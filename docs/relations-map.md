@@ -1,72 +1,79 @@
 # The connections map
 
 A second view of the same cast: instead of *where* characters are, *how they
-are tied to each other*.
+are tied to each other*. Reached from the Map / Connections switch in the
+header.
 
-Not built yet. The data layer is, and this is the plan for the rest.
+## The graph
 
-## What already exists
+`src/data/relations.ts` derives it from data that was already there. An edge is
+an unordered pair, deduplicated, carrying every reason those two are connected:
 
-`src/data/relations.ts` builds the graph at module load and is fully queryable
-today:
-
-```ts
-RELATIONS              // RelationEdge[], unordered pairs, deduplicated
-relationsFor(id)       // every edge touching a character
-neighboursOf(id, kind) // connected character ids, optionally by kind
-RELATION_DEGREE        // Map<id, number>, connections per character
-```
-
-An edge carries every reason two characters are connected:
-
-| kind      | derived from                                   | edges |
-| --------- | ---------------------------------------------- | ----- |
-| `bond`    | the authored `bonds` array on each character   | 165   |
-| `journey` | both walked the same entry in `JOURNEY_MEMBERS`| 38    |
-| `place`   | both live in the same place (fewer than 7 do)  | 36    |
+| kind      | derived from                                      | edges |
+| --------- | ------------------------------------------------- | ----- |
+| `bond`    | the authored `bonds` array on each character      | 165   |
+| `journey` | both walked the same entry in `JOURNEY_MEMBERS`   | 38    |
+| `place`   | both live in the same place (fewer than 7 do)     | 36    |
 
 201 edges over 57 characters, nobody isolated, 36 edges backed by more than one
 reason. Most connected: Gandalf (28), then Frodo and Aragorn (22 each).
 
-`bond` is the one that carries the story and should be the default layer.
-`journey` and `place` are cheap derivations, offered as toggles rather than
-mixed in silently.
+Each kind is a layer the reader can switch off in the header. An edge is drawn
+in the colour of its highest-ranking *enabled* kind, `bond` > `journey` >
+`place`, so turning off Bonds does not hide a pair who also travelled together,
+it recolours their line green.
 
-## What is missing
+## The layout
 
-1. **A layout.** The graph has no coordinates. Two options worth trying:
-   - *Force-directed*, computed once at startup from a fixed seed and cached,
-     so the picture is the same on every visit. `d3-force` would do it, but 57
-     nodes and 201 edges is small enough to hand-roll in an afternoon and skip
-     the dependency.
-   - *Arc diagram*: characters on a circle grouped by people, chords between
-     them. No simulation, deterministic, and it reads well at this size. Worth
-     prototyping first because it is much less work.
+`src/lib/relationsLayout.ts`, Fruchterman-Reingold, run once at module load and
+cached. 57 nodes and 201 edges is small enough that naive O(n²) repulsion takes
+a few milliseconds, so there is no case for a simulation library, and none for
+animating it either.
 
-2. **A `RelationsView` component**, sibling to `MapView`, consuming the same
-   props: `translator`, `selectedId`, `visibleIds`, `onSelect`.
+It is deterministic on purpose. The picture is the same on every visit, or
+nobody can learn its shape: fixed seed, fixed iteration count, and a starting
+arrangement (a circle grouped by people) chosen rather than random.
 
-3. **A view switch** in `Header`, and a `view: "map" | "relations"` state in
-   `App`.
+Three things were needed beyond the textbook algorithm, each of which is
+commented where it happens:
 
-## Why the current structure already fits
+- **Degree damping.** Hubs are pulled on by many edges at once and end up in a
+  knot in the middle. Damping each node's response by `1/sqrt(degree)` lets
+  hubs hold station while leaves orbit them, which is what makes the clusters
+  legible.
+- **A separation pass.** The simulation treats nodes as points, so tightly
+  bound pairs (Merry and Pippin) end up closer than their medallions are wide.
+  Sixty relaxation passes push overlapping pairs apart, clamped to the margins,
+  which also evens out the density.
+- **Short labels.** 57 full names do not fit. The label is the first word with
+  any leading article dropped, so "The Witch-king of Angmar" reads
+  "Witch-king". The full name is one click away on the character sheet.
 
-The state a second view needs is deliberately not inside `MapView`:
+## Reading it
 
-- `selectedId`, `query`, `activePeoples` and `visibleIds` live in `App`, so both
-  views filter and select against the same state and the sidebar keeps working
-  unchanged.
-- `Medallion` / `MedallionContent` are standalone and used by three components
-  already, so graph nodes get character pictures for free.
-- People colours come from `PEOPLES[c.people].colour`, the same source the map
-  markers, chips and legend use, so the two views stay visually consistent.
+- **Hover** a character to light their web: their edges brighten, everyone
+  outside it fades, and labels outside it disappear. The legend names them and
+  counts their connections.
+- **Click** to open the same character sheet the map uses.
+- The sidebar's search and people filters dim non-matching nodes, exactly as
+  they dim map markers.
 
-The only thing to add is the layout and the component. No refactor of what is
-there.
+## What is shared with the map view
 
-## One thing to decide first
+`selectedId`, `query`, `activePeoples` and `visibleIds` live in `App`, so both
+views filter and select against the same state and the sidebar drives either
+one. `useZoomPan` takes the viewBox size as an argument and serves both.
+`Medallion` and the circular clip and glow in `SharedDefs` are common. People
+colours come from `PEOPLES[c.people].colour` in both.
 
-Whether the connections map replaces the map view or sits beside it. Beside it
-is the assumption above (a toggle, shared sidebar). If the two should ever be
-seen together, `MARKERS.positions` could seed the layout so the graph keeps
-Middle-earth's geography, which is a nicer idea but a harder layout problem.
+## Ideas not taken
+
+- **Geographic layout.** Seeding node positions from `MARKERS.positions` would
+  keep Middle-earth's geography in the graph. Attractive, but a much harder
+  layout problem, and the clusters that the free layout finds (the Fellowship,
+  Rohan, the house of Durin) are more informative than geography here.
+- **An arc diagram** was the cheaper option considered first. The force layout
+  earns its extra work by showing the cluster structure; an arc diagram would
+  only have ordered the cast.
+- **Edge bundling** would tidy the dense middle, but it makes individual
+  connections harder to follow, which is the one thing this view is for.

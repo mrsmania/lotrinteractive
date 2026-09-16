@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import type { Character, Language } from "./types";
+import type { Character, Language, ViewName } from "./types";
 import { CHARACTERS, CHARACTER_BY_ID } from "./data/characters";
+import type { RelationKind } from "./data/relations";
 import { PLACES } from "./data/places";
 import { createTranslator } from "./lib/i18n";
 import type { Translator } from "./lib/i18n";
@@ -8,11 +9,15 @@ import { Header } from "./components/Header";
 import { Sidebar } from "./components/Sidebar";
 import { MapView } from "./components/MapView";
 import type { FocusRequest } from "./components/MapView";
+import { RelationsView } from "./components/RelationsView";
 import { CharacterSheet } from "./components/CharacterSheet";
 import { SharedDefs } from "./components/SharedDefs";
 
 /** Below this width the sidebar becomes a drawer; matches the CSS breakpoint. */
 const NARROW = 880;
+
+/** All three kinds of connection are shown until the reader turns one off. */
+const ALL_KINDS: RelationKind[] = ["bond", "journey", "place"];
 
 /** Everything a search looks through, in both languages. */
 function haystack(c: Character, tr: Translator): string {
@@ -38,6 +43,7 @@ function haystack(c: Character, tr: Translator): string {
 
 export default function App() {
   const [language, setLanguage] = useState<Language>("en");
+  const [view, setView] = useState<ViewName>("map");
   const [query, setQuery] = useState("");
   const [activePeoples, setActivePeoples] = useState<ReadonlySet<string>>(new Set());
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -46,6 +52,9 @@ export default function App() {
   const [showJourneys, setShowJourneys] = useState(true);
   const [showPlaceNames, setShowPlaceNames] = useState(true);
   const [focus, setFocus] = useState<FocusRequest | null>(null);
+  const [activeKinds, setActiveKinds] = useState<ReadonlySet<RelationKind>>(
+    () => new Set(ALL_KINDS),
+  );
 
   const translator = useMemo(() => createTranslator(language), [language]);
 
@@ -72,6 +81,15 @@ export default function App() {
     setSheetOpen(true);
     if (move) setFocus((prev) => ({ id, scale, nonce: (prev?.nonce ?? 0) + 1 }));
     if (window.innerWidth <= NARROW) setSidebarOpen(false);
+  }, []);
+
+  const toggleKind = useCallback((kind: RelationKind) => {
+    setActiveKinds((prev) => {
+      const next = new Set(prev);
+      if (next.has(kind)) next.delete(kind);
+      else next.add(kind);
+      return next;
+    });
   }, []);
 
   const togglePeople = useCallback((people: string) => {
@@ -105,12 +123,16 @@ export default function App() {
 
       <Header
         translator={translator}
+        view={view}
         query={query}
         showJourneys={showJourneys}
         showPlaceNames={showPlaceNames}
+        activeKinds={activeKinds}
+        onViewChange={setView}
         onQueryChange={setQuery}
         onToggleJourneys={() => setShowJourneys((v) => !v)}
         onTogglePlaceNames={() => setShowPlaceNames((v) => !v)}
+        onToggleKind={toggleKind}
         onRandom={random}
         onToggleLanguage={() => setLanguage((l) => (l === "en" ? "de" : "en"))}
         onToggleSidebar={() => setSidebarOpen((v) => !v)}
@@ -127,15 +149,26 @@ export default function App() {
           onSelect={(id) => select(id, true)}
         />
 
-        <MapView
-          translator={translator}
-          selectedId={sheetOpen ? selectedId : null}
-          visibleIds={visibleIds}
-          showJourneys={showJourneys}
-          showPlaceNames={showPlaceNames}
-          focus={focus}
-          onSelect={(id) => select(id, false)}
-        />
+        {view === "map" ? (
+          <MapView
+            translator={translator}
+            selectedId={sheetOpen ? selectedId : null}
+            visibleIds={visibleIds}
+            showJourneys={showJourneys}
+            showPlaceNames={showPlaceNames}
+            focus={focus}
+            onSelect={(id) => select(id, false)}
+          />
+        ) : (
+          <RelationsView
+            translator={translator}
+            selectedId={sheetOpen ? selectedId : null}
+            visibleIds={visibleIds}
+            activeKinds={activeKinds}
+            focusNonce={focus?.nonce ?? 0}
+            onSelect={(id) => select(id, false)}
+          />
+        )}
 
         <CharacterSheet
           translator={translator}

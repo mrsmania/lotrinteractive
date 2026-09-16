@@ -91,6 +91,13 @@ const UI = {
     aside: "Aside",
     connectedWith: "Connected with",
     journey: "Journey",
+    viewMap: "Map",
+    viewConnections: "Connections",
+    connections: "Connections",
+    connectionCount: "connections",
+    kindBond: "Bonds",
+    kindJourney: "Fellow travellers",
+    kindPlace: "Same home",
   },
   de: {
     title: "Die Karte von Mittelerde",
@@ -127,6 +134,13 @@ const UI = {
     aside: "Am Rande",
     connectedWith: "Verbunden mit",
     journey: "Reiseweg",
+    viewMap: "Karte",
+    viewConnections: "Verbindungen",
+    connections: "Verbindungen",
+    connectionCount: "Verbindungen",
+    kindBond: "Bünde",
+    kindJourney: "Weggefährten",
+    kindPlace: "Gleiche Heimat",
   },
 } satisfies Record<Language, Record<string, string>>;
 

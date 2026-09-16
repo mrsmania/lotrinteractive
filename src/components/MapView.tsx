@@ -42,7 +42,14 @@ export function MapView({
 }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
   const fieldRef = useRef<HTMLDivElement>(null);
-  const zoomPan = useZoomPan(svgRef);
+  const zoomPan = useZoomPan(svgRef, {
+    width: MAP_W,
+    height: MAP_H,
+    onTap: (target) => {
+      const id = target?.closest<SVGGElement>(".marker")?.dataset.id;
+      if (id) onSelect(id);
+    },
+  });
   const [tooltip, setTooltip] = useState<{ id: string; x: number; y: number } | null>(null);
 
   // The defs never change; the world only when the language does, because the
@@ -118,16 +125,13 @@ export function MapView({
               return (
                 <g
                   key={c.id}
+                  data-id={c.id}
                   className={
                     "marker" +
                     (c.id === selectedId ? " selected" : "") +
                     (dimmed ? " dimmed" : "")
                   }
                   transform={`translate(${p.x.toFixed(1)},${p.y.toFixed(1)}) scale(${counterScale.toFixed(3)})`}
-                  onClick={() => {
-                    // A press that panned the map is not a click on the marker.
-                    if (!zoomPan.didDrag()) onSelect(c.id);
-                  }}
                   onPointerEnter={(ev) => showTooltip(c.id, ev)}
                   onPointerMove={(ev) => showTooltip(c.id, ev)}
                   onPointerLeave={() => setTooltip(null)}

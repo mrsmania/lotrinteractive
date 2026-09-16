@@ -88,3 +88,6 @@ export interface Journey {
 }
 
 export type Language = "en" | "de";
+
+/** Which of the two views of the cast is on screen. */
+export type ViewName = "map" | "relations";

@@ -49,8 +49,8 @@ export function buildDefs(): string {
     '<feColorMatrix type="saturate" values="0.42"/>' +
     '<feComponentTransfer><feFuncR type="linear" slope=".95" intercept=".06"/>' +
     '<feFuncG type="linear" slope=".92" intercept=".05"/><feFuncB type="linear" slope=".82" intercept=".03"/></feComponentTransfer></filter>' +
-    '<filter id="glow" x="-60%" y="-60%" width="220%" height="220%">' +
-    '<feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
+    // The glow behind a highlighted marker is shared with the graph view, so
+    // it lives in the shared defs too.
     "</defs>"
   );
 }

@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { MAP_H, MAP_W } from "../data/map";
 
 export interface View {
   /** Scale. */
@@ -25,8 +24,6 @@ export interface ZoomPan {
   /** Centre a map position, zooming to `scale`. */
   centreOn: (p: { x: number; y: number }, scale?: number) => void;
   reset: () => void;
-  /** True when the pointer travelled far enough that the press was a drag. */
-  didDrag: () => boolean;
   /** Spread onto the <svg>. */
   handlers: {
     onPointerDown: (ev: React.PointerEvent<SVGSVGElement>) => void;
@@ -40,11 +37,31 @@ export interface ZoomPan {
  * Zoom and pan for the map SVG.
  *
  * The arithmetic is the original page's, unchanged: pointer coordinates are
- * converted into the fixed MAP_W x MAP_H space, allowing for the letterboxing
+ * converted into the SVG's own coordinate space, allowing for the letterboxing
  * that preserveAspectRatio introduces, and zooming keeps the point under the
  * cursor still.
  */
-export function useZoomPan(svgRef: React.RefObject<SVGSVGElement | null>): ZoomPan {
+export interface ZoomPanOptions {
+  /** The SVG's viewBox size; pointer coordinates are mapped into it. */
+  width: number;
+  height: number;
+  /**
+   * Called when a press ends without having turned into a drag, with the
+   * element that was pressed.
+   *
+   * Selection cannot be done with an ordinary onClick on the thing being
+   * clicked: this hook takes pointer capture so a drag survives the pointer
+   * leaving the SVG, and capture retargets the compatibility mouse events, so
+   * the browser fires `click` on the <svg> rather than on the marker. Pointer
+   * *down* still reports the real target, so that is what gets remembered.
+   */
+  onTap?: (target: Element | null) => void;
+}
+
+export function useZoomPan(
+  svgRef: React.RefObject<SVGSVGElement | null>,
+  { width, height, onTap }: ZoomPanOptions,
+): ZoomPan {
   const [view, setView] = useState<View>(INITIAL);
   // Pointer handlers and the easing both need the live view without
   // re-subscribing, so it is mirrored into a ref.
@@ -55,6 +72,11 @@ export function useZoomPan(svgRef: React.RefObject<SVGSVGElement | null>): ZoomP
   const last = useRef<{ x: number; y: number } | null>(null);
   const travelled = useRef(0);
   const frame = useRef(0);
+  const downTarget = useRef<Element | null>(null);
+
+  // Kept in a ref so the pointer handlers never close over a stale callback.
+  const tapHandler = useRef(onTap);
+  tapHandler.current = onTap;
 
   const apply = useCallback((v: View) => {
     current.current = v;
@@ -66,13 +88,13 @@ export function useZoomPan(svgRef: React.RefObject<SVGSVGElement | null>): ZoomP
       const el = svgRef.current;
       if (!el) return { x: 0, y: 0 };
       const r = el.getBoundingClientRect();
-      const m = Math.max(MAP_W / r.width, MAP_H / r.height);
+      const m = Math.max(width / r.width, height / r.height);
       return {
-        x: (ev.clientX - r.left - (r.width - MAP_W / m) / 2) * m,
-        y: (ev.clientY - r.top - (r.height - MAP_H / m) / 2) * m,
+        x: (ev.clientX - r.left - (r.width - width / m) / 2) * m,
+        y: (ev.clientY - r.top - (r.height - height / m) / 2) * m,
       };
     },
-    [svgRef],
+    [svgRef, width, height],
   );
 
   const zoom = useCallback(
@@ -80,13 +102,13 @@ export function useZoomPan(svgRef: React.RefObject<SVGSVGElement | null>): ZoomP
       cancelAnimationFrame(frame.current);
       const v = current.current;
       const next = Math.min(MAX_SCALE, Math.max(MIN_SCALE, v.k * factor));
-      const ax = px ?? MAP_W / 2;
-      const ay = py ?? MAP_H / 2;
+      const ax = px ?? width / 2;
+      const ay = py ?? height / 2;
       const wx = (ax - v.tx) / v.k;
       const wy = (ay - v.ty) / v.k;
       apply({ k: next, tx: ax - wx * next, ty: ay - wy * next });
     },
-    [apply],
+    [apply, width, height],
   );
 
   const glideTo = useCallback(
@@ -116,9 +138,9 @@ export function useZoomPan(svgRef: React.RefObject<SVGSVGElement | null>): ZoomP
 
   const centreOn = useCallback(
     (p: { x: number; y: number }, scale = 2.4) => {
-      glideTo(MAP_W / 2 - p.x * scale, MAP_H / 2 - p.y * scale, scale);
+      glideTo(width / 2 - p.x * scale, height / 2 - p.y * scale, scale);
     },
-    [glideTo],
+    [glideTo, width, height],
   );
 
   const reset = useCallback(() => glideTo(0, 0, 1), [glideTo]);
@@ -145,6 +167,7 @@ export function useZoomPan(svgRef: React.RefObject<SVGSVGElement | null>): ZoomP
       dragging.current = true;
       travelled.current = 0;
       last.current = toMapPoint(ev);
+      downTarget.current = ev.target instanceof Element ? ev.target : null;
       try {
         ev.currentTarget.setPointerCapture(ev.pointerId);
       } catch {
@@ -168,8 +191,12 @@ export function useZoomPan(svgRef: React.RefObject<SVGSVGElement | null>): ZoomP
     [toMapPoint, apply],
   );
 
-  const endDrag = useCallback(() => {
+  const endDrag = useCallback((tapped: boolean) => {
+    if (tapped && dragging.current && travelled.current <= DRAG_THRESHOLD) {
+      tapHandler.current?.(downTarget.current);
+    }
     dragging.current = false;
+    downTarget.current = null;
   }, []);
 
   return {
@@ -178,12 +205,11 @@ export function useZoomPan(svgRef: React.RefObject<SVGSVGElement | null>): ZoomP
     glideTo,
     centreOn,
     reset,
-    didDrag: () => travelled.current > DRAG_THRESHOLD,
     handlers: {
       onPointerDown,
       onPointerMove,
-      onPointerUp: () => endDrag(),
-      onPointerCancel: () => endDrag(),
+      onPointerUp: () => endDrag(true),
+      onPointerCancel: () => endDrag(false),
     },
   };
 }

@@ -260,3 +260,44 @@ main{
 
 /* Shared defs carrier: present in the document, never seen. */
 .sprites{position:absolute;width:0;height:0;overflow:hidden;}
+
+/* ---------- View switch ---------- */
+.views{display:flex;}
+.views .button:first-child{border-top-right-radius:0;border-bottom-right-radius:0;}
+.views .button:last-child{margin-left:-1px;border-top-left-radius:0;border-bottom-left-radius:0;}
+
+/* ---------- Connections graph ---------- */
+.graph-field{
+  background:radial-gradient(ellipse at 50% 42%, #1d1610 0%, #0b0805 72%);
+}
+#graph{width:100%;height:100%;display:block;cursor:grab;touch-action:none;}
+#graph:active{cursor:grabbing;}
+.graph-field,#graph{-webkit-user-select:none;-moz-user-select:none;user-select:none;}
+
+.graph-edge{opacity:.34;transition:opacity .16s;}
+.graph-edge.lit{opacity:.95;}
+.graph-edge.hushed{opacity:.05;}
+.graph-edge.dimmed{opacity:.04;}
+
+.graph-node{cursor:pointer;transition:opacity .16s;}
+.graph-node .ring{opacity:0;transition:opacity .18s;}
+.graph-node:hover .ring,.graph-node.selected .ring,.graph-node.focused .ring{opacity:1;}
+.graph-node.hushed{opacity:.24;}
+.graph-node.dimmed{opacity:.09;pointer-events:none;}
+
+.graph-label{
+  font-family:"Avenir Next","Trebuchet MS","Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:9.5px;letter-spacing:.05em;
+  fill:#c2ad7e;
+  paint-order:stroke;stroke:#0b0805;stroke-width:3px;stroke-linejoin:round;
+  pointer-events:none;
+}
+.graph-node.focused .graph-label{fill:var(--gold-light);}
+/* While a web is highlighted, drop the labels of everyone outside it. */
+.graph-node.hushed .graph-label{opacity:0;}
+
+.legend-focus{
+  display:block;margin-top:9px;padding-top:8px;border-top:1px solid #3d2f1b;
+}
+.legend-focus b{display:block;color:var(--gold-light);font-size:12px;}
+.legend-focus span{color:#9c8759;font-size:10.5px;}

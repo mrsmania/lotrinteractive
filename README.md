@@ -1,7 +1,8 @@
 # lotrinteractive
 
 An interactive map of Middle-earth and the characters of *The Lord of the
-Rings*. React + TypeScript, built with Vite, deployed to GitHub Pages.
+Rings*, with a second view showing how the characters are connected to one
+another. React + TypeScript, built with Vite, deployed to GitHub Pages.
 
 Live: https://mrsmania.github.io/lotrinteractive/
 
@@ -41,10 +42,11 @@ plugins/character-images.ts   reads public/images/characters/ into a virtual mod
 src/data/                     places, peoples, characters, English text, journeys,
                               map geometry, and the relationship graph
 src/lib/                      drawing helpers, map builder, i18n, image lookup,
-                              marker placement
-src/components/               Header, Sidebar, MapView, CharacterSheet, Legend
-src/hooks/useZoomPan.ts       zoom and pan for the map SVG
-docs/relations-map.md         plan for the character connections view
+                              marker placement, graph layout
+src/components/               Header, Sidebar, MapView, RelationsView,
+                              CharacterSheet, Legend
+src/hooks/useZoomPan.ts       zoom and pan, shared by both views
+docs/relations-map.md         how the connections view works
 ```
 
 The world map is generated as SVG markup and injected once
@@ -53,9 +55,18 @@ respond to the user, so running React's reconciler over them would cost a lot
 and buy nothing. Everything that does respond to the user (markers, sidebar,
 character sheet) is ordinary React.
 
+The connections view (`src/components/RelationsView.tsx`) draws the character
+relationship graph derived in `src/data/relations.ts`, positioned by a
+deterministic force-directed layout in `src/lib/relationsLayout.ts` that runs
+once at startup. Hovering a character lights their web; clicking opens the same
+character sheet. See [docs/relations-map.md](docs/relations-map.md).
+
+Both views share their filter and selection state, which lives in `App`, so the
+sidebar drives either one.
+
 The text is authored in German; English lives in `src/data/en.ts` and is looked
-up per field with a fallback. Switching language is pure state, so the map view
-is not disturbed.
+up per field with a fallback. Switching language is pure state, so neither view
+is disturbed.
 
 ## Deploying
 
