@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LOTR Interactive</title>
+  <style>
+    :root {
+      --bg: #0f0d0a;
+      --fg: #ede4d3;
+      --muted: #9a8f7c;
+      --accent: #c8a24a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.6;
+    }
+    main { max-width: 42rem; text-align: center; }
+    h1 {
+      margin: 0 0 .5rem;
+      font-size: clamp(2rem, 6vw, 3.25rem);
+      letter-spacing: .02em;
+      color: var(--accent);
+    }
+    p { color: var(--muted); margin: 0 0 1.5rem; }
+    .status {
+      display: inline-block;
+      padding: .5rem 1rem;
+      border: 1px solid rgba(200, 162, 74, .4);
+      border-radius: 999px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: .8rem;
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>LOTR Interactive</h1>
+    <p>Starting point. Edit <code>index.html</code>, commit, push &mdash; GitHub Pages updates in about a minute.</p>
+    <span class="status">page is live</span>
+  </main>
+</body>
+</html>
