@@ -245,7 +245,14 @@ main{
 .marker{cursor:pointer;}
 .marker .ring{opacity:0;transition:opacity .18s;}
 .marker:hover .ring,.marker.selected .ring{opacity:1;}
-.journey-line{animation:wandern 22s linear infinite;}
+/* The marching dashes step rather than flow, and that is deliberate.
+   stroke-dashoffset cannot be animated on the compositor, so a smooth march
+   repaints on every frame; because the journeys cross the whole map, each of
+   those repaints re-rasterises all ~3,400 elements of it. Measured: 32fps and
+   constant GPU work while just sitting there. steps() cuts it to about five
+   repaints a second, which measures at ~100fps, and at this dash size still
+   reads as a slow crawl. */
+.journey-line{animation:wandern 22s steps(110,end) infinite;}
 @keyframes wandern{to{stroke-dashoffset:-260;}}
 @media (prefers-reduced-motion:reduce){.journey-line{animation:none;}}
 
