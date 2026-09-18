@@ -60,7 +60,7 @@ export interface CharacterText {
   bookFilm?: string;
   /** Milestones, in order. */
   deeds?: string[];
-  note?: string;
+  /** Asides, shown as loose margin notes under the sheet's last section. */
   notes?: string[];
 }
 

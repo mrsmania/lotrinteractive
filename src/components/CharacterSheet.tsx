@@ -46,7 +46,7 @@ export function CharacterSheet({
   const colour = PEOPLES[c.people]?.colour;
 
   const deeds = f("deeds");
-  const notes = [f("note"), ...(f("notes") ?? [])].filter(Boolean) as string[];
+  const notes = f("notes") ?? [];
   const bonds = (c.bonds ?? [])
     .map((id) => CHARACTER_BY_ID.get(id))
     .filter((x): x is Character => Boolean(x));

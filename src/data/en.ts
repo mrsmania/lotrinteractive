@@ -32,7 +32,6 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Is taken prisoner in Cirith Ungol and freed by Sam",
       "Claims the Ring for himself in the Sammath Naur on 25 March 3019"
     ],
-    note: "He carries the Ring for seventeen years before he ever sets out.",
     notes: [
       "His Elvish name Iorhael means old-wise, Sam's Perhael means half-wise.",
       "The Weathertop wound aches every year afterwards on 13 October.",
@@ -65,11 +64,8 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Carries Frodo up the last slope of Orodruin",
       "Replants the Shire after the war with Galadriel's soil"
     ],
-    note: "He is the only bearer who gives up the Ring freely and unprompted.",
     notes: [
-      "He is the only one to surrender the Ring of his own will, with nobody demanding it.",
       "His song in the tower of Cirith Ungol tells Frodo that help is near.",
-      "Seven terms as Mayor is a Shire record.",
       "Tradition says that after Rosie's death he sails as the last of the Ring-bearers."
     ]
   },
@@ -99,7 +95,6 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Stabs the Witch-king behind the knee and breaks his spell",
       "Fights in the front rank at the Scouring of the Shire"
     ],
-    note: "He later writes a herblore of the Shire and a study of pipe-weed.",
     notes: [
       "His barrow-blade was forged against Angmar and crumbles after the blow.",
       "Holdwine is Rohirric for faithful friend.",
@@ -132,11 +127,9 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Fetches Gandalf when Denethor prepares to burn Faramir",
       "Kills a hill-troll before the Black Gate and is buried beneath it"
     ],
-    note: "He and Merry grow into the tallest hobbits on record, thanks to the ent-draughts.",
     notes: [
-      "His song for Denethor comes from the film; in the book he does not sing there.",
+      "He and Merry grow into the tallest hobbits on record, thanks to the ent-draughts.",
       "The palantír is Sauron's greatest error: he takes Pippin for the Ring-bearer held in Isengard.",
-      "At twenty-eight he is not yet of age by hobbit reckoning.",
       "As Thain he becomes one of the three most powerful hobbits in the Shire."
     ]
   },
@@ -166,9 +159,8 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Lives twenty years in Rivendell translating Elvish books",
       "Gives Frodo Sting and the mithril shirt"
     ],
-    note: "At the Council of Elrond he seriously offers to carry the Ring to Mordor himself.",
     notes: [
-      "The 1937 version is friendlier; Tolkien rewrote it in 1951 to fit the later story.",
+      "His book is called There and Back Again, and it is Frodo's only source for Erebor.",
       "He is the first hobbit to compose an Elvish lay, the song of Eärendil.",
       "At the Council he seriously offers to finish the task himself.",
       "When he shows Frodo the mithril shirt he does not know it is worth more than the Shire."
@@ -194,7 +186,6 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Greets Sam on his return by telling him he is a year late",
       "Marries Sam in the spring of 3020 and moves into Bag End"
     ],
-    note: "Her first child Elanor is named after a flower of Lothlórien.",
     notes: [
       "Elanor is named for the golden flower of Lothlórien.",
       "Several of the thirteen children carry names from Gondor and Rohan.",
@@ -228,10 +219,8 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Returns as Gandalf the White after the fight on Zirakzigil",
       "Heals Théoden, parleys with Saruman and directs the defence of Minas Tirith"
     ],
-    note: "He bears Narya, the Ring of Fire, given to him by Círdan on arrival.",
     notes: [
       "Olórin was the wisest of the Maiar in Valinor and learned pity from Nienna.",
-      "He refuses the Ring knowing he would take it from pity and do terrible things with it.",
       "Shadowfax understands the speech of Men and suffers neither saddle nor bridle.",
       "His fireworks are proverbial from the Shire to Bree.",
       "He truly dies in Moria and is sent back, not healed."
@@ -263,7 +252,6 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Loses Isengard to the Ents and his staff to Gandalf",
       "Seizes the Shire as Sharkey and has trees and mills torn down"
     ],
-    note: "His name means man of skill; the Elves call him Curunír.",
     notes: [
       "Curunír means man of skill, Sharkû is Orkish for old man.",
       "His white robe shimmers in every colour as soon as he moves.",
@@ -292,12 +280,9 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Sent by Saruman as a messenger to Bree, and so warns Gandalf without meaning to",
       "Sends birds and Eagles as scouts to Isengard"
     ],
-    note: "Tolkien leaves open whether he fulfils his errand or merely forgets it.",
     notes: [
-      "Aiwendil means friend of birds.",
       "He is known to Beorn, which Gandalf exploits in The Hobbit.",
-      "Tolkien leaves open whether he completes his errand or forgets it in the wild.",
-      "The rabbit sled belongs to the films and to no book."
+      "Tolkien leaves open whether he completes his errand or forgets it in the wild."
     ]
   },
   aragorn: {
@@ -329,8 +314,8 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Heals Faramir, Éowyn and Merry in the Houses of Healing",
       "Marches on the Black Gate as bait and is crowned on 1 May 3019"
     ],
-    note: "He served under other names in Rohan and Gondor, under Thengel and Ecthelion.",
     notes: [
+      "The rulers he serves unrecognised are Thengel of Rohan and Ecthelion of Gondor.",
       "Estel means hope, Thorongil eagle of the star, Elessar elfstone.",
       "He reigns 122 years and lays down his life of his own will, in the Númenórean manner.",
       "His healing is taken in Gondor as proof of kingship: the hands of the king are the hands of a healer.",
@@ -361,11 +346,9 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Sees the Sea for the first time at Pelargir and is seized by longing",
       "Founds an Elvish settlement in Ithilien after the war"
     ],
-    note: "At the Sea by Pelargir the longing for the West wakes in him and never leaves.",
     notes: [
-      "He walks on fresh snow without sinking and sleeps with open eyes.",
+      "He sleeps with his eyes open.",
       "His Lórien bow, a gift of Galadriel, outranges the one he brought from home.",
-      "His name means simply green-leaf.",
       "After Aragorn's death he builds a ship and sails West with Gimli."
     ]
   },
@@ -393,10 +376,9 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Fights on the Pelennor and marches to the Black Gate",
       "Founds a dwarf colony in Aglarond and becomes its lord"
     ],
-    note: "He is the only Dwarf ever to sail to Aman, and only as Legolas's companion.",
     notes: [
       "Fëanor asked three times for a strand of Galadriel's hair and was refused; Gimli receives three on one asking.",
-      "He is the only Dwarf recorded as sailing to Aman.",
+      "He is the only Dwarf recorded as sailing to Aman, and only as Legolas's companion.",
       "His father Glóin was one of the thirteen of The Hobbit.",
       "His description of the Glittering Caves is one of the few lyrical speeches by any Dwarf."
     ]
@@ -424,12 +406,11 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Tries to take the Ring and comes to himself at once",
       "Falls defending Merry and Pippin, pierced by many arrows"
     ],
-    note: "His boat carrying the weapons of his enemies goes over the Falls of Rauros without capsizing.",
     notes: [
       "The dream of the broken sword comes to Faramir many times and to Boromir only once.",
       "His horn is fished from the Anduin in two pieces and reaches Denethor.",
       "He is the only one of the Company to say aloud what everyone thinks: use the Ring.",
-      "His funeral boat goes over the Falls of Rauros without capsizing."
+      "His funeral boat, carrying the weapons of his enemies, goes over the Falls of Rauros without capsizing, and Faramir sees it days later."
     ]
   },
   faramir: {
@@ -457,12 +438,9 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Is called back by Aragorn in the Houses of Healing",
       "Becomes Prince of Ithilien and Steward under King Elessar"
     ],
-    note: "He is the last to keep the old custom of the silent turn to the West before meals.",
     notes: [
-      "In the book he refuses the Ring within minutes; the film keeps him wavering for a long time.",
-      "Gandalf called him a pupil, which Denethor took as a betrayal of the family.",
       "He and Éowyn come together in the Houses of Healing while the host stands before Mordor.",
-      "He keeps the old custom of the silent look westward before eating."
+      "He is the last to keep the old custom of the silent look westward before eating."
     ]
   },
   denethor: {
@@ -488,7 +466,6 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Loses all hope under Sauron's influence and has the pyre prepared",
       "Burns himself with the palantír in his hands"
     ],
-    note: "He recognises Thorongil as Aragorn decades later and sees a rival in him.",
     notes: [
       "He knew Thorongil and recognised him again decades later as a rival.",
       "His contest with Sauron in the Stone lasts years and ages him before his time.",
@@ -516,11 +493,9 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Keeps the door of the Stewards",
       "Abandons his post, kills the porter and halts the pyre"
     ],
-    note: "Aragorn condemns him formally and rewards him in fact with a better post.",
     notes: [
       "His son Bergil guides Pippin through the city while the fathers are on duty.",
-      "Aragorn sentences him formally and in practice gives him a better command.",
-      "He does not appear in the films at all."
+      "Aragorn sentences him formally and in practice gives him a better command."
     ]
   },
   elrond: {
@@ -549,10 +524,8 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Calls the Council that determines the Company",
       "Releases Arwen and sails on the last ship in 3021"
     ],
-    note: "His brother Elros chose the life of Men and became the first King of Númenor.",
     notes: [
-      "His brother Elros chose mortality and founded the line of the Kings of Númenor.",
-      "That makes Aragorn a very distant nephew of his brother.",
+      "Through the line of Elros, Aragorn is a very distant nephew of his brother.",
       "His sons Elladan and Elrohir ride south with the Grey Company.",
       "In the book the flood at the Ford takes the shape of white riding horses."
     ]
@@ -581,12 +554,8 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Becomes Queen in Minas Tirith at Midsummer 3019",
       "Gives Frodo her place on the ship into the West"
     ],
-    note: "She gives Frodo her place on the ship into the West.",
     notes: [
-      "She is held to be the returning likeness of Lúthien, who made the same choice two ages before.",
-      "Her mother Celebrían sailed West after an orc ambush in the mountains.",
-      "After Aragorn's death she lies down on Cerin Amroth and dies there.",
-      "The ride to the Ford belongs to Glorfindel in the book, not to her."
+      "After Aragorn's death she lies down on Cerin Amroth and dies there."
     ]
   },
   glorfindel: {
@@ -611,10 +580,8 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Prophesies that the Witch-king will not fall by the hand of man",
       "Finds the hobbits on the road in 3018 and sets Frodo on Asfaloth"
     ],
-    note: "In the films Arwen takes over his role at the Ford.",
     notes: [
       "Asfaloth wears no bit, only a headstall of silver.",
-      "To the Nazgûl he shines, because he stands in both worlds at once.",
       "Tolkien long hesitated over whether there are two Glorfindels or one returned."
     ]
   },
@@ -643,12 +610,10 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Refuses Frodo's offer of the Ring and remains Galadriel",
       "Throws down the hosts of Dol Guldur three times with Celeborn"
     ],
-    note: "Her gifts to the Company later decide life and death more than once.",
     notes: [
       "The ban on her return to Aman is lifted only after she refuses the Ring.",
       "The Mirror shows past, present and possible things without saying which is which.",
-      "Her gifts decide life and death more than once: phial, rope, soil, bow.",
-      "Fëanor asked three times for a strand of her hair and got none."
+      "Her gifts decide life and death more than once: phial, rope, soil, bow."
     ]
   },
   celeborn: {
@@ -673,11 +638,9 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Leads the Elves of Lórien three times against Dol Guldur",
       "Crosses the Anduin after the victory and takes the fortress"
     ],
-    note: "After Galadriel's departure he stays a while and then goes to Rivendell.",
     notes: [
       "He names Moria by its old name Khazad-dûm and rebukes Gimli before Galadriel intervenes.",
-      "After Galadriel sails he goes to Rivendell to his grandsons.",
-      "His name means silver tree."
+      "After Galadriel sails he stays a while in Middle-earth and then goes to Rivendell to his grandsons."
     ]
   },
   haldir: {
@@ -700,10 +663,8 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Receives the Company and demands the blindfold for Gimli",
       "Leads them to Caras Galadhon and later to the Anduin"
     ],
-    note: "The blindfold is put on everyone in the end, so that Gimli is not shamed alone.",
     notes: [
       "He is one of the few march-wardens who speak the Common Speech.",
-      "His death at the Deep belongs to the film alone.",
       "In the end all are blindfolded, so that Gimli is not singled out."
     ]
   },
@@ -730,11 +691,9 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Fights in the Battle of Five Armies",
       "Holds northern Mirkwood against the hosts of Dol Guldur in the War of the Ring"
     ],
-    note: "After the victory the Elves call the wood Eryn Lasgalen, the Wood of Greenleaves.",
     notes: [
       "After the victory the wood is renamed Eryn Lasgalen, the Wood of Greenleaves.",
-      "In The Hobbit he has no name and is only the Elvenking.",
-      "Tolkien explicitly gives him a weakness for treasure, above all for white gems.",
+      "His weakness runs above all to white gems.",
       "At the partition of Mirkwood he receives the north and Celeborn the south."
     ]
   },
@@ -760,11 +719,8 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Takes in the refugees of Arnor and keeps the havens open",
       "Fits out every ship that sails into the West"
     ],
-    note: "He is the only Elf who grows a beard, and he waits at the quay to the last.",
     notes: [
-      "He is the only Elf on record with a beard.",
-      "He knew Gandalf at once for the greatest of the Istari, though he came last.",
-      "He waits until the last Elf has left Middle-earth."
+      "He knew Gandalf at once for the greatest of the Istari, though he came last."
     ]
   },
   gilgalad: {
@@ -789,10 +745,8 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Wins on the Dagorlad and besieges Barad-dûr for seven years",
       "Falls together with Elendil in combat with Sauron"
     ],
-    note: "His spear Aeglos is never wielded again after his death.",
     notes: [
       "Aeglos means snow-point, and is never borne again after him.",
-      "He left no heir; after him there is no High King of the Noldor.",
       "Bilbo's lay of the fall of Gil-galad is one of the few Elvish songs in the Red Book."
     ]
   },
@@ -822,8 +776,8 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Leads the charge on the Pelennor and breaks the besiegers' line",
       "Dies beneath his horse Snowmane"
     ],
-    note: "His son Théodred falls at the Fords of Isen, which makes Éomer his heir.",
     notes: [
+      "Théodred's death makes Éomer his heir.",
       "Ednew means the renewed, because he came back when no one expected it.",
       "The Wild Men of the Drúadan Forest show him the way around the enemy.",
       "Against all sense he takes Merry as his esquire and treats him like a son.",
@@ -855,12 +809,9 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Kills him after Merry has broken the spell",
       "Wakes in the Houses of Healing and lays down the sword there"
     ],
-    note: "She later calls herself Lady of Ithilien and becomes a healer instead of a warrior.",
     notes: [
       "Dernhelm means hidden helm.",
-      "Her sword arm breaks with the blow against the Witch-king.",
-      "She says she fears neither pain nor death, but a cage.",
-      "Her turn to healing is fully told in the book and almost absent from the cinema cut."
+      "Her sword arm breaks with the blow against the Witch-king."
     ]
   },
   eomer: {
@@ -887,12 +838,9 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Is nearly surrounded on the Pelennor and saved by Imrahil's arrival",
       "Is proclaimed eighteenth King of the Mark"
     ],
-    note: "He calls his friendship with Aragorn and Gimli a bond their heirs should keep.",
     notes: [
-      "Éadig means the fortunate or the blessed.",
-      "He marries Lothíriel, daughter of Imrahil of Dol Amroth.",
       "He calls Galadriel perilous and has to hear about it from Gimli.",
-      "His friendship with Aragorn becomes a treaty their heirs are to keep."
+      "His friendship with Aragorn and Gimli becomes a treaty their heirs are to keep."
     ]
   },
   grima: {
@@ -919,11 +867,9 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Follows Saruman to the Shire and endures daily humiliation",
       "Cuts Saruman's throat outside Bag End"
     ],
-    note: "The throw of the palantír is his only hit, and it strikes his own master.",
     notes: [
       "He throws the palantír trying to hit Gandalf and thereby hands it to him.",
-      "Gandalf calls him Saruman's snake and offers him a way out twice.",
-      "In the film he kills Saruman at the tower; in the book he does it in the Shire."
+      "Gandalf calls him Saruman's snake and offers him a way out twice."
     ]
   },
   imrahil: {
@@ -948,12 +894,8 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Takes joint command of the city with Éomer and Gandalf",
       "Marches with the host to the Black Gate"
     ],
-    note: "His house is held to be the only one in Gondor with Elvish blood in its line.",
     notes: [
-      "His house is the only one in Gondor said to carry Elvish blood.",
-      "He is Finduilas's brother and so uncle to Boromir and Faramir.",
-      "His daughter Lothíriel becomes Queen of Rohan.",
-      "He is missing from the films entirely."
+      "His daughter Lothíriel becomes Queen of Rohan."
     ]
   },
   butterbur: {
@@ -977,7 +919,6 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Shelters the hobbits on the night the Ringwraiths strike",
       "Sells them Bill, the half-starved pony of Bill Ferny"
     ],
-    note: "Without his forgotten letter the hobbits would never have met Strider.",
     notes: [
       "His letter would have spared the hobbits months and several wounds.",
       "Bill the pony finds his own way back to Bree.",
@@ -1007,10 +948,8 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Demands a share of the hoard from Thorin and besieges the Mountain",
       "Fights in the Battle of Five Armies and becomes King of Dale"
     ],
-    note: "He uses the last black arrow his house has kept for generations.",
     notes: [
-      "The black arrow came from Girion's forge and always returned to the hand.",
-      "His great-grandfather Girion was the last lord of Dale before Smaug.",
+      "The last black arrow came from Girion's forge, always returned to the hand, and had been kept in his house for generations.",
       "His grandson Brand falls in the War of the Ring beside Dáin before Erebor."
     ]
   },
@@ -1036,10 +975,9 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Appears late in the Battle of Five Armies in bear shape",
       "Carries the wounded Thorin out and shatters Bolg's bodyguard"
     ],
-    note: "His descendants, the Beornings, later keep the High Pass open for travellers.",
     notes: [
       "His animals do not speak but understand him and wait at table.",
-      "His descendants, the Beornings, later keep the High Pass open.",
+      "His descendants, the Beornings, later keep the High Pass open for travellers.",
       "He eats no meat and keeps bees the size of a thumb."
     ]
   },
@@ -1070,7 +1008,6 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Breaks out of the gate in the battle and falls mortally wounded",
       "Is reconciled with Bilbo as he dies"
     ],
-    note: "His name comes from an oak branch he used as a shield before Moria.",
     notes: [
       "The Arkenstone is laid in his tomb, and Orcrist upon his breast.",
       "His by-name comes from the oak branch he used as a shield before Moria.",
@@ -1102,12 +1039,9 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Becomes Lord of Moria and holds the East-deeps for five years",
       "Falls in 2994 by an orc arrow at Mirrormere"
     ],
-    note: "The Company finds his tomb and the book that tells how the colony ended.",
     notes: [
       "His tomb is the only dwarvish inscription the Company can read.",
-      "The Book of Mazarbul ends with the words, they are coming.",
-      "He is Gimli's kinsman and Dwalin's brother.",
-      "He was the only dwarf who took Bilbo seriously from the start."
+      "The Book of Mazarbul ends with the words, they are coming."
     ]
   },
   dain: {
@@ -1134,11 +1068,10 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Turns away Sauron's messengers in 3018 who ask after Bilbo and the Ring",
       "Falls in 3019 before the gate of Erebor over the body of King Brand"
     ],
-    note: "He dies at 252 in battle, which is remarkable even for a Dwarf.",
     notes: [
       "He is the only Dwarf who looked in at Moria's East-gate and said what he saw there.",
       "Sauron's messenger offered him three dwarf-rings for word of the Ring-bearer.",
-      "He dies fighting at 252, which is old even for a Dwarf."
+      "He dies at 252, which is old even for a Dwarf."
     ]
   },
   smaug: {
@@ -1165,7 +1098,6 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Flies to Esgaroth and burns the town",
       "Falls into the Long Lake to Bard's black arrow"
     ],
-    note: "The armour on his breast is his own making, and one place stayed bare.",
     notes: [
       "His conversation with Bilbo is one of the few scenes in which anyone outwits a dragon.",
       "The dragon-sickness is catching: it takes Thorin long after Smaug is dead.",
@@ -1197,10 +1129,9 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Guards Saruman in Orthanc and finally lets him go",
       "Promises Aragorn to keep Fangorn and receives the land back"
     ],
-    note: "The Ents have searched for the Entwives for centuries, lost in a war of the elder days.",
     notes: [
       "He recites a list of the free peoples that pointedly lacks hobbits, and then amends it.",
-      "The Entwives vanished in the Second Age; since then there have been no Entings.",
+      "The Entwives vanished in the Second Age; the Ents have searched for them ever since, and there have been no Entings.",
       "The ent-draughts make Merry and Pippin the tallest hobbits in history.",
       "His own name in his own language would be too long for a book, he says."
     ]
@@ -1227,10 +1158,8 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Chooses a blade from the barrow hoard for each of the four",
       "Calls the pony Fatty Lumpkin and finds the lost ponies again"
     ],
-    note: "The Council rejects him as a keeper: he would simply mislay the Ring.",
     notes: [
       "He puts the Ring on and does not vanish, then makes it vanish and hands it back.",
-      "The Council rejects him as keeper: he would simply mislay it.",
       "The barrow-blades later decide the battle of the Pelennor.",
       "He began as a figure in a poem Tolkien wrote long before The Hobbit."
     ]
@@ -1255,11 +1184,8 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Tells them that Tom belongs to no one and rules over nothing",
       "Sends them off on the second morning with plain counsel"
     ],
-    note: "In her house the autumn rain counts as her washing day.",
     notes: [
-      "The autumn rain is her washing day.",
-      "Tom caught her in the river and took her home, as the tale has it.",
-      "She is missing from the films along with Tom Bombadil."
+      "The autumn rain is her washing day."
     ]
   },
   gollum: {
@@ -1288,7 +1214,6 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Leads them to Cirith Ungol and delivers them to Shelob",
       "Bites off Frodo's finger at the Cracks of Doom and falls into the fire"
     ],
-    note: "Without his bite the Ring would never have gone into the fire.",
     notes: [
       "His birthday present to himself is the murder of Déagol.",
       "The name Gollum comes from the noise he makes in his throat.",
@@ -1322,11 +1247,7 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Rebuilds Barad-dûr from 2951 and claims Mordor openly",
       "Loses everything when the Ring falls into the fire on 25 March 3019"
     ],
-    note: "His original name is Mairon, the admirable.",
     notes: [
-      "Mairon, his first name, means the admirable.",
-      "After the downfall of Númenor he can no longer take a fair form.",
-      "It never occurs to him that anyone would destroy the Ring rather than use it.",
       "The nine rings of Men worked faster than the seven of the Dwarves, which only woke greed."
     ]
   },
@@ -1355,8 +1276,8 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Breaks the gate of Minas Tirith with the ram Grond in 3019",
       "Falls on the Pelennor to Merry and Éowyn"
     ],
-    note: "Glorfindel's prophecy is fulfilled to the letter: a woman and a hobbit.",
     notes: [
+      "Glorfindel's prophecy is fulfilled to the letter: a woman and a hobbit.",
       "His steed is winged but no dragon, a creature out of an older world.",
       "He challenges Eärnur twice, and the second time Eärnur vanishes without trace.",
       "The blade that strikes him was forged against Angmar long before.",
@@ -1387,12 +1308,10 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Are swept away by the flood at the Ford of Bruinen",
       "Return on winged steeds and carry terror over the hosts"
     ],
-    note: "Three of the Nine were once lords of Númenor.",
     notes: [
       "Three of the Nine were once lords of Númenor.",
       "Only two are named: the Witch-king and Khamûl, the Shadow of the East.",
-      "Their cry disables men without a sword being drawn.",
-      "They pass away in the instant the Ring falls apart in the fire."
+      "Their cry disables men without a sword being drawn."
     ]
   },
   mouthofsauron: {
@@ -1416,12 +1335,6 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Produces mithril shirt, grey cloak and sword as proofs",
       "Demands withdrawal and the submission of Gondor as his price"
     ],
-    note: "He has forgotten his own name.",
-    notes: [
-      "He is a living man and not a wraith, of the line of the Black Númenóreans.",
-      "He has forgotten his own name.",
-      "In the film Aragorn beheads him at once; in the book he rides back unharmed."
-    ]
   },
   lurtz: {
     name: "Lurtz",
@@ -1444,10 +1357,7 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Fells Boromir with three arrows",
       "Is killed by Aragorn in single combat"
     ],
-    note: "He appears in no book and was created for the first film.",
     notes: [
-      "He exists in no book and was made for the first film.",
-      "His part is taken in the book by nameless orc archers.",
       "The white hand on his brow is Saruman's mark."
     ]
   },
@@ -1472,11 +1382,9 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Drives the prisoners across Rohan without rest",
       "Is brought to bay at the forest eaves by Éomer's riders and killed"
     ],
-    note: "The quarrel between Isengard and Mordor saves the hobbits' lives.",
     notes: [
       "The quarrel between Isengard, Mordor and the northern orcs saves the hobbits.",
-      "He gives Merry and Pippin the orc-draught, which closes wounds and burns.",
-      "The book gives the quarrel a whole chapter, the film a few lines."
+      "He gives Merry and Pippin the orc-draught, which closes wounds and burns."
     ]
   },
   gothmog: {
@@ -1499,9 +1407,7 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Has the heads of the fallen flung into the city",
       "Takes command after the Witch-king has fallen"
     ],
-    note: "His name is taken from the lord of Balrogs of the First Age.",
     notes: [
-      "The book gives only his name and rank; the rest is the film's.",
       "His name is borrowed from the Balrog lord of the First Age.",
       "Whether he is orc, man or something else is left open."
     ]
@@ -1527,7 +1433,6 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Quarrels with Gorbag of Minas Morgul over the mithril shirt",
       "Escapes the slaughter in the tower and brings the spoil to Barad-dûr"
     ],
-    note: "Of some two hundred orcs in the tower only two survive the quarrel.",
     notes: [
       "Of about two hundred orcs in the tower only two survive.",
       "His talk with Gorbag tells Sam that Frodo is still alive.",
@@ -1557,7 +1462,6 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Is wounded by Sam with Sting and the Phial of Galadriel",
       "Withdraws grievously hurt into her hole"
     ],
-    note: "Sauron calls her his cat and tolerates her as a watchdog.",
     notes: [
       "Sauron calls her his cat and keeps her as a guard upon the pass.",
       "The light of Eärendil in the phial is the one thing she gives way before.",
@@ -1589,10 +1493,8 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Faces Gandalf on the bridge and pulls him down into the deep",
       "Is pursued up the Endless Stair and slain on Zirakzigil"
     ],
-    note: "The dwarves woke him by digging too deep for mithril.",
     notes: [
       "The dwarves name him only Durin's Bane and are loath to say it aloud.",
-      "Whether Balrogs have wings is one of the oldest arguments among readers.",
       "The fight lasts ten days and ends above the clouds.",
       "The orcs of Moria fear him so much that they call him only the terror."
     ]
@@ -1618,10 +1520,8 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Kindles the war between dwarves and orcs",
       "Falls in 2799 at Azanulbizar to Dáin Ironfoot"
     ],
-    note: "His son Bolg leads the orcs in the Battle of Five Armies.",
     notes: [
       "His son Bolg leads the orcs in the Battle of Five Armies.",
-      "The films keep him alive far longer than the book allows.",
       "The dwarf war over his head lasted six years and cost both sides everything."
     ]
   },
@@ -1646,11 +1546,9 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Brings him with the Eagles to the battle before the Black Gate",
       "Carries Frodo and Sam from the slopes of Mount Doom"
     ],
-    note: "Gandalf once healed one of his forebears of an arrow wound.",
     notes: [
-      "He descends from Thorondor, whose wingspan the tales give as thirty yards.",
+      "The tales give Thorondor's wingspan as thirty yards.",
       "Gandalf once healed a forebear of his of an arrow wound; hence the old debt.",
-      "The Eagles are under no command, which is why they do not simply fly the Ring away.",
       "He carries Gandalf three times, and each time Gandalf says it is the last."
     ]
   },
@@ -1675,11 +1573,8 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Carries him from Rohan to Minas Tirith in three days",
       "Alone among horses stands firm before the Witch-king at the gate"
     ],
-    note: "He understands the speech of Men and suffers neither saddle nor bridle.",
     notes: [
-      "The mearas are said to descend from Béma, the Vala of the hunt.",
       "Théoden gives him outright only after the healing; before that it was a grudging loan.",
-      "He bears neither saddle nor bridle and understands the speech of Men.",
       "He does not sail after the war but stays in Middle-earth."
     ]
   },
@@ -1706,11 +1601,9 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Follows Aragorn, who claims the oath as Isildur's heir",
       "Drives the crews from the corsair fleet at Pelargir"
     ],
-    note: "Only the fulfilment of the old oath releases the host and lets it pass away.",
     notes: [
       "The Stone of Erech came out of Númenor with Isildur and has stood on the hill ever since.",
       "The dead do not fight; they fill the living with mortal terror.",
-      "In the book they never storm the Pelennor, which is the film's invention.",
       "Once released they pass away on the spot like mist in the wind."
     ]
   },
@@ -1739,11 +1632,10 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Sets down a description of the Ring in Gondor",
       "Falls at the Gladden Fields when the Ring slips from his finger"
     ],
-    note: "He calls the Ring the weregild for his father and brother.",
     notes: [
-      "He calls the Ring the weregild for his father and his brother.",
+      "He calls the Ring the precious thing of his house and the weregild for his father and his brother.",
       "Gandalf finds his scroll describing the Ring in the archive in 3018.",
-      "Only his youngest son Valandil survives, because he stayed in Rivendell.",
+      "Valandil survives only because he stayed behind in Rivendell.",
       "The Ring betrays him because in his need he shifts it from hand to hand."
     ]
   },
@@ -1770,11 +1662,9 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Wins on the Dagorlad and besieges Barad-dûr for seven years",
       "Falls wrestling with Sauron, and Narsil breaks beneath him"
     ],
-    note: "Narsil broke under his weight, and only for that could Isildur cut the Ring away.",
     notes: [
       "His name means Elf-friend or star-lover.",
-      "He is reckoned the tallest man of his age at nearly eight feet.",
-      "From the shards of Narsil, Andúril is forged three thousand years later.",
+      "Andúril is not forged from the shards until three thousand years later.",
       "His tomb on the Halifirien stayed a state secret until Cirion's day."
     ]
   }

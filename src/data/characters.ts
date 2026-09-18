@@ -38,7 +38,6 @@ export const CHARACTERS: Character[] = [
       "Wird in Cirith Ungol gefangen und von Sam befreit",
       "Beansprucht am 25. März 3019 in den Sammath Naur den Ring für sich"
     ],
-    note: "Er trägt den Ring siebzehn Jahre, bevor er überhaupt aufbricht.",
     notes: [
       "Sein Elbenname Iorhael bedeutet Altweise, Sams Perhael bedeutet Halbweise.",
       "Die Wunde von der Wetterspitze schmerzt danach jedes Jahr am 13. Oktober.",
@@ -84,11 +83,8 @@ export const CHARACTERS: Character[] = [
       "Trägt Frodo den letzten Hang des Orodruin hinauf",
       "Pflanzt nach dem Krieg mit Galadriels Erde die Bäume des Auenlandes neu"
     ],
-    note: "Er ist Ringträger für wenige Stunden und gibt den Ring freiwillig zurück.",
     notes: [
-      "Er ist der einzige, der den Ring freiwillig und ohne Zwang zurückgibt.",
       "Sein Lied im Turm von Cirith Ungol verrät Frodo, dass er in der Nähe ist.",
-      "Als Bürgermeister wird er siebenmal wiedergewählt, das ist Auenlandrekord.",
       "Nach Rosies Tod fährt er der Überlieferung nach als letzter Ringträger über das Meer."
     ],
     bonds: ["frodo", "rosie", "galadriel", "gollum", "shelob"],
@@ -131,7 +127,6 @@ export const CHARACTERS: Character[] = [
       "Sticht dem Hexenkönig in die Kniekehle und bricht damit seinen Zauber",
       "Kämpft in der Befreiung des Auenlandes an vorderster Stelle"
     ],
-    note: "Er schreibt später ein Kräuterbuch und eine Abhandlung über Pfeifenkraut.",
     notes: [
       "Sein Dolch aus dem Hügelgrab war eigens gegen den Hexenkönig geschmiedet und zerfällt nach dem Stoss.",
       "Er erhält den Titel Holdwine, Rohirrisch für treuer Freund.",
@@ -177,11 +172,9 @@ export const CHARACTERS: Character[] = [
       "Holt Gandalf, als Denethor Faramir verbrennen will",
       "Erschlägt vor dem Schwarzen Tor einen Bergtroll und wird darunter begraben"
     ],
-    note: "Er und Merry wachsen durch das Entwasser zu den grössten Hobbits aller Zeiten.",
     notes: [
-      "Sein Lied für Denethor stammt aus dem Film, im Buch singt Pippin dort nicht.",
+      "Er und Merry wachsen durch das Entwasser zu den grössten Hobbits aller Zeiten.",
       "Der Palantír-Vorfall ist Saurons grösster Irrtum: er hält Pippin für den Ringträger in Isengart.",
-      "Mit 28 Jahren gilt er nach Hobbitmass noch als unmündig.",
       "Als Thain wird er später einer der drei mächtigsten Hobbits des Auenlandes."
     ],
     bonds: ["merry", "gandalf", "denethor", "faramir", "beregond"],
@@ -224,9 +217,8 @@ export const CHARACTERS: Character[] = [
       "Lebt zwanzig Jahre in Bruchtal und übersetzt Elbenbücher",
       "Schenkt Frodo in Bruchtal Stich und das Mithrilhemd"
     ],
-    note: "Sein Buch heisst Hin und zurück und ist Frodos einzige Quelle über Erebor.",
     notes: [
-      "Die Fassung von 1937 erzählt die Ringfindung freundlicher, Tolkien schrieb sie 1951 um.",
+      "Sein Buch heisst Hin und zurück und ist Frodos einzige Quelle über Erebor.",
       "Er ist der erste Hobbit, der ein Elbenlied auf Sindarin dichtet, das Lied von Eärendil.",
       "Beim Rat von Elrond bietet er ernsthaft an, den Ring selbst nach Mordor zu tragen.",
       "Als er Frodo in Bruchtal das Mithrilhemd zeigt, weiss er nicht, dass es ein Königslösegeld wert ist."
@@ -265,7 +257,6 @@ export const CHARACTERS: Character[] = [
       "Begrüsst Sam bei der Rückkehr mit dem Vorwurf, er sei ein Jahr zu spät",
       "Heiratet Sam im Frühjahr 3020 und zieht mit ihm nach Beutelsend"
     ],
-    note: "Ihr erstes Kind Elanor wird nach einer Blume aus Lothlórien benannt.",
     notes: [
       "Elanor, ihr erstes Kind, wird nach der goldenen Blume von Lothlórien benannt.",
       "Von den dreizehn Kindern tragen mehrere Namen aus Gondor und Rohan.",
@@ -312,10 +303,8 @@ export const CHARACTERS: Character[] = [
       "Kehrt nach dem Kampf auf dem Zirakzigil als Gandalf der Weisse zurück",
       "Heilt Théoden, verhandelt mit Saruman und führt die Verteidigung von Minas Tirith"
     ],
-    note: "Er trägt Narya, den Ring des Feuers, den Círdan ihm bei der Ankunft gab.",
     notes: [
       "Olórin war in Valinor der weiseste der Maiar und lernte bei Nienna das Mitleid.",
-      "Er lehnt den Ring ab, weil er weiss, dass er ihn aus Mitleid nähme und aus Mitleid Schreckliches täte.",
       "Sein Pferd Schattenfell versteht Menschenrede und duldet weder Sattel noch Zaum.",
       "Sein Feuerwerk beim Fest ist in ganz Bree und im Auenland sprichwörtlich.",
       "Er stirbt in Moria tatsächlich und wird zurückgesandt, nicht geheilt."
@@ -361,7 +350,6 @@ export const CHARACTERS: Character[] = [
       "Verliert Isengart an die Ents und den Stab an Gandalf",
       "Nimmt das Auenland als Scharrer in Besitz und lässt Bäume und Mühlen zerstören"
     ],
-    note: "Sein Name bedeutet Mann der Kunstfertigkeit, die Elben nennen ihn Curunír.",
     notes: [
       "Curunír heisst Mann der Kunstfertigkeit, Sharkû ist Orkisch für alter Mann.",
       "Sein weisser Mantel schillert in allen Farben, sobald man ihn bewegt.",
@@ -403,12 +391,9 @@ export const CHARACTERS: Character[] = [
       "Wird von Saruman als Bote nach Bree geschickt und warnt damit unwissentlich Gandalf",
       "Sendet Vögel und Adler als Kundschafter nach Isengart"
     ],
-    note: "Tolkien lässt offen, ob er seinen Auftrag erfüllt oder nur vergessen hat.",
     notes: [
-      "Aiwendil bedeutet Vogelfreund.",
       "Er ist mit Beorn bekannt, was Gandalf in Der Hobbit ausnutzt.",
-      "Tolkien lässt offen, ob er seinen Auftrag erfüllt oder in der Wildnis vergessen hat.",
-      "Die Hobbit-Filme geben ihm einen Kaninchenschlitten, den es in keinem Buch gibt."
+      "Tolkien lässt offen, ob er seinen Auftrag erfüllt oder in der Wildnis vergessen hat."
     ],
     bonds: ["gandalf", "gwaihir", "saruman", "beorn"],
     portrait: {
@@ -454,8 +439,8 @@ export const CHARACTERS: Character[] = [
       "Heilt Faramir, Éowyn und Merry in den Häusern der Heilung",
       "Zieht als Köder vor das Schwarze Tor und wird am 1. Mai 3019 gekrönt"
     ],
-    note: "Er dient unter falschem Namen auch in Rohan und Gondor, unter Thengel und Ecthelion.",
     notes: [
+      "Die Herrscher, denen er unerkannt dient, sind Thengel von Rohan und Ecthelion von Gondor.",
       "Estel bedeutet Hoffnung, Thorongil Adler des Sterns, Elessar Elbenstein.",
       "Er regiert 122 Jahre und legt sein Leben am Ende freiwillig nieder, nach Númenorbrauch.",
       "Seine Heilkunst gilt in Gondor als Beweis der Königswürde: die Hände des Königs heilen.",
@@ -500,11 +485,9 @@ export const CHARACTERS: Character[] = [
       "Erblickt in Pelargir zum ersten Mal das Meer und wird von der Sehnsucht ergriffen",
       "Gründet nach dem Krieg eine Elbensiedlung in Ithilien"
     ],
-    note: "Am Meer bei Pelargir erwacht in ihm die Sehnsucht nach dem Westen, die ihn nie mehr loslässt.",
     notes: [
-      "Er geht über frischen Schnee, ohne einzusinken, und schläft mit offenen Augen.",
+      "Er schläft mit offenen Augen.",
       "Sein Bogen aus Lórien ist ein Geschenk Galadriels und weiter tragend als sein alter.",
-      "Sein Name bedeutet schlicht Grünblatt.",
       "Nach Aragorns Tod baut er ein Schiff und fährt mit Gimli in den Westen."
     ],
     bonds: ["gimli", "thranduil", "aragorn", "galadriel"],
@@ -545,10 +528,9 @@ export const CHARACTERS: Character[] = [
       "Kämpft auf dem Pelennor und zieht vor das Schwarze Tor",
       "Gründet in Aglarond eine Zwergensiedlung und wird ihr Herr"
     ],
-    note: "Er ist der einzige Zwerg, der je nach Aman fährt, und das nur als Legolas' Begleiter.",
     notes: [
       "Feanor erbat Galadriels Haar dreimal vergeblich, Gimli erhält drei Strähnen auf eine Bitte.",
-      "Er ist der einzige Zwerg, von dem berichtet wird, dass er nach Aman fuhr.",
+      "Er ist der einzige Zwerg, von dem berichtet wird, dass er nach Aman fuhr, und das nur als Legolas' Begleiter.",
       "Sein Vater Glóin gehörte zu den dreizehn Zwergen aus Der Hobbit.",
       "Die Glitzernden Grotten beschreibt er in einer der wenigen lyrischen Reden eines Zwerges."
     ],
@@ -590,12 +572,11 @@ export const CHARACTERS: Character[] = [
       "Versucht Frodo den Ring abzunehmen und kommt sofort zur Besinnung",
       "Fällt bei der Verteidigung von Merry und Pippin, von vielen Pfeilen getroffen"
     ],
-    note: "Sein Boot mit den Waffen der Feinde treibt über die Rauros-Fälle, Faramir sieht es Tage später.",
     notes: [
       "Der Traum vom zerbrochenen Schwert kommt Faramir mehrfach und Boromir nur einmal.",
       "Sein Horn wird in zwei Teilen aus dem Anduin gefischt und erreicht Denethor.",
       "Er ist der einzige der Gemeinschaft, der offen ausspricht, was alle denken: benutzt den Ring.",
-      "Sein Totenboot treibt über die Rauros-Fälle, ohne zu kentern."
+      "Sein Totenboot mit den Waffen der Feinde treibt über die Rauros-Fälle, ohne zu kentern, und Faramir sieht es Tage später."
     ],
     bonds: ["faramir", "denethor", "aragorn", "lurtz", "merry", "pippin"],
     portrait: {
@@ -636,10 +617,7 @@ export const CHARACTERS: Character[] = [
       "Wird von Aragorn in den Häusern der Heilung zurückgeholt",
       "Wird Fürst von Ithilien und Truchsess unter König Elessar"
     ],
-    note: "Er wird Fürst von Ithilien und Truchsess unter König Elessar.",
     notes: [
-      "Im Buch lehnt er den Ring binnen Minuten ab, der Film lässt ihn lange schwanken.",
-      "Gandalf nannte ihn Schüler, was Denethor als Verrat an der Familie empfand.",
       "Er und Éowyn finden im Garten der Heilenden zusammen, während das Heer vor Mordor steht.",
       "Er ist der letzte, der den alten Brauch der stillen Blickwendung nach Westen vor dem Essen pflegt."
     ],
@@ -680,7 +658,6 @@ export const CHARACTERS: Character[] = [
       "Verliert unter Saurons Einfluss jede Hoffnung und lässt den Scheiterhaufen richten",
       "Verbrennt sich mit dem Palantír in den Händen"
     ],
-    note: "Er durchschaut Aragorns Herkunft lange vor der Krönung und sieht darin eine Bedrohung.",
     notes: [
       "Er erkennt Thorongil Jahrzehnte später als Aragorn wieder und sieht darin einen Rivalen.",
       "Sein Palantírduell mit Sauron dauert Jahre und lässt ihn vorzeitig altern.",
@@ -721,11 +698,9 @@ export const CHARACTERS: Character[] = [
       "Nimmt den Dienst an der Tür der Truchsessen wahr",
       "Verlässt den Posten, tötet den Torwächter und hält den Scheiterhaufen auf"
     ],
-    note: "Aragorn verbannt ihn formal aus der Turmwache und macht ihn zum Hauptmann von Faramirs Garde.",
     notes: [
       "Sein Sohn Bergil führt Pippin durch die Stadt, während die Väter Dienst tun.",
-      "Aragorn verurteilt ihn formal und belohnt ihn faktisch mit einem besseren Posten.",
-      "Er fehlt in den Filmen vollständig."
+      "Aragorn verurteilt ihn formal und belohnt ihn faktisch mit einem besseren Posten."
     ],
     bonds: ["pippin", "faramir", "denethor"],
     portrait: {
@@ -768,10 +743,8 @@ export const CHARACTERS: Character[] = [
       "Beruft den Rat, der die Gemeinschaft bestimmt",
       "Gibt Arwen frei und fährt 3021 mit dem letzten Schiff"
     ],
-    note: "Sein Bruder Elros wählte das Leben der Menschen und wurde der erste König von Númenor.",
     notes: [
-      "Sein Bruder Elros wählte das Leben der Menschen und wurde Stammvater der Könige von Númenor.",
-      "Aragorn ist damit ein sehr entfernter Neffe seines Bruders.",
+      "Über Elros' Linie ist Aragorn ein sehr entfernter Neffe seines Bruders.",
       "Seine Söhne Elladan und Elrohir reiten mit den Grauen Schar nach Süden.",
       "Die Flut an der Furt nimmt im Buch die Form weisser Reiterpferde an."
     ],
@@ -814,12 +787,8 @@ export const CHARACTERS: Character[] = [
       "Wird am Mittsommertag 3019 in Minas Tirith Königin",
       "Gibt Frodo ihren Platz auf dem Schiff in den Westen"
     ],
-    note: "Sie schenkt Frodo ihren Platz auf dem Schiff in den Westen.",
     notes: [
-      "Sie gilt als Wiedergängerin Lúthiens, die zweitausend Jahre vor ihr dieselbe Wahl traf.",
-      "Ihre Mutter Celebrían fuhr nach einem Überfall der Orks in den Westen.",
-      "Nach Aragorns Tod legt sie sich auf dem Cerin Amroth nieder und stirbt dort.",
-      "Die Flucht zur Furt gehört im Buch Glorfindel, nicht ihr."
+      "Nach Aragorns Tod legt sie sich auf dem Cerin Amroth nieder und stirbt dort."
     ],
     bonds: ["elrond", "aragorn", "galadriel", "celeborn"],
     portrait: {
@@ -858,10 +827,8 @@ export const CHARACTERS: Character[] = [
       "Weissagt, dass der Hexenkönig nicht von der Hand eines Mannes fallen wird",
       "Findet 3018 die Hobbits auf der Strasse und setzt Frodo auf Asfaloth"
     ],
-    note: "In den Filmen übernimmt Arwen seine Rolle an der Furt.",
     notes: [
       "Sein Pferd Asfaloth trägt kein Zaumzeug, nur ein Kopfgeschirr aus Silber.",
-      "Für die Nazgûl leuchtet er, weil er zugleich in der sichtbaren und der unsichtbaren Welt steht.",
       "Tolkien hat lange geschwankt, ob es zwei Glorfindel gibt oder einen zurückgesandten."
     ],
     bonds: ["elrond", "frodo", "witchking"],
@@ -903,12 +870,10 @@ export const CHARACTERS: Character[] = [
       "Widersteht Frodos Angebot des Ringes und bleibt Galadriel",
       "Schleift mit Celeborn dreimal die Heere von Dol Guldur und reisst die Festung nieder"
     ],
-    note: "Ihre Gaben an die Gefährten entscheiden später mehrfach über Leben und Tod.",
     notes: [
       "Ihr Bann, nach Aman zurückzukehren, wird erst nach der Ablehnung des Ringes aufgehoben.",
       "Der Spiegel zeigt Vergangenes, Gegenwärtiges und Mögliches, ohne zu sagen, welches davon.",
-      "Ihre Gaben entscheiden später mehrfach über Leben und Tod: Glas, Seil, Erde, Bogen.",
-      "Feanor erbat dreimal eine Strähne ihres Haares und bekam keine."
+      "Ihre Gaben entscheiden später mehrfach über Leben und Tod: Glas, Seil, Erde, Bogen."
     ],
     bonds: ["celeborn", "arwen", "frodo", "gimli", "gandalf", "sam"],
     portrait: {
@@ -947,11 +912,9 @@ export const CHARACTERS: Character[] = [
       "Führt die Elben Lóriens dreimal gegen Dol Guldur",
       "Überquert nach dem Sieg den Anduin und nimmt die Festung ein"
     ],
-    note: "Er bleibt nach Galadriels Abfahrt noch eine Weile in Mittelerde und zieht dann nach Bruchtal.",
     notes: [
       "Er nennt Moria beim Namen Khazad-dûm und rügt Gimli erst, ehe Galadriel einlenkt.",
-      "Nach Galadriels Abfahrt zieht er nach Bruchtal zu seinen Enkeln.",
-      "Sein Name bedeutet Silberbaum."
+      "Nach Galadriels Abfahrt bleibt er noch eine Weile in Mittelerde und zieht dann nach Bruchtal zu seinen Enkeln."
     ],
     bonds: ["galadriel", "haldir", "arwen"],
     portrait: {
@@ -987,10 +950,8 @@ export const CHARACTERS: Character[] = [
       "Nimmt die Gefährten auf und verlangt für Gimli die Augenbinde",
       "Geleitet sie nach Caras Galadhon und später zum Anduin"
     ],
-    note: "Im Buch überlebt er, sein Tod in der Klamm ist eine Erfindung der Verfilmung.",
     notes: [
       "Er spricht als einer von wenigen Grenzwächtern die Gemeinsame Sprache.",
-      "Sein Tod in Helms Klamm ist eine Erfindung des Films.",
       "Die Augenbinde wird am Ende allen angelegt, damit Gimli nicht allein gedemütigt wird."
     ],
     bonds: ["celeborn", "galadriel", "gimli"],
@@ -1030,11 +991,9 @@ export const CHARACTERS: Character[] = [
       "Kämpft in der Schlacht der Fünf Heere",
       "Hält den Norden des Düsterwaldes im Ringkrieg gegen die Heere Dol Guldurs"
     ],
-    note: "Nach dem Sieg über Dol Guldur nennen die Elben den Wald Eryn Lasgalen, den Wald der grünen Blätter.",
     notes: [
       "Der Wald heisst nach dem Sieg Eryn Lasgalen, Wald der grünen Blätter.",
-      "Im Hobbit hat er keinen Namen und heisst nur der Elbenkönig.",
-      "Tolkien schreibt ihm ausdrücklich eine Schwäche für Schätze zu, besonders für weisse Edelsteine.",
+      "Seine Schwäche gilt besonders weissen Edelsteinen.",
       "Bei der Teilung Düsterwalds erhält er den Norden, Celeborn den Süden."
     ],
     bonds: ["legolas", "bard", "thorin", "celeborn"],
@@ -1074,11 +1033,8 @@ export const CHARACTERS: Character[] = [
       "Nimmt die Flüchtlinge aus Arnor auf und hält die Häfen offen",
       "Rüstet jedes Schiff aus, das in den Westen fährt"
     ],
-    note: "Er ist der einzige Elb, dem ein Bart wächst, und er wartet als Letzter am Hafen.",
     notes: [
-      "Er ist der einzige Elb, dem ein Bart wächst.",
-      "Er erkannte in Gandalf sofort den Grössten der Istari, obwohl der als letzter kam.",
-      "Er wartet, bis der letzte Elb Mittelerde verlassen hat."
+      "Er erkannte in Gandalf sofort den Grössten der Istari, obwohl der als letzter kam."
     ],
     bonds: ["gandalf", "gilgalad", "elrond"],
     portrait: {
@@ -1116,10 +1072,8 @@ export const CHARACTERS: Character[] = [
       "Siegt auf der Dagorlad und belagert sieben Jahre Barad-dûr",
       "Fällt gemeinsam mit Elendil im Zweikampf gegen Sauron"
     ],
-    note: "Sein Speer Aeglos wird nach seinem Tod nie wieder geführt.",
     notes: [
       "Sein Speer Aeglos heisst Schneedorn und wird nach ihm nie wieder geführt.",
-      "Er hinterliess keinen Erben, danach gibt es keinen Hochkönig der Noldor mehr.",
       "Bilbos Lied vom Fall Gil-galads ist eines der wenigen elbischen Lieder im Roten Buch."
     ],
     bonds: ["elendil", "elrond", "cirdan", "sauron"],
@@ -1163,8 +1117,8 @@ export const CHARACTERS: Character[] = [
       "Führt den Angriff auf dem Pelennor und bricht die Reihen der Belagerer",
       "Stirbt unter seinem Pferd Schneemähne"
     ],
-    note: "Sein Sohn Théodred fällt an den Furten des Isen, deshalb wird Éomer sein Erbe.",
     notes: [
+      "Mit Théodreds Tod wird Éomer sein Erbe.",
       "Ednew bedeutet der Erneuerte, weil er zurückkam, als niemand mehr damit rechnete.",
       "Die Wilden Männer des Druadan-Waldes zeigen ihm den Weg um die Feinde herum.",
       "Er nimmt Merry entgegen aller Vernunft als Knappe an und behandelt ihn wie einen Sohn.",
@@ -1210,12 +1164,9 @@ export const CHARACTERS: Character[] = [
       "Erschlägt ihn, nachdem Merry den Zauber gebrochen hat",
       "Erwacht in den Häusern der Heilung und legt dort das Schwert ab"
     ],
-    note: "Sie nennt sich später Herrin von Ithilien und wird Heilerin statt Kriegerin.",
     notes: [
       "Dernhelm bedeutet verborgener Helm.",
-      "Ihr Schwertarm bricht beim Schlag gegen den Hexenkönig.",
-      "Sie sagt, sie fürchte nicht Schmerz oder Tod, sondern einen Käfig.",
-      "Ihre Wandlung zur Heilerin steht im Buch ausführlich und fehlt in der Kinofassung fast ganz."
+      "Ihr Schwertarm bricht beim Schlag gegen den Hexenkönig."
     ],
     bonds: ["theoden", "eomer", "faramir", "merry", "aragorn", "witchking"],
     portrait: {
@@ -1255,12 +1206,9 @@ export const CHARACTERS: Character[] = [
       "Wird auf dem Pelennor beinahe eingeschlossen und von Imrahils Ankunft gerettet",
       "Wird als achtzehnter König der Mark ausgerufen"
     ],
-    note: "Er nennt seine Freundschaft mit Aragorn und Gimli ein Bündnis, das auch seine Erben halten sollen.",
     notes: [
-      "Éadig bedeutet der Glückliche oder Gesegnete.",
-      "Er heiratet Lothíriel, die Tochter Imrahils von Dol Amroth.",
       "Er nennt Galadriel zunächst gefährlich und muss sich das von Gimli anhören.",
-      "Seine Freundschaft mit Aragorn wird zu einem Bündnis, das auch die Erben halten."
+      "Seine Freundschaft mit Aragorn und Gimli wird zu einem Bündnis, das auch die Erben halten."
     ],
     bonds: ["theoden", "eowyn", "aragorn", "imrahil", "gimli"],
     portrait: {
@@ -1301,11 +1249,9 @@ export const CHARACTERS: Character[] = [
       "Folgt Saruman ins Auenland und erträgt dort täglich Demütigungen",
       "Schneidet Saruman vor Beutelsend die Kehle durch"
     ],
-    note: "Der Wurf des Palantír ist sein einziger Treffer und er trifft damit ausgerechnet seinen Herrn.",
     notes: [
       "Den Palantír wirft er in dem Versuch, Gandalf zu treffen, und übergibt ihm damit den Stein.",
-      "Gandalf nennt ihn Sarumans Schlange und bietet ihm zweimal einen Ausweg an.",
-      "Im Film stürzt er Saruman vom Turm, im Buch tötet er ihn im Auenland."
+      "Gandalf nennt ihn Sarumans Schlange und bietet ihm zweimal einen Ausweg an."
     ],
     bonds: ["saruman", "theoden", "eowyn", "gandalf"],
     portrait: {
@@ -1343,12 +1289,8 @@ export const CHARACTERS: Character[] = [
       "Übernimmt gemeinsam mit Éomer und Gandalf den Befehl über die Stadt",
       "Zieht mit dem Heer vor das Schwarze Tor"
     ],
-    note: "Sein Haus gilt als das einzige in Gondor, in dessen Adern noch Elbenblut fliesst.",
     notes: [
-      "Sein Haus gilt als einziges in Gondor mit elbischem Blut in der Ahnenreihe.",
-      "Er ist Bruder Finduilas' und damit Onkel von Boromir und Faramir.",
-      "Seine Tochter Lothíriel wird Königin von Rohan.",
-      "Er fehlt in den Filmen ganz."
+      "Seine Tochter Lothíriel wird Königin von Rohan."
     ],
     bonds: ["faramir", "aragorn", "eomer", "denethor"],
     portrait: {
@@ -1386,7 +1328,6 @@ export const CHARACTERS: Character[] = [
       "Beherbergt die Hobbits in der Nacht, in der die Ringgeister zuschlagen",
       "Verkauft ihnen Bill, das abgemagerte Pony Farmer Ferkelbeins"
     ],
-    note: "Ohne seinen vergessenen Brief hätten die Hobbits Streicher nie kennengelernt.",
     notes: [
       "Sein Brief hätte den Hobbits Monate und einige Wunden erspart.",
       "Bill das Pony findet allein den Weg zurück nach Bree.",
@@ -1429,10 +1370,8 @@ export const CHARACTERS: Character[] = [
       "Fordert von Thorin einen Anteil am Hort und belagert den Berg",
       "Kämpft in der Schlacht der Fünf Heere und wird König von Thal"
     ],
-    note: "Er nutzt den letzten schwarzen Pfeil, den sein Haus über Generationen aufbewahrt hat.",
     notes: [
-      "Der schwarze Pfeil stammt aus der Schmiede von Girion und kehrte immer zurück.",
-      "Sein Urgrossvater Girion war der letzte Herr von Thal, ehe Smaug kam.",
+      "Der letzte schwarze Pfeil stammt aus der Schmiede von Girion, kehrte immer zurück und wurde in seinem Haus über Generationen aufbewahrt.",
       "Sein Enkel Brand fällt im Ringkrieg an Dáins Seite vor Erebor."
     ],
     bonds: ["thorin", "thranduil", "smaug", "dain"],
@@ -1471,10 +1410,9 @@ export const CHARACTERS: Character[] = [
       "Erscheint spät in der Schlacht der Fünf Heere in Bärengestalt",
       "Trägt Thorin verwundet aus dem Getümmel und zerbricht die Leibwache Bolgs"
     ],
-    note: "Seine Nachkommen, die Beorninger, halten später den Hohen Pass für Reisende offen.",
     notes: [
       "Seine Tiere sprechen nicht, verstehen ihn aber und bedienen bei Tisch.",
-      "Seine Nachkommen, die Beorninger, halten später den Hohen Pass offen.",
+      "Seine Nachkommen, die Beorninger, halten später den Hohen Pass für Reisende offen.",
       "Er isst kein Fleisch und hält sich Bienen von der Grösse eines Daumens."
     ],
     bonds: ["thorin", "bilbo", "gandalf", "radagast"],
@@ -1518,7 +1456,6 @@ export const CHARACTERS: Character[] = [
       "Bricht in der Schlacht aus dem Tor und fällt tödlich verwundet",
       "Versöhnt sich sterbend mit Bilbo"
     ],
-    note: "Sein Beiname stammt von einem Eichenast, den er vor Moria als Schild benutzte.",
     notes: [
       "Der Arkenstein wird ihm mit ins Grab gelegt, dazu Orcrist auf die Brust.",
       "Sein Beiname stammt von einem Eichenast, den er vor Moria als Schild benutzte.",
@@ -1563,12 +1500,9 @@ export const CHARACTERS: Character[] = [
       "Wird Herr von Moria und hält die Ostgrube fünf Jahre lang",
       "Fällt 2994 am Spiegelsee durch einen Orkpfeil"
     ],
-    note: "Die Gefährten finden sein Grab und das Buch, das den Untergang der Kolonie schildert.",
     notes: [
       "Sein Grabmal in der Kammer von Mazarbul ist die einzige Zwergeninschrift, die die Gefährten lesen.",
-      "Das Buch von Mazarbul endet mit dem Satz, sie kommen.",
-      "Er ist Gimlis Verwandter und Dwalins Bruder.",
-      "Er war der einzige Zwerg, der Bilbo von Anfang an ernst nahm."
+      "Das Buch von Mazarbul endet mit dem Satz, sie kommen."
     ],
     bonds: ["thorin", "gimli", "bilbo", "gandalf"],
     portrait: {
@@ -1608,11 +1542,10 @@ export const CHARACTERS: Character[] = [
       "Weist 3018 Saurons Boten ab, die nach Bilbo und dem Ring fragen",
       "Fällt 3019 vor dem Tor Erebors über dem Leichnam König Brands"
     ],
-    note: "Er stirbt mit über 250 Jahren im Kampf über dem Leichnam König Brands.",
     notes: [
       "Er ist der einzige Zwerg, der einen Blick in Morias Osttor warf und sagte, was er dort sah.",
       "Saurons Bote versprach ihm drei Zwergenringe für Auskunft über den Ringträger.",
-      "Er stirbt mit 252 Jahren im Kampf, was selbst für Zwerge ungewöhnlich ist."
+      "Er stirbt mit 252 Jahren, was selbst für Zwerge ungewöhnlich ist."
     ],
     bonds: ["thorin", "thranduil", "azog", "bard"],
     portrait: {
@@ -1653,7 +1586,6 @@ export const CHARACTERS: Character[] = [
       "Fliegt nach Esgaroth und brennt die Stadt nieder",
       "Fällt durch Bards schwarzen Pfeil in den Langen See"
     ],
-    note: "Die Schuppen an seiner Brust hat er sich selbst aus Edelsteinen gepanzert, eine Stelle blieb frei.",
     notes: [
       "Sein Gespräch mit Bilbo gilt als eine der wenigen Szenen, in denen jemand einen Drachen überlistet.",
       "Die Drachenkrankheit ist ansteckend: sie ergreift Thorin, obwohl Smaug längst tot ist.",
@@ -1692,10 +1624,9 @@ export const CHARACTERS: Character[] = [
       "Bewacht Saruman in Orthanc und lässt ihn schliesslich ziehen",
       "Verspricht Aragorn, den Fangorn zu hüten, und erhält das Land zurück"
     ],
-    note: "Die Ents suchen seit Jahrhunderten die Entfrauen, die im Krieg der Vorzeit verschwanden.",
     notes: [
       "Er nennt sein Volk in einer Liste, die ausdrücklich keine Hobbits enthält, und ergänzt sie.",
-      "Die Entfrauen verschwanden im Zweiten Zeitalter, seither gibt es keine Entkinder.",
+      "Die Entfrauen verschwanden im Zweiten Zeitalter; die Ents suchen sie seither, und es gibt keine Entkinder mehr.",
       "Das Entwasser lässt Merry und Pippin zu den grössten Hobbits der Geschichte wachsen.",
       "Sein Name in der eigenen Sprache wäre zu lang für ein Buch, sagt er selbst."
     ],
@@ -1729,10 +1660,8 @@ export const CHARACTERS: Character[] = [
       "Wählt für jeden der vier eine Klinge aus dem Grabschatz",
       "Ruft das Pony Fatty Lumpkin und findet die verlorenen Ponys wieder"
     ],
-    note: "Der Rat von Elrond verwirft die Idee, ihm den Ring zu geben: er würde ihn schlicht verlegen.",
     notes: [
       "Er setzt den Ring auf und wird nicht unsichtbar, dann lässt er ihn verschwinden und gibt ihn zurück.",
-      "Der Rat von Elrond verwirft ihn als Hüter: er würde den Ring schlicht verlegen.",
       "Die Klingen aus dem Hügelgrab entscheiden später die Schlacht auf dem Pelennor.",
       "Er stammt aus einem Gedicht, das Tolkien lange vor dem Hobbit schrieb."
     ],
@@ -1771,11 +1700,8 @@ export const CHARACTERS: Character[] = [
       "Erklärt ihnen, dass Tom niemandem gehört und über nichts herrscht",
       "Verabschiedet sie am zweiten Morgen mit klarem Rat"
     ],
-    note: "Der Herbstregen gilt in ihrem Haus als ihr Waschtag.",
     notes: [
-      "Der Herbstregen gilt in ihrem Haus als ihr Waschtag.",
-      "Tom fing sie der Erzählung nach im Fluss und nahm sie mit heim.",
-      "Sie fehlt in den Filmen wie Tom Bombadil."
+      "Der Herbstregen gilt in ihrem Haus als ihr Waschtag."
     ],
     bonds: ["bombadil", "frodo"],
     portrait: {
@@ -1817,7 +1743,6 @@ export const CHARACTERS: Character[] = [
       "Führt sie nach Cirith Ungol und liefert sie Kankra aus",
       "Beisst Frodo am Feuerspalt den Finger ab und stürzt mit dem Ring in die Glut"
     ],
-    note: "Ohne seinen Biss in den Finger wäre der Ring nie ins Feuer gefallen.",
     notes: [
       "Sein Geburtstagsgeschenk an sich selbst ist der Mord an Déagol.",
       "Der Name Gollum kommt von dem Geräusch, das er mit der Kehle macht.",
@@ -1858,11 +1783,7 @@ export const CHARACTERS: Character[] = [
       "Baut Barad-dûr ab 2951 wieder auf und nimmt Mordor offen in Besitz",
       "Verliert alles, als der Ring am 25. März 3019 ins Feuer fällt"
     ],
-    note: "Sein ursprünglicher Name ist Mairon, der Bewundernswerte.",
     notes: [
-      "Mairon, sein ursprünglicher Name, bedeutet der Bewundernswerte.",
-      "Nach Númenors Untergang kann er keine freundliche Gestalt mehr annehmen.",
-      "Er kommt nie auf den Gedanken, dass jemand den Ring zerstören statt benutzen will.",
       "Die neun Ringe der Menschen wirkten schneller als die sieben der Zwerge, die nur Gier weckten."
     ],
     bonds: ["witchking", "saruman", "isildur", "mouthofsauron", "gilgalad", "gollum"],
@@ -1898,8 +1819,8 @@ export const CHARACTERS: Character[] = [
       "Bricht 3019 mit dem Rammbock Grond das Tor von Minas Tirith",
       "Fällt auf dem Pelennor durch Merry und Éowyn"
     ],
-    note: "Die Weissagung Glorfindels erfüllt sich wörtlich: es sind eine Frau und ein Hobbit.",
     notes: [
+      "Die Weissagung Glorfindels erfüllt sich wörtlich: es sind eine Frau und ein Hobbit.",
       "Sein Streitross ist geflügelt, aber kein Drache, sondern ein Wesen aus früherer Zeit.",
       "Er fordert Eärnur zweimal zum Zweikampf und dieser verschwindet beim zweiten Mal spurlos.",
       "Die Klinge, die ihn trifft, wurde eigens gegen Angmar geschmiedet.",
@@ -1937,12 +1858,10 @@ export const CHARACTERS: Character[] = [
       "Werden an der Furt des Bruinen von der Flut fortgerissen",
       "Kehren auf geflügelten Reittieren zurück und tragen den Schrecken über die Heere"
     ],
-    note: "Drei der Neun waren einst Fürsten von Númenor.",
     notes: [
       "Drei von ihnen waren einst Fürsten von Númenor.",
       "Nur zwei tragen Namen: der Hexenkönig und Khamûl, der Schatten des Ostens.",
-      "Ihr Schrei macht Menschen kampfunfähig, ohne dass ein Schwert gezogen wird.",
-      "Sie vergehen in dem Augenblick, in dem der Ring im Feuer zerfällt."
+      "Ihr Schrei macht Menschen kampfunfähig, ohne dass ein Schwert gezogen wird."
     ],
     bonds: ["witchking", "sauron", "frodo"],
     portrait: {
@@ -1972,12 +1891,6 @@ export const CHARACTERS: Character[] = [
       "Verhandelt vor dem Schwarzen Tor mit dem Heer des Westens",
       "Legt Mithrilhemd, grauen Mantel und Schwert als Beweise vor",
       "Fordert Rückzug und Unterwerfung Gondors als Preis"
-    ],
-    note: "Er hat seinen eigenen Namen vergessen, so lange steht er schon in diesem Dienst.",
-    notes: [
-      "Er ist ein lebender Mensch, kein Geist, und stammt von den Schwarzen Númenórern ab.",
-      "Er hat seinen eigenen Namen vergessen.",
-      "Im Film enthauptet Aragorn ihn sofort, im Buch reitet er unversehrt zurück."
     ],
     bonds: ["sauron", "aragorn", "gandalf"],
     portrait: {
@@ -2015,10 +1928,7 @@ export const CHARACTERS: Character[] = [
       "Streckt Boromir mit drei Pfeilen nieder",
       "Wird von Aragorn im Zweikampf erschlagen"
     ],
-    note: "Er kommt in keinem Buch vor und wurde für den Film erfunden.",
     notes: [
-      "Er kommt in keinem Buch vor und wurde für den ersten Film erfunden.",
-      "Seine Aufgabe übernehmen im Buch namenlose Orkbogenschützen.",
       "Die weisse Hand auf seiner Stirn ist Sarumans Zeichen."
     ],
     bonds: ["saruman", "boromir", "aragorn"],
@@ -2050,11 +1960,9 @@ export const CHARACTERS: Character[] = [
       "Treibt die Gefangenen ohne Rast quer durch Rohan",
       "Wird an der Waldgrenze von Éomers Reitern gestellt und getötet"
     ],
-    note: "Der Streit zwischen Isengart und Mordor um die Gefangenen rettet den Hobbits das Leben.",
     notes: [
       "Der Streit zwischen Isengart, Mordor und den Nordorks rettet den Hobbits das Leben.",
-      "Er verabreicht Merry und Pippin den Orktrank, der Wunden schliesst und brennt.",
-      "Das Buch widmet dem Streit ein ganzes Kapitel, der Film wenige Sätze."
+      "Er verabreicht Merry und Pippin den Orktrank, der Wunden schliesst und brennt."
     ],
     bonds: ["saruman", "merry", "pippin", "eomer"],
     portrait: {
@@ -2084,9 +1992,7 @@ export const CHARACTERS: Character[] = [
       "Lässt die Köpfe der Gefallenen in die Stadt schleudern",
       "Übernimmt den Befehl, nachdem der Hexenkönig gefallen ist"
     ],
-    note: "Sein Name stammt vom Balrogfürsten des Ersten Zeitalters.",
     notes: [
-      "Das Buch nennt nur seinen Namen und seinen Rang, alles Weitere stammt vom Film.",
       "Sein Name stammt vom Balrogfürsten des Ersten Zeitalters.",
       "Ob er Ork, Mensch oder etwas anderes ist, bleibt offen."
     ],
@@ -2119,7 +2025,6 @@ export const CHARACTERS: Character[] = [
       "Streitet mit Gorbag aus Minas Morgul um das Mithrilhemd",
       "Entkommt dem Gemetzel im Turm und bringt die Beute nach Barad-dûr"
     ],
-    note: "Von den gut zweihundert Orks des Turms überleben den Streit nur zwei.",
     notes: [
       "Von rund zweihundert Orks des Turms überleben den Streit nur zwei.",
       "Sein Gespräch mit Gorbag verrät Sam, dass Frodo noch lebt.",
@@ -2156,7 +2061,6 @@ export const CHARACTERS: Character[] = [
       "Wird von Sam mit Stich und dem Sternenglas Galadriels verwundet",
       "Zieht sich schwer verletzt in ihr Loch zurück"
     ],
-    note: "Sauron duldet sie als Wachhund und weiss, dass sie ihm nicht dient.",
     notes: [
       "Sauron nennt sie seine Katze und duldet sie als Wachhund am Pass.",
       "Das Licht Eärendils im Glas ist das einzige, vor dem sie weicht.",
@@ -2195,10 +2099,8 @@ export const CHARACTERS: Character[] = [
       "Stellt sich Gandalf auf der Brücke und zieht ihn mit in die Tiefe",
       "Wird nach dem Sturz die Endlose Treppe hinauf verfolgt und auf dem Zirakzigil erschlagen"
     ],
-    note: "Die Zwerge weckten ihn, als sie zu tief nach Mithril gruben.",
     notes: [
       "Die Zwerge nennen ihn nur Durins Fluch und sprechen den Namen ungern aus.",
-      "Ob Balrogs Flügel haben, ist eine der ältesten Streitfragen unter Lesern.",
       "Der Kampf dauert der Erzählung nach zehn Tage und endet über den Wolken.",
       "Die Orks Morias fürchten ihn so sehr, dass sie ihn nur den Schrecken nennen."
     ],
@@ -2231,10 +2133,8 @@ export const CHARACTERS: Character[] = [
       "Entfacht damit den Krieg zwischen Zwergen und Orks",
       "Fällt 2799 in der Schlacht von Azanulbizar durch Dáin Eisenfuss"
     ],
-    note: "Im Buch stirbt er bereits 2799, die Filme lassen ihn bis zur Schlacht der Fünf Heere leben.",
     notes: [
       "Sein Sohn Bolg führt die Orks in der Schlacht der Fünf Heere.",
-      "Die Filme halten ihn 140 Jahre länger am Leben als das Buch.",
       "Der Zwergenkrieg um seinen Kopf dauerte sechs Jahre und kostete beide Seiten alles."
     ],
     bonds: ["thorin", "dain", "smaug"],
@@ -2266,11 +2166,9 @@ export const CHARACTERS: Character[] = [
       "Bringt ihn mit den Adlern zur Schlacht vor dem Schwarzen Tor",
       "Trägt Frodo und Sam vom Hang des Schicksalsberges"
     ],
-    note: "Gandalf heilte einst seinen Vorfahren von einem Pfeilschuss, daher die alte Schuld.",
     notes: [
-      "Er ist ein Nachfahre Thorondors, dessen Flügelspannweite die Überlieferung mit dreissig Metern angibt.",
+      "Thorondors Flügelspannweite gibt die Überlieferung mit dreissig Metern an.",
       "Gandalf heilte einst seinen Vorfahren von einem Pfeilschuss, daher die alte Schuld.",
-      "Die Adler stehen unter keinem Befehl, deshalb tragen sie den Ring nicht einfach fort.",
       "Er trägt Gandalf dreimal, und jedes Mal sagt Gandalf, es sei das letzte Mal."
     ],
     bonds: ["gandalf", "radagast", "frodo", "sam"],
@@ -2302,11 +2200,8 @@ export const CHARACTERS: Character[] = [
       "Trägt ihn in drei Tagen von Rohan nach Minas Tirith",
       "Steht vor dem Tor der Stadt als einziges Pferd dem Hexenkönig stand"
     ],
-    note: "Er versteht menschliche Rede und duldet weder Sattel noch Zaum.",
     notes: [
-      "Die Mearas stammen der Sage nach von Béma, dem Vala der Jagd.",
       "Théoden schenkt ihn Gandalf erst nach der Heilung, vorher war es eine Leihgabe im Zorn.",
-      "Er trägt weder Sattel noch Zaum und versteht Menschenrede.",
       "Nach dem Krieg fährt er nicht mit, sondern bleibt in Mittelerde."
     ],
     bonds: ["gandalf", "theoden"],
@@ -2340,11 +2235,9 @@ export const CHARACTERS: Character[] = [
       "Folgt Aragorn, der als Isildurs Erbe den Eid einfordert",
       "Vertreibt bei Pelargir die Besatzungen der Korsarenflotte"
     ],
-    note: "Erst die Erfüllung des alten Eides erlöst das Heer und lässt es vergehen.",
     notes: [
       "Der Stein von Erech kam mit Isildur aus Númenor und steht seither auf dem Hügel.",
       "Die Toten kämpfen nicht, sie versetzen die Lebenden in Todesangst.",
-      "Im Buch stürmt das Totenheer nicht über den Pelennor, das ist eine Erfindung des Films.",
       "Nach der Entlassung vergehen sie an Ort und Stelle wie Nebel im Wind."
     ],
     bonds: ["aragorn", "isildur", "legolas", "gimli"],
@@ -2380,11 +2273,10 @@ export const CHARACTERS: Character[] = [
       "Schreibt in Gondor eine Beschreibung des Ringes nieder",
       "Fällt an den Schwertelfeldern, als der Ring ihm vom Finger gleitet"
     ],
-    note: "Er nennt den Ring das Kleinod seines Hauses und nimmt ihn als Wergeld für Vater und Bruder.",
     notes: [
-      "Er nennt den Ring das Wergeld für Vater und Bruder.",
+      "Er nennt den Ring das Kleinod seines Hauses und das Wergeld für Vater und Bruder.",
       "Die Schriftrolle mit der Beschreibung des Ringes findet Gandalf 3018 im Archiv.",
-      "Nur sein jüngster Sohn Valandil überlebt, weil er in Bruchtal zurückblieb.",
+      "Valandil überlebt nur, weil er in Bruchtal zurückblieb.",
       "Der Ring verrät ihn, weil er ihn in Not von einer Seite zur anderen wechselt."
     ],
     bonds: ["elendil", "sauron", "aragorn", "elrond", "kingofthedead"],
@@ -2425,11 +2317,9 @@ export const CHARACTERS: Character[] = [
       "Siegt auf der Dagorlad und belagert sieben Jahre lang Barad-dûr",
       "Fällt im Ringen mit Sauron, wobei Narsil unter ihm zerbricht"
     ],
-    note: "Unter seinem Gewicht zerbricht Narsil, und gerade deshalb kann Isildur den Ring abschlagen.",
     notes: [
       "Sein Name bedeutet Elbenfreund oder Sternenfreund.",
-      "Er gilt mit über zweieinhalb Metern als grösster Mensch seiner Zeit.",
-      "Aus den Scherben von Narsil wird dreitausend Jahre später Andúril geschmiedet.",
+      "Andúril wird erst dreitausend Jahre später aus den Scherben geschmiedet.",
       "Sein Grab auf dem Halifirien blieb bis in Cirions Zeit ein Staatsgeheimnis."
     ],
     bonds: ["isildur", "gilgalad", "aragorn", "sauron"],
