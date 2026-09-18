@@ -1,4 +1,5 @@
 import { CHARACTERS } from "../data/characters";
+import { MARKER_SCALE } from "../data/map";
 import { PLACES } from "../data/places";
 
 export interface Point {
@@ -46,17 +47,17 @@ export function computeMarkers(): MarkerLayout {
     if (!place) continue;
 
     if (group.length > 1) {
-      const radius = 17 + group.length * 3;
+      const radius = (17 + group.length * 3) * MARKER_SCALE;
       hubs.push({ x: place.x, y: place.y });
       group.forEach((id, i) => {
         const angle = Math.PI + ((i + 0.5) / group.length) * Math.PI;
         const x = place.x + Math.cos(angle) * radius * 1.15;
-        const y = place.y + Math.sin(angle) * radius * 0.95 - 6;
+        const y = place.y + Math.sin(angle) * radius * 0.95 - 6 * MARKER_SCALE;
         positions[id] = { x, y };
         spokes.push({ x1: place.x, y1: place.y, x2: x, y2: y });
       });
     } else {
-      positions[group[0]] = { x: place.x, y: place.y - 16 };
+      positions[group[0]] = { x: place.x, y: place.y - 16 * MARKER_SCALE };
     }
   }
 

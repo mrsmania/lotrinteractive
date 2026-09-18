@@ -4,3 +4,7 @@ dist
 .DS_Store
 .vite
 *.tsbuildinfo
+
+# The map before it is cut into tiles: tens of megabytes, and the tiles
+# under public/images/map/ are what the site actually serves.
+map-source

@@ -50,7 +50,6 @@ export default function App() {
   const [sheetOpen, setSheetOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showJourneys, setShowJourneys] = useState(true);
-  const [showPlaceNames, setShowPlaceNames] = useState(true);
   const [focus, setFocus] = useState<FocusRequest | null>(null);
   const [activeKinds, setActiveKinds] = useState<ReadonlySet<RelationKind>>(
     () => new Set(ALL_KINDS),
@@ -126,12 +125,10 @@ export default function App() {
         view={view}
         query={query}
         showJourneys={showJourneys}
-        showPlaceNames={showPlaceNames}
         activeKinds={activeKinds}
         onViewChange={setView}
         onQueryChange={setQuery}
         onToggleJourneys={() => setShowJourneys((v) => !v)}
-        onTogglePlaceNames={() => setShowPlaceNames((v) => !v)}
         onToggleKind={toggleKind}
         onRandom={random}
         onToggleLanguage={() => setLanguage((l) => (l === "en" ? "de" : "en"))}
@@ -155,7 +152,6 @@ export default function App() {
             selectedId={sheetOpen ? selectedId : null}
             visibleIds={visibleIds}
             showJourneys={showJourneys}
-            showPlaceNames={showPlaceNames}
             focus={focus}
             onSelect={(id) => select(id, false)}
           />

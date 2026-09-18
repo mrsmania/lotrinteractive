@@ -7,12 +7,10 @@ interface Props {
   view: ViewName;
   query: string;
   showJourneys: boolean;
-  showPlaceNames: boolean;
   activeKinds: ReadonlySet<RelationKind>;
   onViewChange: (view: ViewName) => void;
   onQueryChange: (q: string) => void;
   onToggleJourneys: () => void;
-  onTogglePlaceNames: () => void;
   onToggleKind: (kind: RelationKind) => void;
   onRandom: () => void;
   onToggleLanguage: () => void;
@@ -31,12 +29,10 @@ export function Header({
   view,
   query,
   showJourneys,
-  showPlaceNames,
   activeKinds,
   onViewChange,
   onQueryChange,
   onToggleJourneys,
-  onTogglePlaceNames,
   onToggleKind,
   onRandom,
   onToggleLanguage,
@@ -87,14 +83,9 @@ export function Header({
 
         {/* Each view has its own layers to switch on and off. */}
         {view === "map" ? (
-          <>
-            <button className="button" aria-pressed={showJourneys} onClick={onToggleJourneys}>
-              {t("journeys")}
-            </button>
-            <button className="button" aria-pressed={showPlaceNames} onClick={onTogglePlaceNames}>
-              {t("placeNames")}
-            </button>
-          </>
+          <button className="button" aria-pressed={showJourneys} onClick={onToggleJourneys}>
+            {t("journeys")}
+          </button>
         ) : (
           KINDS.map((kind) => (
             <button

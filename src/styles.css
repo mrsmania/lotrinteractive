@@ -253,14 +253,13 @@ main{
    repaints a second, which measures at ~100fps, and at this dash size still
    reads as a slow crawl. */
 .journey-line{animation:wandern 22s steps(110,end) infinite;}
-@keyframes wandern{to{stroke-dashoffset:-260;}}
+@keyframes wandern{to{stroke-dashoffset:-420;}}
 @media (prefers-reduced-motion:reduce){.journey-line{animation:none;}}
 
 /* ---------- Layer visibility ---------- */
 /* The world is one static markup blob, so the header toggles hide whole
    groups with CSS rather than rebuilding it. */
 #map.without-journeys #journeys{display:none;}
-#map.without-labels #place-labels,#map.without-labels #regions{display:none;}
 
 /* ---------- Markers dimmed by the current filter ---------- */
 .marker.dimmed{opacity:.12;pointer-events:none;}

@@ -6,10 +6,6 @@ export interface Place {
   shortName?: string;
   x: number;
   y: number;
-  /** Which symbol to draw. See `placeSymbol` in lib/draw.ts. */
-  kind: string;
-  /** Drawn but never labelled. */
-  unlabelled?: boolean;
 }
 
 /** A people: Hobbit, Elf, Dwarf and so on. Keys of PEOPLES are the ids. */
