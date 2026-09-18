@@ -956,7 +956,7 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "He is missing from the films entirely."
     ]
   },
-  butterblum: {
+  butterbur: {
     name: "Barliman Butterbur",
     title: "Landlord of The Prancing Pony",
     allegiance: "Independent",
@@ -1173,7 +1173,7 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "His carcass lies for ever in the lake bed above the town's treasure."
     ]
   },
-  baumbart: {
+  treebeard: {
     name: "Treebeard",
     title: "Fangorn, eldest of the Ents",
     allegiance: "Free Peoples",
@@ -1235,7 +1235,7 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "He began as a figure in a poem Tolkien wrote long before The Hobbit."
     ]
   },
-  goldbeere: {
+  goldberry: {
     name: "Goldberry",
     title: "Daughter of the River",
     allegiance: "Independent",
@@ -1330,7 +1330,7 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "The nine rings of Men worked faster than the seven of the Dwarves, which only woke greed."
     ]
   },
-  hexenkoenig: {
+  witchking: {
     name: "The Witch-king of Angmar",
     title: "Lord of the Nazgûl",
     allegiance: "Mordor",
@@ -1395,7 +1395,7 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "They pass away in the instant the Ring falls apart in the fire."
     ]
   },
-  mundsaurons: {
+  mouthofsauron: {
     name: "The Mouth of Sauron",
     title: "Messenger of the Black Land",
     allegiance: "Mordor",
@@ -1534,7 +1534,7 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "Orcs talk about their superiors exactly as soldiers do everywhere, which mattered to Tolkien."
     ]
   },
-  kankra: {
+  shelob: {
     name: "Shelob",
     title: "Last child of Ungoliant",
     allegiance: "Independent",
@@ -1654,7 +1654,7 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "He carries Gandalf three times, and each time Gandalf says it is the last."
     ]
   },
-  schattenfell: {
+  shadowfax: {
     name: "Shadowfax",
     title: "Lord of all horses",
     allegiance: "Free Peoples",
@@ -1683,7 +1683,7 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "He does not sail after the war but stays in Middle-earth."
     ]
   },
-  koenigdertoten: {
+  kingofthedead: {
     name: "The King of the Dead",
     title: "Leader of the Oathbreakers",
     allegiance: "Independent",

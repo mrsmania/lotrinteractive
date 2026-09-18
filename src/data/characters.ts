@@ -45,7 +45,7 @@ export const CHARACTERS: Character[] = [
       "Bilbo und Frodo feiern am selben Tag Geburtstag, dem 22. September.",
       "Im Roten Buch schreibt er die Reise selbst auf und lässt die letzten Seiten für Sam frei."
     ],
-    bonds: ["sam", "bilbo", "gollum", "gandalf", "faramir", "kankra"],
+    bonds: ["sam", "bilbo", "gollum", "gandalf", "faramir", "shelob"],
     portrait: {
       skin: "#f2d3ac",
       hair: "#3a2a1c",
@@ -91,7 +91,7 @@ export const CHARACTERS: Character[] = [
       "Als Bürgermeister wird er siebenmal wiedergewählt, das ist Auenlandrekord.",
       "Nach Rosies Tod fährt er der Überlieferung nach als letzter Ringträger über das Meer."
     ],
-    bonds: ["frodo", "rosie", "galadriel", "gollum", "kankra"],
+    bonds: ["frodo", "rosie", "galadriel", "gollum", "shelob"],
     portrait: {
       skin: "#f3d2a4",
       hair: "#c8863c",
@@ -138,7 +138,7 @@ export const CHARACTERS: Character[] = [
       "Er schreibt später über Kräuter, Pfeifenkraut und die Zeitrechnung des Auenlandes.",
       "Er und Pippin werden in Rohan beigesetzt, an Éomers Seite."
     ],
-    bonds: ["pippin", "eowyn", "theoden", "baumbart", "frodo"],
+    bonds: ["pippin", "eowyn", "theoden", "treebeard", "frodo"],
     portrait: {
       skin: "#f1d0a6",
       hair: "#8a5a2b",
@@ -320,7 +320,7 @@ export const CHARACTERS: Character[] = [
       "Sein Feuerwerk beim Fest ist in ganz Bree und im Auenland sprichwörtlich.",
       "Er stirbt in Moria tatsächlich und wird zurückgesandt, nicht geheilt."
     ],
-    bonds: ["frodo", "aragorn", "saruman", "schattenfell", "balrog", "bilbo", "cirdan"],
+    bonds: ["frodo", "aragorn", "saruman", "shadowfax", "balrog", "bilbo", "cirdan"],
     portrait: {
       skin: "#e9c9a4",
       hair: "#e8e4dc",
@@ -368,7 +368,7 @@ export const CHARACTERS: Character[] = [
       "Die Stimme Sarumans ist im Buch eine eigene Waffe mit einem eigenen Kapitel.",
       "Sein Rauch über Isengart wird von Baumbart als erstes Zeichen des Verrats gedeutet."
     ],
-    bonds: ["gandalf", "grima", "theoden", "ugluk", "lurtz", "baumbart"],
+    bonds: ["gandalf", "grima", "theoden", "ugluk", "lurtz", "treebeard"],
     portrait: {
       skin: "#e2c6a6",
       hair: "#f2f0ec",
@@ -462,7 +462,7 @@ export const CHARACTERS: Character[] = [
       "Elrond verlangt vor der Heirat, dass er König beider Reiche wird, nichts Geringeres.",
       "Er ist 87 Jahre alt, als er in Bree auf die Hobbits trifft, und gilt damit als junger Mann."
     ],
-    bonds: ["arwen", "elrond", "gandalf", "eomer", "boromir", "koenigdertoten", "gollum"],
+    bonds: ["arwen", "elrond", "gandalf", "eomer", "boromir", "kingofthedead", "gollum"],
     portrait: {
       skin: "#d8ac81",
       hair: "#3b2c20",
@@ -864,7 +864,7 @@ export const CHARACTERS: Character[] = [
       "Für die Nazgûl leuchtet er, weil er zugleich in der sichtbaren und der unsichtbaren Welt steht.",
       "Tolkien hat lange geschwankt, ob es zwei Glorfindel gibt oder einen zurückgesandten."
     ],
-    bonds: ["elrond", "frodo", "hexenkoenig"],
+    bonds: ["elrond", "frodo", "witchking"],
     portrait: {
       skin: "#f4e2c8",
       hair: "#f2cf58",
@@ -1217,7 +1217,7 @@ export const CHARACTERS: Character[] = [
       "Sie sagt, sie fürchte nicht Schmerz oder Tod, sondern einen Käfig.",
       "Ihre Wandlung zur Heilerin steht im Buch ausführlich und fehlt in der Kinofassung fast ganz."
     ],
-    bonds: ["theoden", "eomer", "faramir", "merry", "aragorn", "hexenkoenig"],
+    bonds: ["theoden", "eomer", "faramir", "merry", "aragorn", "witchking"],
     portrait: {
       skin: "#f0d3ab",
       hair: "#ecd48e",
@@ -1363,7 +1363,7 @@ export const CHARACTERS: Character[] = [
     }
   },
   {
-    id: "butterblum",
+    id: "butterbur",
     name: "Gerstenmann Butterblum",
     title: "Wirt zum Tänzelnden Pony",
     people: "Mensch",
@@ -1666,7 +1666,7 @@ export const CHARACTERS: Character[] = [
     }
   },
   {
-    id: "baumbart",
+    id: "treebeard",
     name: "Baumbart",
     title: "Fangorn, der älteste Ent",
     people: "Ent",
@@ -1736,7 +1736,7 @@ export const CHARACTERS: Character[] = [
       "Die Klingen aus dem Hügelgrab entscheiden später die Schlacht auf dem Pelennor.",
       "Er stammt aus einem Gedicht, das Tolkien lange vor dem Hobbit schrieb."
     ],
-    bonds: ["goldbeere", "frodo", "merry", "pippin"],
+    bonds: ["goldberry", "frodo", "merry", "pippin"],
     portrait: {
       skin: "#e8b98a",
       hair: "#8a5a2a",
@@ -1749,7 +1749,7 @@ export const CHARACTERS: Character[] = [
     }
   },
   {
-    id: "goldbeere",
+    id: "goldberry",
     name: "Goldbeere",
     title: "Tochter des Flusses",
     people: "Wesen",
@@ -1824,7 +1824,7 @@ export const CHARACTERS: Character[] = [
       "Am Treppenabsatz von Cirith Ungol ist er einen Moment lang fast wieder Sméagol, bis Sam ihn anfährt.",
       "Ohne ihn wäre die Aufgabe gescheitert, das sagt Gandalf schon zu Beginn voraus."
     ],
-    bonds: ["frodo", "sam", "bilbo", "kankra", "aragorn", "sauron"],
+    bonds: ["frodo", "sam", "bilbo", "shelob", "aragorn", "sauron"],
     portrait: {
       special: "gollum"
     }
@@ -1865,13 +1865,13 @@ export const CHARACTERS: Character[] = [
       "Er kommt nie auf den Gedanken, dass jemand den Ring zerstören statt benutzen will.",
       "Die neun Ringe der Menschen wirkten schneller als die sieben der Zwerge, die nur Gier weckten."
     ],
-    bonds: ["hexenkoenig", "saruman", "isildur", "mundsaurons", "gilgalad", "gollum"],
+    bonds: ["witchking", "saruman", "isildur", "mouthofsauron", "gilgalad", "gollum"],
     portrait: {
       special: "sauron"
     }
   },
   {
-    id: "hexenkoenig",
+    id: "witchking",
     name: "Der Hexenkönig von Angmar",
     title: "Herr der Nazgûl",
     people: "Nazgûl",
@@ -1944,13 +1944,13 @@ export const CHARACTERS: Character[] = [
       "Ihr Schrei macht Menschen kampfunfähig, ohne dass ein Schwert gezogen wird.",
       "Sie vergehen in dem Augenblick, in dem der Ring im Feuer zerfällt."
     ],
-    bonds: ["hexenkoenig", "sauron", "frodo"],
+    bonds: ["witchking", "sauron", "frodo"],
     portrait: {
       special: "nazgul"
     }
   },
   {
-    id: "mundsaurons",
+    id: "mouthofsauron",
     name: "Der Mund Saurons",
     title: "Bote des Schwarzen Landes",
     people: "Mensch",
@@ -2090,7 +2090,7 @@ export const CHARACTERS: Character[] = [
       "Sein Name stammt vom Balrogfürsten des Ersten Zeitalters.",
       "Ob er Ork, Mensch oder etwas anderes ist, bleibt offen."
     ],
-    bonds: ["hexenkoenig", "sauron"],
+    bonds: ["witchking", "sauron"],
     portrait: {
       special: "ork"
     }
@@ -2125,13 +2125,13 @@ export const CHARACTERS: Character[] = [
       "Sein Gespräch mit Gorbag verrät Sam, dass Frodo noch lebt.",
       "Orks reden über Vorgesetzte genauso wie Soldaten überall, das war Tolkien wichtig."
     ],
-    bonds: ["kankra", "sauron", "frodo", "sam"],
+    bonds: ["shelob", "sauron", "frodo", "sam"],
     portrait: {
       special: "ork"
     }
   },
   {
-    id: "kankra",
+    id: "shelob",
     name: "Kankra",
     title: "Ungoliants letztes Kind",
     people: "Wesen",
@@ -2279,7 +2279,7 @@ export const CHARACTERS: Character[] = [
     }
   },
   {
-    id: "schattenfell",
+    id: "shadowfax",
     name: "Schattenfell",
     title: "Fürst aller Pferde",
     people: "Wesen",
@@ -2315,7 +2315,7 @@ export const CHARACTERS: Character[] = [
     }
   },
   {
-    id: "koenigdertoten",
+    id: "kingofthedead",
     name: "Der König der Toten",
     title: "Anführer des Eidbrecherheeres",
     people: "Wesen",
@@ -2387,7 +2387,7 @@ export const CHARACTERS: Character[] = [
       "Nur sein jüngster Sohn Valandil überlebt, weil er in Bruchtal zurückblieb.",
       "Der Ring verrät ihn, weil er ihn in Not von einer Seite zur anderen wechselt."
     ],
-    bonds: ["elendil", "sauron", "aragorn", "elrond", "koenigdertoten"],
+    bonds: ["elendil", "sauron", "aragorn", "elrond", "kingofthedead"],
     portrait: {
       skin: "#d8ac82",
       hair: "#33281e",
