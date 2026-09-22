@@ -8,3 +8,7 @@ dist
 # The map before it is cut into tiles: tens of megabytes, and the tiles
 # under public/images/map/ are what the site actually serves.
 map-source
+
+# The Aniron archive, kept for reference. The site loads the font from a CDN
+# instead, so nothing here is served or redistributed.
+font-source

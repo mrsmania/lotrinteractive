@@ -122,6 +122,28 @@ so running React's reconciler over them on every hover would cost something and
 buy nothing. Everything that does respond to the user (markers, sidebar,
 character sheet) is ordinary React.
 
+## Typography
+
+The masthead, the character sheet's name and the two legends are set in
+**Aniron**, the calligraphic face of the films' credits, reconstructed from the
+DVDs by Pete Klassen in 2004. It is a poor face to read and a fine one to name
+things with, so it is used nowhere else; the rest of the page keeps its sans.
+Wherever it is used, the uppercasing and heavy tracking of the `h1..h3` rule
+are undone, because its own letterforms carry the spacing and its lowercase is
+half the point of it.
+
+The font is **not** in this repository. It is linked from the CDN that
+publishes it (`index.html`), for licence reasons: Aniron may be passed on only
+free of charge, whole, and unmodified, so serving it from here would mean
+shipping its entire original archive and giving up a woff2 that would be worth
+about seventy kilobytes. Linking it means this project does not pass the font
+on at all, and the CDN's own woff is 56KB against the archive's 117KB .ttf.
+
+If the CDN ever stops answering, every rule that names Aniron falls through to
+the sans stack behind it and the page looks as it did before. Google's Cinzel
+is the nearest thing licensed for the web outright, if a self-hosted face is
+ever wanted instead.
+
 The connections view (`src/components/RelationsView.tsx`) draws the character
 relationship graph derived in `src/data/relations.ts`, positioned by a
 deterministic force-directed layout in `src/lib/relationsLayout.ts` that runs

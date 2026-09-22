@@ -5,19 +5,10 @@
  * used only where a title or a name stands on its own: the masthead, the
  * character sheet's name, the two legends. Everything else keeps the sans.
  *
- * The file is not in git; see public/fonts/README.md. Until it is dropped in,
- * every rule below falls through to the stack that was there before and the
- * page looks exactly as it did.
+ * The @font-face comes from the CDN, linked in index.html. Should it ever stop
+ * answering, every rule below falls through to the stack behind it and the
+ * page looks as it did before Aniron.
  */
-@font-face{
-  font-family:"Aniron";
-  src:url("/fonts/aniron.woff2") format("woff2"),
-      url("/fonts/aniron.ttf") format("truetype");
-  font-weight:normal;
-  font-style:normal;
-  font-display:swap;
-}
-
 :root{
   --display:"Aniron","Avenir Next","Trebuchet MS","Segoe UI",Helvetica,Arial,sans-serif;
   --night:#140f0a;
