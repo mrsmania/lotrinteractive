@@ -1,4 +1,25 @@
+/*
+ * The display face of the films' title cards.
+ *
+ * Aniron is a poor face to read and a fine one to name things with, so it is
+ * used only where a title or a name stands on its own: the masthead, the
+ * character sheet's name, the two legends. Everything else keeps the sans.
+ *
+ * The file is not in git; see public/fonts/README.md. Until it is dropped in,
+ * every rule below falls through to the stack that was there before and the
+ * page looks exactly as it did.
+ */
+@font-face{
+  font-family:"Aniron";
+  src:url("/fonts/aniron.woff2") format("woff2"),
+      url("/fonts/aniron.ttf") format("truetype");
+  font-weight:normal;
+  font-style:normal;
+  font-display:swap;
+}
+
 :root{
+  --display:"Aniron","Avenir Next","Trebuchet MS","Segoe UI",Helvetica,Arial,sans-serif;
   --night:#140f0a;
   --leather:#1e1610;
   --leather-light:#2b2016;
@@ -60,7 +81,12 @@ header::after{
 }
 .title{display:flex;flex-direction:column;gap:2px;min-width:200px;}
 h1{
-  margin:0;font-size:clamp(15px,2.2vw,22px);font-weight:600;
+  margin:0;font-size:clamp(17px,2.5vw,26px);font-weight:400;
+  font-family:var(--display);
+  /* Aniron's own letterforms carry the spacing, and its lowercase is half the
+     point of it, so the uppercasing and heavy tracking of the h1..h3 rule
+     above are undone here. */
+  text-transform:none;letter-spacing:.06em;
   color:var(--gold-light);
   text-shadow:0 0 18px rgba(201,162,39,.35);
 }
@@ -165,7 +191,11 @@ main{
   padding:9px 11px;font-size:11px;max-width:210px;
   backdrop-filter:blur(2px);
 }
-.legend h3{margin:0 0 6px;font-size:9.5px;color:#9c8759;}
+.legend h3{
+  margin:0 0 6px;font-size:13px;font-weight:400;
+  font-family:var(--display);
+  text-transform:none;letter-spacing:.04em;color:#b79a63;
+}
 .legend div{display:flex;align-items:center;gap:7px;margin:3px 0;color:#b6a179;}
 .legend i{width:11px;height:11px;border-radius:50%;display:inline-block;flex:none;}
 .legend .path-key i{height:0;border-radius:0;border-top:2px dashed;width:14px;}
@@ -190,7 +220,12 @@ main{
 .sheet.open{transform:none;}
 .sheet-top{padding:16px 18px 12px;border-bottom:1px solid #3d2f1b;position:relative;text-align:center;}
 .sheet-top svg{width:112px;height:112px;filter:drop-shadow(0 4px 14px rgba(0,0,0,.8));}
-.sheet-top h2{margin:8px 0 2px;font-size:17px;color:var(--gold-light);}
+.sheet-top h2{
+  margin:8px 0 3px;font-size:22px;font-weight:400;
+  font-family:var(--display);
+  text-transform:none;letter-spacing:.04em;
+  color:var(--gold-light);
+}
 .sheet-top p{margin:0;font-size:12.5px;color:#a08d63;font-style:italic;}
 .close{
   position:absolute;top:8px;right:10px;background:none;border:none;
