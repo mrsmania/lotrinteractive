@@ -33,3 +33,21 @@ export const MAP_H = 913.75;
  * drawn at well under half that, small enough to read the map through them.
  */
 export const MARKER_SCALE = 0.7;
+
+/**
+ * The rim drawn round a medallion, in map units and deliberately not scaled
+ * with the picture inside it.
+ *
+ * Everything that gives a medallion an edge of its own — the gold frame, its
+ * dark contour — is drawn in the picture's 0..100 space, so at MARKER_SCALE
+ * those strokes fall under a pixel and the medallion is lost against a map
+ * that is itself full of ink. The rim is stated here instead, and keeps its
+ * weight however small the face gets. components/MapView draws it;
+ * lib/markers measures by it, so that two medallions never overlap.
+ */
+export const RIM_R = 9.3;
+export const RIM_WIDTH = 1.9;
+/** The rim's dark contour, drawn under it and a little wider either side. */
+export const CONTOUR_WIDTH = RIM_WIDTH + 1.2;
+/** Outer edge of a medallion, rim and contour included. */
+export const MARKER_OUTER_R = RIM_R + CONTOUR_WIDTH / 2;

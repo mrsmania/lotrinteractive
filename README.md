@@ -1,8 +1,8 @@
 # lotrinteractive
 
 An interactive map of Middle-earth and the characters of *The Lord of the
-Rings*, with a second view showing how the characters are connected to one
-another. React + TypeScript, built with Vite, deployed to GitHub Pages.
+Rings* and *The Hobbit*, with a second view showing how the characters are
+connected to one another. React + TypeScript, built with Vite, deployed to GitHub Pages.
 
 Live: https://mrsmania.github.io/lotrinteractive/
 

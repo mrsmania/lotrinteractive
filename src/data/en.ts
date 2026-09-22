@@ -697,6 +697,32 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "At the partition of Mirkwood he receives the north and Celeborn the south."
     ]
   },
+  tauriel: {
+    name: "Tauriel",
+    title: "Captain of the Woodland Guard",
+    allegiance: "Free Peoples",
+    weapon: "Bow and two long knives",
+    actor: "Evangeline Lilly",
+    source: "The Hobbit (films only)",
+    bio: "Leads the guard of the Woodland Realm and thinks Thranduil's shutting of the gate a kind of cowardice.",
+    fate: "Loses Kíli on Ravenhill and is left with a grief none of the films resolves.",
+    otherNames: "Daughter of the forest, which is what her name means",
+    descent: "A Silvan elf of no royal line, which Thranduil occasionally reminds her of.",
+    appearance: "Red hair, green guard's dress, and a bow she draws faster than Legolas.",
+    nature: "Wilful and impatient with borders. She goes after the evil rather than closing the gate on it.",
+    bookFilm: "She does not appear in the book. The films invent her to give the Woodland Realm a voice and Kíli a story.",
+    deeds: [
+      "Leads the guard against the spiders of Mirkwood",
+      "Defies Thranduil's order and pursues the orcs",
+      "Heals Kíli of a Morgul wound in Esgaroth with athelas",
+      "Fights Bolg on Ravenhill",
+      "Stays with Kíli as he dies"
+    ],
+    notes: [
+      "Her name means daughter of the forest.",
+      "Thranduil banishes her; Legolas goes north on her account, where decades later he meets Aragorn."
+    ]
+  },
   cirdan: {
     name: "Círdan",
     title: "The Shipwright",
@@ -953,6 +979,32 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "His grandson Brand falls in the War of the Ring beside Dáin before Erebor."
     ]
   },
+  master: {
+    name: "The Master of Esgaroth",
+    title: "Lord of Lake-town",
+    allegiance: "Free Peoples",
+    weapon: "The key to the town treasury",
+    actor: "Stephen Fry",
+    source: "The Hobbit",
+    bio: "Elected lord of Esgaroth, a calculator without courage, who sees in the returning dwarves chiefly a piece of business.",
+    fate: "Takes the gold meant for rebuilding and starves with it in the waste. The films let the dragon have him instead.",
+    otherNames: "The Master, the mayor of Lake-town",
+    descent: "Of no descent worth the mention, as Bard occasionally points out.",
+    appearance: "Well fed, richly dressed, and always a step behind his own eloquence.",
+    nature: "Calculating, cowardly, a fine speaker before a crowd and nobody at all when it matters.",
+    bookFilm: "In the book he outlives the dragon and dies of his own greed; in the films Smaug takes him along with his barge of gold.",
+    deeds: [
+      "Receives Thorin as King under the Mountain because it is good for trade",
+      "Outfits the company without believing in the Mountain",
+      "Flees when Smaug comes over the town",
+      "Puts the blame on the dwarves, in the book",
+      "Embezzles the gold meant for rebuilding and dies in the waste"
+    ],
+    notes: [
+      "Esgaroth elects its masters rather than inheriting them, and is proud of it.",
+      "After him Bard becomes lord of Dale, not of Lake-town."
+    ]
+  },
   beorn: {
     name: "Beorn",
     title: "The skin-changer",
@@ -1072,6 +1124,347 @@ export const EN: Record<string, Partial<CharacterText>> = {
       "He is the only Dwarf who looked in at Moria's East-gate and said what he saw there.",
       "Sauron's messenger offered him three dwarf-rings for word of the Ring-bearer.",
       "He dies at 252, which is old even for a Dwarf."
+    ]
+  },
+  dwalin: {
+    name: "Dwalin",
+    title: "Thorin's staunchest companion",
+    allegiance: "Free Peoples",
+    weapon: "Two war axes, Grasper and Keeper",
+    actor: "Graham McTavish",
+    source: "The Hobbit",
+    lifespan: "2772 T.A. to 91 F.A.",
+    bio: "The first to knock at Bilbo's door, and the last to doubt Thorin. A warrior with no use for preamble.",
+    fate: "Survives the battle, stays in the Mountain, and dies the last of the thirteen at three hundred and forty.",
+    otherNames: "Dwalin, son of Fundin",
+    descent: "Brother of Balin, of the house of Durin. Born in exile after the fall of Erebor.",
+    appearance: "A dark green hood in the book; in the films a tattooed bald head and two axes across his back.",
+    nature: "Grim, short of words, with no patience for courtesies. Where Balin smooths, Dwalin goes first.",
+    bookFilm: "The book gives him little beyond a hood and a viol; the films make him Thorin's bodyguard.",
+    deeds: [
+      "Is the first dwarf to knock at the door of Bag End",
+      "Fights beside Thorin at Azanulbizar in 2799",
+      "Goes east to Erebor in 2941 and stands by him to the end",
+      "Searches Ravenhill with Thorin for Azog",
+      "Stays under the Mountain after the battle and serves Dáin",
+      "Alone of the company lives to see the Fourth Age"
+    ],
+    notes: [
+      "His axes are named in the films; in the book he carries none.",
+      "He outlives Balin by nearly a hundred and twenty years."
+    ]
+  },
+  fili: {
+    name: "Fíli",
+    title: "Thorin's heir",
+    allegiance: "Free Peoples",
+    weapon: "Two swords and more hidden knives than anyone cares to count",
+    actor: "Dean O'Gorman",
+    source: "The Hobbit",
+    lifespan: "2859 to 2941 T.A.",
+    bio: "The elder of Thorin's nephews and so the next heir of Durin. Young enough still to take the thing for an adventure.",
+    fate: "Falls on Ravenhill covering his uncle.",
+    otherNames: "Fíli, son of Dís",
+    descent: "Son of Dís, Thorin's sister, and elder brother of Kíli. Of the house of Durin.",
+    appearance: "Fair hair and a fair beard, both braided; the only blond in the company.",
+    nature: "Dependable, graver than his brother, conscious of his inheritance and therefore poor at saying no.",
+    bookFilm: "Book and film end the same way: Fíli and Kíli fall because they put themselves in front of Thorin.",
+    deeds: [
+      "Sets out from the Blue Mountains with thirteen others in 2941",
+      "Is taken with the company by the Wood-elves",
+      "Stays behind in Esgaroth with Kíli, Óin and Bofur when Kíli is wounded",
+      "Falls on Ravenhill before Thorin and Kíli"
+    ],
+    notes: [
+      "With him and Kíli the direct line of Thráin ends.",
+      "The two are buried with Thorin under the Mountain."
+    ]
+  },
+  kili: {
+    name: "Kíli",
+    title: "The youngest of the company",
+    allegiance: "Free Peoples",
+    weapon: "Bow and sword",
+    actor: "Aidan Turner",
+    source: "The Hobbit",
+    lifespan: "2864 to 2941 T.A.",
+    bio: "Thorin's younger nephew, seventy-seven years old and so barely grown as dwarves reckon it.",
+    fate: "Falls on Ravenhill beside his brother.",
+    otherNames: "Kíli, son of Dís",
+    descent: "Son of Dís, younger brother of Fíli, of the house of Durin.",
+    appearance: "Dark-haired and all but beardless, which earns him mockery among dwarves.",
+    nature: "Quick, forward, the only one of the company who handles a bow like an elf, which he does not like being told.",
+    bookFilm: "The films give him a Morgul wound, a recovery in Esgaroth and a love for Tauriel. None of it is in the book.",
+    deeds: [
+      "Goes east with the company in 2941",
+      "Is struck by a Morgul arrow in the films and nursed in Esgaroth",
+      "Fights in the Battle of Five Armies on Ravenhill",
+      "Falls coming to Thorin's aid"
+    ],
+    notes: [
+      "In the book both brothers die shielding Thorin with body and shield.",
+      "The films invent Tauriel for this story alone."
+    ]
+  },
+  gloin: {
+    name: "Glóin",
+    title: "Gimli's father",
+    allegiance: "Free Peoples",
+    weapon: "Axe",
+    actor: "Peter Hambleton",
+    source: "The Hobbit, The Lord of the Rings",
+    lifespan: "2783 T.A. to 15 F.A.",
+    bio: "The fire-maker of the company, and the only one of the thirteen to appear in both stories.",
+    fate: "Survives the battle, grows rich under the Mountain, and sits at the Council of Elrond seventy-seven years later.",
+    otherNames: "Glóin, son of Gróin",
+    descent: "Brother of Óin, of the house of Durin. Father of Gimli, born in 2879.",
+    appearance: "A white beard that reaches his belt in old age, and a white hood.",
+    nature: "Fond of reckoning, fonder of talking about his son, and able to raise a fire in the rain.",
+    bookFilm: "In the book he brings word of Sauron's messenger to Rivendell; the films leave the scene out.",
+    deeds: [
+      "Goes to Erebor with the company in 2941",
+      "Stays in the Kingdom under the Mountain after the battle",
+      "Travels to the Council of Elrond in 3018 as Dáin's envoy",
+      "Reports there of Sauron's messenger, who asks after Bilbo and the Ring",
+      "Lives to see the Mountain restored and dies in the Fourth Age"
+    ],
+    notes: [
+      "The two stories of the book hang together through him.",
+      "His brother Óin goes to Moria with Balin and does not come back."
+    ]
+  },
+  oin: {
+    name: "Óin",
+    title: "The company's healer",
+    allegiance: "Free Peoples",
+    weapon: "Staff and axe",
+    actor: "John Callen",
+    source: "The Hobbit",
+    lifespan: "2774 to 2994 T.A.",
+    bio: "Eldest of Glóin's brothers, half deaf and carrying an ear trumpet. He knows wounds, and he knows tinder.",
+    fate: "Goes to Moria with Balin and is taken by the Watcher in the Water at the west gate.",
+    otherNames: "Óin, son of Gróin",
+    descent: "Brother of Glóin, of the house of Durin. Uncle to Gimli.",
+    appearance: "A grey beard flaring wide, and an ear trumpet he holds like a weapon.",
+    nature: "Deliberate, stubborn, and the one who stays behind in Esgaroth to nurse Kíli.",
+    bookFilm: "The book records his end in a line of the Book of Mazarbul; the films give him a healer's part in Esgaroth.",
+    deeds: [
+      "Goes east with the company in 2941",
+      "Stays behind in Esgaroth with Fíli, Kíli and Bofur",
+      "Follows Balin into the recolonising of Moria in 2989",
+      "Is seized by the Watcher in the Water before the west gate in 2994"
+    ],
+    notes: [
+      "The Book of Mazarbul records his end, and the Fellowship reads it there.",
+      "He and Glóin are the only brothers of the company besides Balin and Dwalin."
+    ]
+  },
+  ori: {
+    name: "Ori",
+    title: "The scribe",
+    allegiance: "Free Peoples",
+    weapon: "A slingshot, later an axe",
+    actor: "Adam Brown",
+    source: "The Hobbit",
+    lifespan: "2793 to 2994 T.A.",
+    bio: "The youngest of the three brothers and the shyest of the company. He keeps the record, even when there is no one left to report to.",
+    fate: "Falls in the Chamber of Mazarbul. The Fellowship find his bones over the book he kept to its last line.",
+    otherNames: "Ori, brother of Dori and Nori",
+    descent: "Youngest of the three brothers Dori, Nori and Ori, distantly of Durin's kin.",
+    appearance: "Dressed in grey, in a knitted waistcoat, with ink on his fingers.",
+    nature: "Polite to the point of embarrassment, braver than he looks, and the only one who writes down what happens.",
+    bookFilm: "The last line of his book is the same in book and film, and in both it is all that is left of Balin's colony.",
+    deeds: [
+      "Goes east in 2941 as the youngest scribe of the company",
+      "Follows Balin to Khazad-dûm in 2989",
+      "Keeps the Book of Mazarbul to the end",
+      "Writes last that they are coming, and falls at the chamber door"
+    ],
+    notes: [
+      "The Book of Mazarbul is the only writing the Fellowship find in Moria.",
+      "Gandalf reads from it aloud, before the drums start in the deep."
+    ]
+  },
+  bofur: {
+    name: "Bofur",
+    title: "Musician and toymaker",
+    allegiance: "Free Peoples",
+    weapon: "A mattock",
+    actor: "James Nesbitt",
+    source: "The Hobbit",
+    bio: "The warmest of the thirteen, and the first to treat Bilbo as though he belonged.",
+    fate: "Survives the battle and stays in the restored Kingdom under the Mountain.",
+    otherNames: "Bofur, brother of Bombur",
+    descent: "Brother of Bombur and cousin of Bifur. Not of Durin's house but of the dwarves of Moria.",
+    appearance: "A fur hat with the flaps pulled down, and a moustache that turns up at both ends.",
+    nature: "Good-natured, talkative, sings at any excuse and never means harm by it.",
+    bookFilm: "In the book he is barely more than a name in a list; the films make him the kindest voice in the company.",
+    deeds: [
+      "Goes to Erebor with the company in 2941",
+      "Stays behind in Esgaroth with Óin, Fíli and Kíli",
+      "Fights in the Battle of Five Armies",
+      "Stays under the Mountain after the victory"
+    ],
+    notes: [
+      "He and Bombur arrive at Bag End last, with Bifur and Gandalf.",
+      "His people once worked the mines of Moria."
+    ]
+  },
+  bombur: {
+    name: "Bombur",
+    title: "The heaviest of the company",
+    allegiance: "Free Peoples",
+    weapon: "A ladle, and at need a cudgel",
+    actor: "Stephen Hunter",
+    source: "The Hobbit",
+    bio: "The fattest dwarf anyone ever put into a barrel, and the company's cook.",
+    fate: "Survives, and grows so heavy in the Mountain that six dwarves are needed to carry him to table.",
+    otherNames: "Bombur, brother of Bofur",
+    descent: "Brother of Bofur and cousin of Bifur, of the dwarves of Moria.",
+    appearance: "A red braided beard he winds about his belt, and a girth that makes doors a problem.",
+    nature: "Good-natured and reliably hungry. Where others worry, he thinks about supper.",
+    bookFilm: "The enchanted stream in Mirkwood throws him into the same days-long sleep in book and film.",
+    deeds: [
+      "Falls into the enchanted stream in Mirkwood and sleeps for days",
+      "Is carried by the others through half the forest",
+      "Comes out of the Woodland Realm in a barrel",
+      "Fights in the Battle of Five Armies and survives"
+    ],
+    notes: [
+      "In his sleep he dreams of a Wood-elf feast, which is really happening.",
+      "The book claims he ends so fat that he cannot rise unaided."
+    ]
+  },
+  bifur: {
+    name: "Bifur",
+    title: "The one with the axe in his head",
+    allegiance: "Free Peoples",
+    weapon: "A boar spear",
+    actor: "William Kircher",
+    source: "The Hobbit",
+    bio: "Carries the splinter of an orc axe in his forehead, from a fight he no longer speaks of.",
+    fate: "Survives the battle and stays with his cousins under the Mountain.",
+    otherNames: "Bifur, cousin of Bofur and Bombur",
+    descent: "Cousin of Bofur and Bombur, of the dwarves of Moria and not of Durin's house.",
+    appearance: "Wild grey hair and a rusted axe splinter standing out of his skull between the eyes.",
+    nature: "Hard to read, quick to anger, and devoted to his two cousins.",
+    bookFilm: "The axe in the head is the films' invention, as is his speaking nothing but Khuzdul.",
+    deeds: [
+      "Arrives at Bag End last, with Gandalf",
+      "Goes east with the company in 2941",
+      "Fights in the Battle of Five Armies",
+      "Stays afterwards in the Kingdom under the Mountain"
+    ],
+    notes: [
+      "His people worked in Moria before the Balrog woke.",
+      "In the films hardly anyone but Bofur understands him."
+    ]
+  },
+  dori: {
+    name: "Dori",
+    title: "The strongest of the company",
+    allegiance: "Free Peoples",
+    weapon: "A sword he is reluctant to draw",
+    actor: "Mark Hadlow",
+    source: "The Hobbit",
+    lifespan: "born 2765 T.A.",
+    bio: "The strongest of the thirteen, and the one Bilbo is most often tied to the back of.",
+    fate: "Survives the battle and stays under the Mountain.",
+    otherNames: "Dori, brother of Nori and Ori",
+    descent: "Eldest of the three brothers Dori, Nori and Ori.",
+    appearance: "A purple hood, silver hair, and the broadest shoulders in the company.",
+    nature: "Elaborately polite, easily offended, and for all that the one who carries Bilbo when there is haste.",
+    bookFilm: "In the book he carries Bilbo out of Goblin-town and drops him doing it, which neither of them ever quite settles.",
+    deeds: [
+      "Carries Bilbo in the flight through the Misty Mountains",
+      "Is caught up by the eagles together with Bilbo",
+      "Goes to Erebor with the company",
+      "Survives the Battle of Five Armies"
+    ],
+    notes: [
+      "He considers himself the most genteel of the thirteen and says so.",
+      "His brothers Nori and Ori have little patience with it."
+    ]
+  },
+  nori: {
+    name: "Nori",
+    title: "The one with the quick fingers",
+    allegiance: "Free Peoples",
+    weapon: "A mace and whatever is lying about",
+    actor: "Jed Brophy",
+    source: "The Hobbit",
+    lifespan: "born 2774 T.A.",
+    bio: "The middle of the three brothers, with hair like a star and pockets that fill along the way.",
+    fate: "Survives the battle and stays in the Kingdom under the Mountain.",
+    otherNames: "Nori, brother of Dori and Ori",
+    descent: "Middle of the three brothers Dori, Nori and Ori.",
+    appearance: "A beard pinned into three points and a head of hair going in three directions.",
+    nature: "Quick with his hands, slow with explanations. What goes missing at Bag End does not go missing by chance.",
+    bookFilm: "The book names him only in a list; the films make him a thief with the best of intentions.",
+    deeds: [
+      "Goes to Erebor with the company in 2941",
+      "Escapes with the others from Goblin-town and from the Woodland Realm",
+      "Fights in the Battle of Five Armies",
+      "Stays under the Mountain after the victory"
+    ],
+    notes: [
+      "Of the three brothers he is the only one who survives the quest and does not go to Moria."
+    ]
+  },
+  thrain: {
+    name: "Thráin II",
+    title: "King in exile",
+    allegiance: "Free Peoples",
+    weapon: "A map and a key, which he gives up to no one until the end",
+    actor: "Antony Sher",
+    source: "The Hobbit",
+    lifespan: "2644 to 2850 T.A.",
+    bio: "Thorin's father. He loses the Mountain to Smaug, his father to Azog, and at last his mind in the pits of Dol Guldur.",
+    fate: "Dies in Dol Guldur after Sauron takes from him the last of the Seven Rings. Gandalf finds him there dying.",
+    otherNames: "Thráin the Second, son of Thrór, King under the Mountain in exile",
+    descent: "Son of Thrór, father of Thorin, Frerin and Dís. Of the house of Durin.",
+    appearance: "At the end a blind and broken prisoner who no longer knows his own name.",
+    nature: "Tough and vengeful. The war against the orcs is his doing, and he presses it for six years.",
+    bookFilm: "In the book he is long dead when the journey begins, and only the map speaks for him. The extended second film lets him meet Thorin once more.",
+    deeds: [
+      "Flees Erebor with his father before Smaug in 2770",
+      "Leads the War of the Dwarves and Orcs after Thrór's death",
+      "Fights at Azanulbizar in 2799, where he loses an eye",
+      "Sets out alone in 2841 to win back Erebor",
+      "Is taken and imprisoned in Dol Guldur",
+      "Gives Gandalf the map and key in 2850 before he dies"
+    ],
+    notes: [
+      "The whole journey comes about only through that map and key.",
+      "Gandalf took Thráin for a nameless prisoner until it was too late."
+    ]
+  },
+  thror: {
+    name: "Thrór",
+    title: "The last King under the Mountain",
+    allegiance: "Free Peoples",
+    weapon: "The Arkenstone as a token, and no sword",
+    actor: "Jeffrey Thomas",
+    source: "The Hobbit",
+    lifespan: "2542 to 2790 T.A.",
+    bio: "Thorin's grandfather, under whom Erebor grew so rich that a dragon heard of it.",
+    fate: "Goes to Moria an old man and is cut down and branded by Azog in the gate. His death begins the War of the Dwarves and Orcs.",
+    otherNames: "Thrór, King under the Mountain, Lord of Erebor",
+    descent: "Son of Dáin I, father of Thráin II, grandfather of Thorin. Of the house of Durin.",
+    appearance: "At his height a king in gold; at the end an old man with a wandering eye.",
+    nature: "The dragon-sickness takes him long before the dragon does. By the end his mind is not his own.",
+    bookFilm: "The films open on him: the gold, the doom and the loss of the Mountain in a single sequence.",
+    deeds: [
+      "Makes Erebor the richest kingdom in the north",
+      "Finds the Arkenstone in the heart of the Mountain",
+      "Loses the Mountain to Smaug in 2770 and escapes by a secret door",
+      "Gives Thráin the last of the Seven Rings",
+      "Goes to Moria in 2790 and is killed by Azog",
+      "His defiled body sets off a six-year war"
+    ],
+    notes: [
+      "Azog had his name cut into the dead king's brow.",
+      "The Arkenstone he found drives his grandson mad a century and a half later."
     ]
   },
   smaug: {
@@ -1523,6 +1916,58 @@ export const EN: Record<string, Partial<CharacterText>> = {
     notes: [
       "His son Bolg leads the orcs in the Battle of Five Armies.",
       "The dwarf war over his head lasted six years and cost both sides everything."
+    ]
+  },
+  bolg: {
+    name: "Bolg",
+    title: "Son of Azog",
+    allegiance: "Sauron",
+    weapon: "A morningstar and a spear",
+    actor: "Lawrence Makoare, later John Tui",
+    source: "The Hobbit",
+    lifespan: "to 2941 T.A.",
+    bio: "Leads the orcs of Gundabad and inherits from his father the war against the house of Durin.",
+    fate: "Falls in the Battle of Five Armies. In the book Beorn breaks him in bear shape; in the films Legolas kills him.",
+    otherNames: "Bolg of Gundabad",
+    descent: "Son of Azog the Defiler, who killed Thrór.",
+    appearance: "Larger than his father, with iron staples in his skull holding an old wound together.",
+    nature: "A taker of orders with a cruelty of his own, more patient than Azog and so more dangerous.",
+    bookFilm: "In the book Bolg leads the orcs in the battle because Azog has been dead since 2799. The films keep the father alive and make the son his lieutenant.",
+    deeds: [
+      "Gathers the host of Gundabad",
+      "Brings the second force to Ravenhill in the films",
+      "Leads the orcs in the Battle of Five Armies in the book",
+      "Falls when the eagles and Beorn come into the field"
+    ],
+    notes: [
+      "Gundabad is the mountain where Durin first woke; that orcs should sit there is unbearable to dwarves.",
+      "In the book Bolg avenges his father; in the films he fights beside him."
+    ]
+  },
+  greatgoblin: {
+    name: "The Great Goblin",
+    title: "Ruler of Goblin-town",
+    allegiance: "Sauron",
+    weapon: "A mace and a great many subordinates",
+    actor: "Barry Humphries",
+    source: "The Hobbit",
+    lifespan: "to 2941 T.A.",
+    bio: "Sits under the High Pass on a throne of bones and has whatever his guards pick up in the caves brought before him.",
+    fate: "Falls to Glamdring when Gandalf puts out the lights of Goblin-town.",
+    otherNames: "The Great Goblin, lord of the caves under the High Pass",
+    descent: "Of the orc people of the Misty Mountains, who hold Gundabad and the passes.",
+    appearance: "Enormously bloated, with a wattle and a crown he most likely forged himself.",
+    nature: "Puffed up and quick to rage, with a taste for passing sentence and for songs of his own.",
+    bookFilm: "The book disposes of him in two sentences; the film gives him an entrance, a ballad and a long ending.",
+    deeds: [
+      "Has the company seized in the caves under the High Pass",
+      "Knows Orcrist for the sword his kind call Biter",
+      "Condemns Thorin to death",
+      "Falls to Gandalf's Glamdring without seeing the blade come"
+    ],
+    notes: [
+      "In the uproar Bilbo loses the others and finds the Ring.",
+      "His death is the reason Azog takes up the pursuit of the company at all."
     ]
   },
   gwaihir: {

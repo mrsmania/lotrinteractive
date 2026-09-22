@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { CHARACTERS, CHARACTER_BY_ID } from "../data/characters";
 import { PEOPLES } from "../data/peoples";
-import { MAP_H, MAP_W, MARKER_SCALE } from "../data/map";
+import { CONTOUR_WIDTH, MAP_H, MAP_W, MARKER_SCALE, RIM_R, RIM_WIDTH } from "../data/map";
 import { buildWorld } from "../lib/buildMap";
 import { MARKERS } from "../lib/markers";
 import type { Translator } from "../lib/i18n";
@@ -17,16 +17,6 @@ const DISC_R = 12.1 * MARKER_SCALE;
 const HUB_R = 2 * MARKER_SCALE;
 const SPOKE_WIDTH = 0.8 * MARKER_SCALE;
 
-// The rim, on the other hand, is NOT scaled with the medallion. Everything
-// that gives a medallion an edge — its gold frame, its dark contour — is drawn
-// in the picture's own 0..100 space, so shrinking the picture takes those
-// strokes under a pixel and the medallion loses its edge against a map that is
-// itself full of ink. The rim is stated in map units instead, so it keeps its
-// weight however small the face inside it gets.
-const RIM_R = 9.3;
-const RIM_WIDTH = 1.9;
-/** The rim's dark contour, drawn under it and a little wider either side. */
-const CONTOUR_WIDTH = RIM_WIDTH + 1.2;
 /** The glow on hover and selection, outside the rim so it reads as a halo. */
 const RING_R = RIM_R + 1.9;
 const RING_WIDTH = 2.4 * MARKER_SCALE;

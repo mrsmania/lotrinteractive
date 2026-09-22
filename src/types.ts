@@ -21,7 +21,7 @@ export interface People {
  * single-file version. The UI now shows a picture from
  * public/images/characters/ or the shared placeholder instead, so nothing
  * reads these. They are kept with the data so drawn portraits could be
- * restored without re-authoring 57 descriptions.
+ * restored without re-authoring seventy-odd descriptions.
  */
 export interface PortraitTraits {
   skin?: string;

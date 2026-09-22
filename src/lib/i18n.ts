@@ -58,7 +58,7 @@ const PEOPLES_EN: Record<string, [string, string]> = {
 const UI = {
   en: {
     title: "The Map of Middle-earth",
-    subtitle: "Characters of The Lord of the Rings",
+    subtitle: "Characters of The Lord of the Rings and The Hobbit",
     characters: "Characters",
     search: "Search a character or place",
     journeys: "Journeys",
@@ -100,7 +100,7 @@ const UI = {
   },
   de: {
     title: "Die Karte von Mittelerde",
-    subtitle: "Figuren aus Der Herr der Ringe",
+    subtitle: "Figuren aus Der Herr der Ringe und Der Hobbit",
     characters: "Figuren",
     search: "Figur oder Ort suchen",
     journeys: "Reisewege",

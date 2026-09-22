@@ -1009,6 +1009,45 @@ export const CHARACTERS: Character[] = [
     }
   },
   {
+    id: "tauriel",
+    name: "Tauriel",
+    title: "Hauptmann der Waldwache",
+    people: "Elb",
+    allegiance: "Freie Völker",
+    home: "duesterwald",
+    weapon: "Bogen und zwei Dolche",
+    actor: "Evangeline Lilly",
+    source: "Der Hobbit (nur die Filme)",
+    bio: "Führt die Wache des Waldlandreichs und hält Thranduils Abschottung für eine Art Feigheit.",
+    fate: "Verliert Kíli auf dem Rabenberg und bleibt mit einer Trauer zurück, die keiner der Filme auflöst.",
+    otherNames: "Tochter des Waldes, so die Bedeutung ihres Namens",
+    descent: "Eine Waldelbin ohne königliche Abkunft, was Thranduil ihr gelegentlich vorhält.",
+    appearance: "Rotes Haar, grüne Wachkleidung, ein Bogen, den sie schneller führt als Legolas.",
+    nature: "Eigensinnig und ungeduldig mit Grenzen. Sie geht dem Übel nach, statt das Tor zu schliessen.",
+    bookFilm: "Sie kommt im Buch nicht vor. Die Filme erfinden sie, um dem Waldlandreich eine Stimme zu geben und Kíli eine Geschichte.",
+    deeds: [
+      "Führt die Wache gegen die Spinnen des Düsterwalds",
+      "Setzt sich über Thranduils Befehl hinweg und verfolgt die Orks",
+      "Heilt Kíli in Esgaroth mit Athelas von einer Morgulwunde",
+      "Kämpft auf dem Rabenberg gegen Bolg",
+      "Bleibt bei Kíli, als er stirbt"
+    ],
+    notes: [
+      "Ihr Name bedeutet Tochter des Waldes.",
+      "Thranduil verbannt sie; Legolas geht ihretwegen in den Norden, wo er Jahrzehnte später Aragorn begegnet."
+    ],
+    bonds: ["legolas", "thranduil", "kili"],
+    portrait: {
+      skin: "#f0d8bc",
+      hair: "#b8603a",
+      hairstyle: "lang",
+      beard: "keine",
+      eyes: "#5d8a6a",
+      cloak: "#5d6f52",
+      ears: "spitz"
+    }
+  },
+  {
     id: "cirdan",
     name: "Círdan",
     title: "Der Schiffbauer",
@@ -1386,6 +1425,45 @@ export const CHARACTERS: Character[] = [
     }
   },
   {
+    id: "master",
+    name: "Der Meister von Esgaroth",
+    title: "Herr der Seestadt",
+    people: "Mensch",
+    allegiance: "Freie Völker",
+    home: "esgaroth",
+    weapon: "Der Schlüssel zur Stadtkasse",
+    actor: "Stephen Fry",
+    source: "Der Hobbit",
+    bio: "Gewählter Herr von Esgaroth, ein Rechner ohne Mut, der in den zurückkehrenden Zwergen vor allem einen Handel sieht.",
+    fate: "Nimmt das Gold, das für den Wiederaufbau bestimmt war, und verhungert damit in der Einöde. Die Filme lassen ihn schon beim Angriff des Drachen umkommen.",
+    otherNames: "Der Meister, der Bürgermeister von Seestadt",
+    descent: "Ohne Abkunft, die der Rede wert wäre, worauf Bard ihn gelegentlich hinweist.",
+    appearance: "Wohlgenährt, kostbar gekleidet und stets einen Schritt hinter seiner eigenen Beredsamkeit.",
+    nature: "Berechnend, feige, ein guter Redner vor einer Menge und niemand, wenn es darauf ankommt.",
+    bookFilm: "Im Buch überlebt er den Drachen und stirbt an seiner eigenen Habgier; in den Filmen holt ihn Smaug mitsamt seinem Goldkahn.",
+    deeds: [
+      "Empfängt Thorin als König unter dem Berg, weil es dem Handel dient",
+      "Rüstet die Gesellschaft aus, ohne an den Berg zu glauben",
+      "Flieht, als Smaug über die Stadt kommt",
+      "Schiebt im Buch die Schuld auf die Zwerge",
+      "Unterschlägt das Gold für den Wiederaufbau und stirbt in der Einöde"
+    ],
+    notes: [
+      "Esgaroth wählt seine Meister, statt sie zu erben, worauf die Stadt stolz ist.",
+      "Nach ihm wird Bard zum Herrn von Thal, nicht von Seestadt."
+    ],
+    bonds: ["bard", "thorin", "smaug"],
+    portrait: {
+      skin: "#e8c2a0",
+      hair: "#6a5a45",
+      hairstyle: "lang",
+      beard: "voll",
+      eyes: "#5a5040",
+      cloak: "#8a6a3e",
+      ears: "rund"
+    }
+  },
+  {
     id: "beorn",
     name: "Beorn",
     title: "Der Wechselhäuter",
@@ -1556,6 +1634,518 @@ export const CHARACTERS: Character[] = [
       eyes: "#6a5a3a",
       cloak: "#6a4a2a",
       headwear: "helm",
+      ears: "rund"
+    }
+  },
+  {
+    id: "dwalin",
+    name: "Dwalin",
+    title: "Thorins treuester Gefährte",
+    people: "Zwerg",
+    allegiance: "Freie Völker",
+    home: "erebor",
+    weapon: "Zwei Kriegsäxte, Grasper und Keeper",
+    actor: "Graham McTavish",
+    source: "Der Hobbit",
+    lifespan: "2772 D.Z. bis 91 V.Z.",
+    bio: "Der erste, der an Bilbos Tür klopft, und der letzte, der an Thorin zweifelt. Ein Krieger ohne Umschweife.",
+    fate: "Überlebt die Schlacht, bleibt im Berg und stirbt als letzter der dreizehn, 340 Jahre alt.",
+    otherNames: "Dwalin, Sohn Fundins",
+    descent: "Bruder Balins, aus dem Haus Durins. Geboren im Exil nach dem Fall Erebors.",
+    appearance: "Im Buch eine dunkelgrüne Kapuze; in den Filmen ein tätowierter Kahlkopf und zwei Äxte auf dem Rücken.",
+    nature: "Grimmig, wortkarg, ohne jede Geduld für Höflichkeiten. Wo Balin vermittelt, geht Dwalin voran.",
+    bookFilm: "Das Buch gibt ihm kaum mehr als eine Kapuze und eine Bratsche; die Filme machen aus ihm Thorins Leibwache.",
+    deeds: [
+      "Klopft als erster Zwerg an die Tür von Beutelsend",
+      "Kämpft 2799 bei Azanulbizar an Thorins Seite",
+      "Zieht 2941 mit nach Erebor und hält bis zuletzt zu ihm",
+      "Sucht auf dem Rabenberg mit Thorin nach Azog",
+      "Bleibt nach der Schlacht unter dem Berg und dient Dáin",
+      "Erlebt als einziger der Gesellschaft noch das Vierte Zeitalter"
+    ],
+    notes: [
+      "Seine beiden Äxte tragen in den Filmen Namen, im Buch führt er keine.",
+      "Er überlebt Balin um fast hundertzwanzig Jahre."
+    ],
+    bonds: ["thorin", "balin", "bilbo", "fili", "kili"],
+    portrait: {
+      skin: "#dda87c",
+      hair: "#3a2f28",
+      hairstyle: "kahl",
+      beard: "zopfbart",
+      eyes: "#5a6a7a",
+      cloak: "#3a4048",
+      ears: "rund"
+    }
+  },
+  {
+    id: "fili",
+    name: "Fíli",
+    title: "Thorins Erbe",
+    people: "Zwerg",
+    allegiance: "Freie Völker",
+    home: "erebor",
+    weapon: "Zwei Schwerter und mehr verborgene Messer, als jemand zählen mag",
+    actor: "Dean O'Gorman",
+    source: "Der Hobbit",
+    lifespan: "2859 bis 2941 D.Z.",
+    bio: "Der ältere von Thorins Neffen und damit der nächste Erbe Durins. Jung genug, um die Sache noch für ein Abenteuer zu halten.",
+    fate: "Fällt auf dem Rabenberg, als er seinen Onkel deckt.",
+    otherNames: "Fíli, Sohn der Dís",
+    descent: "Sohn von Dís, Thorins Schwester, und älterer Bruder Kílis. Aus dem Haus Durins.",
+    appearance: "Blondes Haar und blonder Bart, beides geflochten; der einzige Blonde der Gesellschaft.",
+    nature: "Verlässlich, ernster als sein Bruder, sich seines Erbes bewusst und deshalb schlecht darin, nein zu sagen.",
+    bookFilm: "Buch und Film enden gleich: Fíli und Kíli fallen, weil sie sich vor Thorin stellen.",
+    deeds: [
+      "Bricht 2941 mit dreizehn anderen von den Blauen Bergen auf",
+      "Wird mit der Gesellschaft von den Waldelben gefangen",
+      "Bleibt mit Kíli, Óin und Bofur in Esgaroth zurück, als Kíli verwundet wird",
+      "Fällt auf dem Rabenberg vor Thorin und Kíli"
+    ],
+    notes: [
+      "Mit ihm und Kíli erlischt die direkte Linie Thráins.",
+      "Die beiden werden mit Thorin unter dem Berg bestattet."
+    ],
+    bonds: ["thorin", "kili", "bilbo", "dwalin"],
+    portrait: {
+      skin: "#e8bd92",
+      hair: "#c8a257",
+      hairstyle: "lang",
+      beard: "zopfbart",
+      eyes: "#6a8ab0",
+      cloak: "#5b4a3a",
+      ears: "rund"
+    }
+  },
+  {
+    id: "kili",
+    name: "Kíli",
+    title: "Der jüngste der Gesellschaft",
+    people: "Zwerg",
+    allegiance: "Freie Völker",
+    home: "erebor",
+    weapon: "Bogen und Schwert",
+    actor: "Aidan Turner",
+    source: "Der Hobbit",
+    lifespan: "2864 bis 2941 D.Z.",
+    bio: "Thorins jüngerer Neffe, siebenundsiebzig Jahre alt und damit unter Zwergen kaum erwachsen.",
+    fate: "Fällt auf dem Rabenberg neben seinem Bruder.",
+    otherNames: "Kíli, Sohn der Dís",
+    descent: "Sohn von Dís, jüngerer Bruder Fílis, aus dem Haus Durins.",
+    appearance: "Dunkelhaarig und beinahe bartlos, was ihm unter Zwergen Spott einträgt.",
+    nature: "Rasch, vorlaut, der einzige der Gesellschaft, der mit einem Bogen umgeht wie ein Elb, was er ungern hört.",
+    bookFilm: "Die Filme geben ihm eine Morgulwunde, eine Genesung in Esgaroth und eine Liebe zu Tauriel. Nichts davon steht im Buch.",
+    deeds: [
+      "Zieht 2941 mit der Gesellschaft nach Osten",
+      "Wird in den Filmen von einem Morgulpfeil getroffen und in Esgaroth gepflegt",
+      "Kämpft in der Schlacht der Fünf Heere auf dem Rabenberg",
+      "Fällt, als er Thorin zu Hilfe kommt"
+    ],
+    notes: [
+      "Im Buch fallen beide Brüder, indem sie Thorin mit Schild und Leib decken.",
+      "Die Filme erfinden Tauriel eigens für diese Geschichte."
+    ],
+    bonds: ["thorin", "fili", "tauriel", "bilbo"],
+    portrait: {
+      skin: "#e2b189",
+      hair: "#2e2622",
+      hairstyle: "lang",
+      beard: "stoppel",
+      eyes: "#5a4a3a",
+      cloak: "#6a4a2a",
+      ears: "rund"
+    }
+  },
+  {
+    id: "gloin",
+    name: "Glóin",
+    title: "Gimlis Vater",
+    people: "Zwerg",
+    allegiance: "Freie Völker",
+    home: "erebor",
+    weapon: "Axt",
+    actor: "Peter Hambleton",
+    source: "Der Hobbit, Herr der Ringe",
+    lifespan: "2783 D.Z. bis 15 V.Z.",
+    bio: "Der Feuermacher der Gesellschaft und der einzige der dreizehn, der in beiden Geschichten auftritt.",
+    fate: "Überlebt die Schlacht, wird reich unter dem Berg und sitzt siebenundsiebzig Jahre später beim Rat von Elrond.",
+    otherNames: "Glóin, Sohn Gróins",
+    descent: "Bruder Óins, aus dem Haus Durins. Vater Gimlis, der 2879 geboren wird.",
+    appearance: "Weisser Bart, der ihm im Alter bis zum Gürtel reicht, und eine weisse Kapuze.",
+    nature: "Rechnet gern, redet gern von seinem Sohn und bringt auch im Regen ein Feuer zustande.",
+    bookFilm: "Im Buch bringt er die Nachricht vom Boten Saurons nach Bruchtal; die Filme lassen diesen Auftritt aus.",
+    deeds: [
+      "Zieht 2941 mit nach Erebor",
+      "Bleibt nach der Schlacht im Königreich unter dem Berg",
+      "Reist 3018 als Gesandter Dáins zum Rat von Elrond",
+      "Berichtet dort von Saurons Boten, der nach Bilbo und dem Ring fragt",
+      "Erlebt die Wiederherstellung des Berges und stirbt im Vierten Zeitalter"
+    ],
+    notes: [
+      "Über ihn hängen die beiden Geschichten des Buches zusammen.",
+      "Sein Bruder Óin geht mit Balin nach Moria und kehrt nicht zurück."
+    ],
+    bonds: ["gimli", "oin", "thorin", "bilbo"],
+    portrait: {
+      skin: "#e6b98c",
+      hair: "#d8c8a8",
+      hairstyle: "lang",
+      beard: "lang",
+      eyes: "#7a6a4a",
+      cloak: "#7a5a34",
+      ears: "rund"
+    }
+  },
+  {
+    id: "oin",
+    name: "Óin",
+    title: "Der Heiler der Gesellschaft",
+    people: "Zwerg",
+    allegiance: "Freie Völker",
+    home: "moria",
+    weapon: "Stab und Axt",
+    actor: "John Callen",
+    source: "Der Hobbit",
+    lifespan: "2774 bis 2994 D.Z.",
+    bio: "Der Älteste von Glóins Brüdern, halb taub und mit einem Hörrohr unterwegs. Er versteht sich auf Wunden und auf Zunder.",
+    fate: "Geht mit Balin nach Moria und wird am Westtor vom Wächter im Wasser geholt.",
+    otherNames: "Óin, Sohn Gróins",
+    descent: "Bruder Glóins, aus dem Haus Durins. Onkel Gimlis.",
+    appearance: "Grauer, weit ausgestellter Bart und ein Hörrohr, das er wie eine Waffe hält.",
+    nature: "Bedächtig, stur, der Einzige, der in Esgaroth bleibt, um Kíli zu pflegen.",
+    bookFilm: "Das Buch erwähnt sein Ende in einem Satz des Buchs von Mazarbul; die Filme geben ihm eine Heilerrolle in Esgaroth.",
+    deeds: [
+      "Zieht 2941 mit der Gesellschaft nach Erebor",
+      "Bleibt mit Fíli, Kíli und Bofur in Esgaroth zurück",
+      "Begleitet Balin 2989 in die Wiedergewinnung Morias",
+      "Wird 2994 vor dem Westtor vom Wächter im Wasser gepackt"
+    ],
+    notes: [
+      "Das Buch von Mazarbul hält sein Ende fest, das die Gefährten dort lesen.",
+      "Er und Glóin sind die einzigen Brüder der Gesellschaft neben Balin und Dwalin."
+    ],
+    bonds: ["balin", "gloin", "ori", "thorin"],
+    portrait: {
+      skin: "#e2b189",
+      hair: "#cfc6b6",
+      hairstyle: "lang",
+      beard: "lang",
+      eyes: "#6a6250",
+      cloak: "#6a5230",
+      ears: "rund"
+    }
+  },
+  {
+    id: "ori",
+    name: "Ori",
+    title: "Der Schreiber",
+    people: "Zwerg",
+    allegiance: "Freie Völker",
+    home: "moria",
+    weapon: "Eine Steinschleuder, später eine Axt",
+    actor: "Adam Brown",
+    source: "Der Hobbit",
+    lifespan: "2793 bis 2994 D.Z.",
+    bio: "Der jüngste der drei Brüder und der schüchternste der Gesellschaft. Er führt Buch, auch dann noch, als es niemanden mehr zu berichten gibt.",
+    fate: "Fällt in der Kammer von Mazarbul. Die Gefährten finden seine Gebeine über dem Buch, das er bis zum letzten Satz geführt hat.",
+    otherNames: "Ori, Bruder Doris und Noris",
+    descent: "Jüngster der drei Brüder Dori, Nori und Ori, entfernt mit dem Haus Durins verwandt.",
+    appearance: "Grau gekleidet, mit einer Strickweste und Tinte an den Fingern.",
+    nature: "Höflich bis zur Verlegenheit, tapferer als er aussieht, und der einzige, der aufschreibt, was geschieht.",
+    bookFilm: "Der Schlusssatz seines Buches ist in Buch und Film derselbe, und in beiden ist er das Letzte, was von Balins Kolonie bleibt.",
+    deeds: [
+      "Zieht 2941 als jüngster Schreiber mit nach Erebor",
+      "Folgt Balin 2989 nach Khazad-dûm",
+      "Führt das Buch von Mazarbul bis zum Ende",
+      "Schreibt als Letztes, dass sie kommen, und fällt an der Kammertür"
+    ],
+    notes: [
+      "Das Buch von Mazarbul ist die einzige Schrift, die die Gefährten in Moria finden.",
+      "Gandalf liest daraus vor, bevor die Trommeln in der Tiefe einsetzen."
+    ],
+    bonds: ["balin", "oin", "dori", "nori", "thorin"],
+    portrait: {
+      skin: "#e8bd92",
+      hair: "#8a6a45",
+      hairstyle: "kurz",
+      beard: "kurz",
+      eyes: "#6a5a45",
+      cloak: "#6b5a4a",
+      ears: "rund"
+    }
+  },
+  {
+    id: "bofur",
+    name: "Bofur",
+    title: "Spielmann und Spielzeugmacher",
+    people: "Zwerg",
+    allegiance: "Freie Völker",
+    home: "erebor",
+    weapon: "Eine Spitzhacke",
+    actor: "James Nesbitt",
+    source: "Der Hobbit",
+    bio: "Der wärmste der dreizehn und der erste, der Bilbo behandelt, als gehöre er dazu.",
+    fate: "Überlebt die Schlacht und bleibt im wiederhergestellten Königreich unter dem Berg.",
+    otherNames: "Bofur, Bruder Bomburs",
+    descent: "Bruder Bomburs und Vetter Bifurs. Nicht aus dem Haus Durins, sondern aus dem Volk der Zwerge von Moria.",
+    appearance: "Eine Fellmütze mit heruntergezogenen Klappen, ein Schnurrbart, der zu beiden Seiten aufwärts zeigt.",
+    nature: "Gutmütig, redselig, singt bei jeder Gelegenheit und meint es nie böse.",
+    bookFilm: "Im Buch ist er kaum mehr als ein Name in einer Reihe; die Filme machen ihn zur freundlichsten Stimme der Gesellschaft.",
+    deeds: [
+      "Zieht 2941 mit nach Erebor",
+      "Bleibt mit Óin, Fíli und Kíli in Esgaroth zurück",
+      "Kämpft in der Schlacht der Fünf Heere",
+      "Bleibt nach dem Sieg unter dem Berg"
+    ],
+    notes: [
+      "Er und Bombur kommen zusammen mit Bifur als letzte in Beutelsend an, samt Gandalf.",
+      "Sein Volk arbeitete einst in den Minen von Moria."
+    ],
+    bonds: ["bombur", "bifur", "bilbo", "thorin"],
+    portrait: {
+      skin: "#e6b98c",
+      hair: "#5a4632",
+      hairstyle: "lang",
+      beard: "voll",
+      eyes: "#6a5a3a",
+      cloak: "#5d6d4a",
+      headwear: "hut",
+      ears: "rund"
+    }
+  },
+  {
+    id: "bombur",
+    name: "Bombur",
+    title: "Der schwerste der Gesellschaft",
+    people: "Zwerg",
+    allegiance: "Freie Völker",
+    home: "erebor",
+    weapon: "Eine Kelle, zur Not ein Schlagstock",
+    actor: "Stephen Hunter",
+    source: "Der Hobbit",
+    bio: "Der dickste Zwerg, den je jemand in ein Fass gesteckt hat, und der Koch der Gesellschaft.",
+    fate: "Überlebt und wird im Berg so schwer, dass sechs Zwerge ihn zu Tisch tragen müssen.",
+    otherNames: "Bombur, Bruder Bofurs",
+    descent: "Bruder Bofurs und Vetter Bifurs, aus dem Volk der Zwerge von Moria.",
+    appearance: "Ein roter Zopfbart, den er sich um den Gürtel schlingt, und ein Umfang, der Türen zum Problem macht.",
+    nature: "Gutmütig und beständig hungrig. Wo andere sich sorgen, denkt er ans Abendessen.",
+    bookFilm: "Der verzauberte Bach im Düsterwald wirft ihn in Buch und Film in denselben tagelangen Schlaf.",
+    deeds: [
+      "Fällt im Düsterwald in den verzauberten Bach und schläft tagelang",
+      "Wird von den anderen durch den halben Wald getragen",
+      "Kommt in einem Fass aus dem Waldlandreich heraus",
+      "Kämpft in der Schlacht der Fünf Heere und überlebt"
+    ],
+    notes: [
+      "Im Schlaf träumt er von einem Festmahl der Waldelben, das es tatsächlich gibt.",
+      "Das Buch behauptet, er sei am Ende so dick, dass er sich allein nicht mehr erheben kann."
+    ],
+    bonds: ["bofur", "bifur", "thorin"],
+    portrait: {
+      skin: "#eec49a",
+      hair: "#a84f2a",
+      hairstyle: "lang",
+      beard: "zopfbart",
+      eyes: "#7a6a4a",
+      cloak: "#7a4a2a",
+      ears: "rund"
+    }
+  },
+  {
+    id: "bifur",
+    name: "Bifur",
+    title: "Der mit der Axt im Kopf",
+    people: "Zwerg",
+    allegiance: "Freie Völker",
+    home: "erebor",
+    weapon: "Ein Schweinespiess",
+    actor: "William Kircher",
+    source: "Der Hobbit",
+    bio: "Trägt den Splitter einer Orkaxt in der Stirn, seit einem Kampf, von dem er nicht mehr spricht.",
+    fate: "Überlebt die Schlacht und bleibt bei seinen Vettern unter dem Berg.",
+    otherNames: "Bifur, Vetter Bofurs und Bomburs",
+    descent: "Vetter Bofurs und Bomburs, aus dem Volk der Zwerge von Moria und nicht aus dem Haus Durins.",
+    appearance: "Wildes graues Haar und ein rostiger Axtsplitter, der ihm zwischen den Augen aus dem Schädel steht.",
+    nature: "Schwer einzuschätzen, schnell aufgebracht, und seinen beiden Vettern treu ergeben.",
+    bookFilm: "Die Axt im Kopf ist eine Erfindung der Filme, ebenso, dass er nur noch Khuzdul spricht.",
+    deeds: [
+      "Kommt zuletzt und mit Gandalf in Beutelsend an",
+      "Zieht 2941 mit nach Erebor",
+      "Kämpft in der Schlacht der Fünf Heere",
+      "Bleibt danach im Königreich unter dem Berg"
+    ],
+    notes: [
+      "Sein Volk arbeitete in Moria, bevor der Balrog erwachte.",
+      "In den Filmen versteht ihn ausser Bofur kaum jemand."
+    ],
+    bonds: ["bofur", "bombur", "thorin"],
+    portrait: {
+      skin: "#dda87c",
+      hair: "#8a8276",
+      hairstyle: "wild",
+      beard: "voll",
+      eyes: "#5a5040",
+      cloak: "#4a5240",
+      ears: "rund"
+    }
+  },
+  {
+    id: "dori",
+    name: "Dori",
+    title: "Der stärkste der Gesellschaft",
+    people: "Zwerg",
+    allegiance: "Freie Völker",
+    home: "erebor",
+    weapon: "Ein Schwert, das er ungern zieht",
+    actor: "Mark Hadlow",
+    source: "Der Hobbit",
+    lifespan: "geboren 2765 D.Z.",
+    bio: "Der kräftigste der dreizehn und der, dem Bilbo am häufigsten auf den Rücken gebunden wird.",
+    fate: "Überlebt die Schlacht und bleibt unter dem Berg.",
+    otherNames: "Dori, Bruder Noris und Oris",
+    descent: "Ältester der drei Brüder Dori, Nori und Ori.",
+    appearance: "Eine purpurne Kapuze, silbernes Haar und die breitesten Schultern der Gesellschaft.",
+    nature: "Umständlich höflich, gern beleidigt, und trotz allem der, der Bilbo trägt, wenn es eilt.",
+    bookFilm: "Im Buch trägt er Bilbo aus Goblin-Stadt und lässt ihn dabei fallen, worüber sich beide lange nicht einig werden.",
+    deeds: [
+      "Trägt Bilbo auf der Flucht durch die Nebelberge",
+      "Wird bei den Adlern zusammen mit Bilbo gegriffen",
+      "Zieht mit der Gesellschaft nach Erebor",
+      "Überlebt die Schlacht der Fünf Heere"
+    ],
+    notes: [
+      "Er hält sich für den Vornehmsten der dreizehn und sagt es auch.",
+      "Seine Brüder Nori und Ori haben wenig Geduld damit."
+    ],
+    bonds: ["nori", "ori", "bilbo", "thorin"],
+    portrait: {
+      skin: "#e8bd92",
+      hair: "#b8b2a4",
+      hairstyle: "lang",
+      beard: "voll",
+      eyes: "#6a6a5a",
+      cloak: "#6a3a4a",
+      ears: "rund"
+    }
+  },
+  {
+    id: "nori",
+    name: "Nori",
+    title: "Der mit den flinken Fingern",
+    people: "Zwerg",
+    allegiance: "Freie Völker",
+    home: "erebor",
+    weapon: "Ein Streitkolben und was gerade herumliegt",
+    actor: "Jed Brophy",
+    source: "Der Hobbit",
+    lifespan: "geboren 2774 D.Z.",
+    bio: "Der mittlere der drei Brüder, mit einer Frisur wie ein Stern und Taschen, die sich unterwegs füllen.",
+    fate: "Überlebt die Schlacht und bleibt im Königreich unter dem Berg.",
+    otherNames: "Nori, Bruder Doris und Oris",
+    descent: "Mittlerer der drei Brüder Dori, Nori und Ori.",
+    appearance: "Ein dreizackig aufgesteckter Bart und ein Haarschopf, der in drei Richtungen zeigt.",
+    nature: "Schnell mit den Händen, langsam mit Erklärungen. Was in Beutelsend fehlt, fehlt nicht zufällig.",
+    bookFilm: "Das Buch nennt ihn nur in einer Reihe; die Filme machen aus ihm einen Dieb mit besten Absichten.",
+    deeds: [
+      "Zieht 2941 mit nach Erebor",
+      "Entkommt mit den anderen aus Goblin-Stadt und aus dem Waldlandreich",
+      "Kämpft in der Schlacht der Fünf Heere",
+      "Bleibt nach dem Sieg unter dem Berg"
+    ],
+    notes: [
+      "Von den drei Brüdern ist er der einzige, der die Sache überlebt und nicht nach Moria geht."
+    ],
+    bonds: ["dori", "ori", "thorin"],
+    portrait: {
+      skin: "#e2b189",
+      hair: "#a8642a",
+      hairstyle: "wild",
+      beard: "zopfbart",
+      eyes: "#5a4a3a",
+      cloak: "#5a5040",
+      ears: "rund"
+    }
+  },
+  {
+    id: "thrain",
+    name: "Thráin II.",
+    title: "König im Exil",
+    people: "Zwerg",
+    allegiance: "Freie Völker",
+    home: "dolguldur",
+    weapon: "Karte und Schlüssel, die er bis zuletzt nicht hergibt",
+    actor: "Antony Sher",
+    source: "Der Hobbit",
+    lifespan: "2644 bis 2850 D.Z.",
+    bio: "Thorins Vater. Er verliert den Berg an Smaug, den Vater an Azog und zuletzt den Verstand in den Kerkern von Dol Guldur.",
+    fate: "Stirbt in Dol Guldur, nachdem Sauron ihm den letzten der Sieben Ringe genommen hat. Gandalf findet ihn dort sterbend.",
+    otherNames: "Thráin der Zweite, Sohn Thrórs, König unter dem Berg im Exil",
+    descent: "Sohn Thrórs, Vater Thorins, Fralins und Dís. Aus dem Haus Durins.",
+    appearance: "Zuletzt ein blinder, gebrochener Gefangener, der seinen eigenen Namen nicht mehr weiss.",
+    nature: "Zäh und rachsüchtig. Der Krieg gegen die Orks ist sein Werk, und er führt ihn sechs Jahre lang.",
+    bookFilm: "Im Buch ist er längst tot, als die Reise beginnt, und nur die Karte spricht für ihn. Die erweiterte Fassung des zweiten Films lässt ihn Thorin noch einmal begegnen.",
+    deeds: [
+      "Flieht 2770 mit seinem Vater vor Smaug aus Erebor",
+      "Führt nach Thrórs Tod den Krieg der Zwerge und Orks",
+      "Kämpft 2799 bei Azanulbizar, wo er ein Auge verliert",
+      "Zieht 2841 allein aus, um Erebor zurückzugewinnen",
+      "Wird gefangen und in Dol Guldur eingekerkert",
+      "Gibt Gandalf 2850 Karte und Schlüssel, bevor er stirbt"
+    ],
+    notes: [
+      "Über Karte und Schlüssel kommt die ganze Reise überhaupt erst zustande.",
+      "Gandalf hielt Thráin für einen namenlosen Gefangenen, bis es zu spät war."
+    ],
+    bonds: ["thorin", "thror", "gandalf", "sauron"],
+    portrait: {
+      skin: "#c9a586",
+      hair: "#9a9288",
+      hairstyle: "wild",
+      beard: "lang",
+      eyes: "#6a6258",
+      cloak: "#4a4034",
+      ears: "rund"
+    }
+  },
+  {
+    id: "thror",
+    name: "Thrór",
+    title: "Der letzte König unter dem Berg",
+    people: "Zwerg",
+    allegiance: "Freie Völker",
+    home: "moria",
+    weapon: "Der Arkenstein als Zeichen, kein Schwert",
+    actor: "Jeffrey Thomas",
+    source: "Der Hobbit",
+    lifespan: "2542 bis 2790 D.Z.",
+    bio: "Thorins Grossvater, unter dem Erebor so reich wurde, dass ein Drache davon hörte.",
+    fate: "Zieht als alter Mann nach Moria und wird von Azog im Tor erschlagen und gebrandmarkt. Sein Tod beginnt den Krieg der Zwerge und Orks.",
+    otherNames: "Thrór, König unter dem Berg, Herr von Erebor",
+    descent: "Sohn Dáins I., Vater Thráins II., Grossvater Thorins. Aus dem Haus Durins.",
+    appearance: "Auf dem Höhepunkt ein König in Gold; am Ende ein Greis mit wirrem Blick.",
+    nature: "Die Drachenkrankheit befällt ihn lange vor dem Drachen. Am Ende ist er nicht mehr klar im Kopf.",
+    bookFilm: "Die Filme eröffnen mit ihm: der Goldrausch, das Verhängnis und der Verlust des Berges in einer einzigen Bildfolge.",
+    deeds: [
+      "Macht Erebor zum reichsten Königreich des Nordens",
+      "Findet den Arkenstein im Herzen des Berges",
+      "Verliert 2770 den Berg an Smaug und entkommt durch eine Geheimtür",
+      "Gibt Thráin den letzten der Sieben Ringe",
+      "Zieht 2790 nach Moria und wird von Azog erschlagen",
+      "Sein geschändeter Leichnam löst einen sechsjährigen Krieg aus"
+    ],
+    notes: [
+      "Azog liess seinen Namen in die Stirn des Toten schneiden.",
+      "Der Arkenstein, den er fand, treibt seinen Enkel später in den Wahnsinn."
+    ],
+    bonds: ["thorin", "thrain", "azog", "smaug"],
+    portrait: {
+      skin: "#d8b28c",
+      hair: "#d8d2c4",
+      hairstyle: "lang",
+      beard: "lang",
+      eyes: "#6a5a3a",
+      cloak: "#c8b478",
+      headwear: "krone",
       ears: "rund"
     }
   },
@@ -2139,6 +2729,86 @@ export const CHARACTERS: Character[] = [
     ],
     bonds: ["thorin", "dain", "smaug"],
     portrait: {
+      special: "ork"
+    }
+  },
+  {
+    id: "bolg",
+    name: "Bolg",
+    title: "Sohn Azogs",
+    people: "Ork",
+    allegiance: "Sauron",
+    home: "gundabad",
+    weapon: "Ein Morgenstern und ein Speer",
+    actor: "Lawrence Makoare, später John Tui",
+    source: "Der Hobbit",
+    lifespan: "bis 2941 D.Z.",
+    bio: "Führt die Orks von Gundabad und erbt von seinem Vater den Krieg gegen das Haus Durins.",
+    fate: "Fällt in der Schlacht der Fünf Heere. Im Buch bricht Beorn ihn in Bärengestalt entzwei, in den Filmen tötet ihn Legolas.",
+    otherNames: "Bolg von Gundabad",
+    descent: "Sohn Azogs des Schänders, der Thrór erschlug.",
+    appearance: "Grösser als sein Vater, mit Eisenklammern im Schädel, die eine alte Wunde zusammenhalten.",
+    nature: "Ein Befehlsempfänger mit eigener Grausamkeit, geduldiger als Azog und darum gefährlicher.",
+    bookFilm: "Im Buch ist Bolg der Anführer der Orks in der Schlacht, weil Azog seit 2799 tot ist. Die Filme lassen den Vater leben und machen den Sohn zu seinem Handlanger.",
+    deeds: [
+      "Sammelt das Heer von Gundabad",
+      "Bringt in den Filmen die zweite Streitmacht zum Rabenberg",
+      "Führt im Buch die Orks in der Schlacht der Fünf Heere",
+      "Fällt, als die Adler und Beorn eingreifen"
+    ],
+    notes: [
+      "Der Gundabad ist der Berg, an dem Durin einst erwachte; dass Orks dort sitzen, ist für Zwerge unerträglich.",
+      "Im Buch rächt Bolg seinen Vater; in den Filmen kämpft er neben ihm."
+    ],
+    bonds: ["azog", "sauron"],
+    portrait: {
+      skin: "#8a8f6a",
+      hair: "#2a2a22",
+      hairstyle: "kahl",
+      beard: "keine",
+      eyes: "#c9a227",
+      cloak: "#2f2a26",
+      ears: "spitz",
+      special: "ork"
+    }
+  },
+  {
+    id: "greatgoblin",
+    name: "Der Grosse Ork",
+    title: "Herrscher von Goblin-Stadt",
+    people: "Ork",
+    allegiance: "Sauron",
+    home: "hohepass",
+    weapon: "Ein Streitkolben und eine Menge Untergebener",
+    actor: "Barry Humphries",
+    source: "Der Hobbit",
+    lifespan: "bis 2941 D.Z.",
+    bio: "Sitzt unter dem Hohen Pass auf einem Thron aus Knochen und lässt sich vorführen, was seine Wachen in den Höhlen aufgreifen.",
+    fate: "Fällt durch Glamdring, als Gandalf das Licht in Goblin-Stadt löscht.",
+    otherNames: "Der Grosse Ork, Herr der Höhlen unter dem Hohen Pass",
+    descent: "Aus dem Orkvolk der Nebelberge, das Gundabad und die Pässe hält.",
+    appearance: "Ungeheuer feist, mit einem Kropf und einer Krone, die er selbst zusammengeschmiedet haben dürfte.",
+    nature: "Aufgeblasen und jähzornig, mit einer Vorliebe für Urteilssprüche und eigene Lieder.",
+    bookFilm: "Das Buch erledigt ihn in zwei Sätzen; der Film gibt ihm einen Auftritt, eine Ballade und ein langes Ende.",
+    deeds: [
+      "Lässt die Gesellschaft in den Höhlen unter dem Hohen Pass ergreifen",
+      "Erkennt Orcrist als das Schwert, das seine Art Beisser nennt",
+      "Verurteilt Thorin zum Tod",
+      "Fällt durch Gandalfs Glamdring, ohne die Klinge kommen zu sehen"
+    ],
+    notes: [
+      "Während des Tumults verliert Bilbo die anderen und findet den Ring.",
+      "Sein Tod ist der Anlass, aus dem Azog die Gesellschaft überhaupt erst verfolgt."
+    ],
+    bonds: ["gandalf", "thorin", "azog"],
+    portrait: {
+      skin: "#9aa377",
+      hair: "#2a2a22",
+      hairstyle: "kahl",
+      beard: "keine",
+      eyes: "#d8c060",
+      cloak: "#4a4034",
+      ears: "spitz",
       special: "ork"
     }
   },
