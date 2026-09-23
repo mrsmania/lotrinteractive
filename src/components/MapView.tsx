@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import { CHARACTERS, CHARACTER_BY_ID } from "../data/characters";
-import { PEOPLES } from "../data/peoples";
-import { CONTOUR_WIDTH, MAP_H, MAP_W, MARKER_SCALE, RIM_R, RIM_WIDTH } from "../data/map";
+import { useCallback, useEffect, useRef, useState } from "react";
+import type { CSSProperties } from "react";
+import { CHARACTER_BY_ID } from "../data/characters";
+import { MAP_H, MAP_W } from "../data/map";
 import { MARKERS } from "../lib/markers";
 import { PLACES } from "../data/places";
 import type { Translator } from "../lib/i18n";
@@ -9,19 +9,8 @@ import { useZoomPan } from "../hooks/useZoomPan";
 import { MapTiles } from "./MapTiles";
 import { Journeys } from "./Journeys";
 import { PlaceMarks } from "./PlaceMarks";
-import { MedallionContent } from "./Medallion";
+import { Markers } from "./Markers";
 import { Legend } from "./Legend";
-
-// Medallion geometry, in map units. The numbers are the drawn map's; what
-// scales them to this one is MARKER_SCALE.
-const MARKER_R = 11.4 * MARKER_SCALE;
-const DISC_R = 12.1 * MARKER_SCALE;
-const HUB_R = 2 * MARKER_SCALE;
-const SPOKE_WIDTH = 0.8 * MARKER_SCALE;
-
-/** The glow on hover and selection, outside the rim so it reads as a halo. */
-const RING_R = RIM_R + 1.9;
-const RING_WIDTH = 2.4 * MARKER_SCALE;
 
 /** A request from elsewhere in the app to bring a character into view. */
 export interface FocusRequest {
@@ -102,7 +91,8 @@ export function MapView({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [focus?.nonce]);
 
-  // Medallions keep a readable size as the map scales.
+  // Medallions keep a readable size as the map scales. Handed down as the CSS
+  // variable --counter rather than as a prop; see counterPlaced in Markers.
   const counterScale = Math.min(1.3, Math.max(0.45, 1 / view.k));
 
   // preserveAspectRatio="xMidYMid meet" fits the viewBox inside the element and
@@ -119,11 +109,15 @@ export function MapView({
     y1: (MAP_H / 2 + halfH - view.ty) / view.k,
   };
 
-  const showTooltip = (id: string, ev: React.PointerEvent) => {
+  // Stable, so the memoised marker layer is not re-rendered by its own hover.
+  const hover = useCallback((id: string | null, ev?: React.PointerEvent) => {
     const field = fieldRef.current?.getBoundingClientRect();
-    if (!field) return;
+    if (!id || !ev || !field) {
+      setTooltip(null);
+      return;
+    }
     setTooltip({ id, x: ev.clientX - field.left, y: ev.clientY - field.top });
-  };
+  }, []);
 
   const tooltipCharacter = tooltip ? CHARACTER_BY_ID.get(tooltip.id) : undefined;
 
@@ -136,96 +130,22 @@ export function MapView({
         preserveAspectRatio="xMidYMid meet"
         {...zoomPan.handlers}
       >
-        <g transform={`translate(${view.tx.toFixed(2)} ${view.ty.toFixed(2)}) scale(${view.k.toFixed(4)})`}>
-          <MapTiles visible={visible} density={density} />
+        <g
+          transform={`translate(${view.tx.toFixed(2)} ${view.ty.toFixed(2)}) scale(${view.k.toFixed(4)})`}
+          style={{ "--counter": counterScale.toFixed(3) } as CSSProperties}
+        >
+          <MapTiles {...visible} density={density} />
 
           <Journeys active={activeJourneys} />
 
           <PlaceMarks
             on={showPlaces}
             selectedId={selectedPlaceId}
-            counterScale={counterScale}
             onSelect={onSelectPlace}
           />
 
           {!showPlaces && (
-          <g id="markers">
-            {/* Crowded places: a dot at the true spot, with a line to each
-                medallion. Both go the same way as the medallion they belong to
-                when the filter dims it, or a place nobody passes would be left
-                trailing lines at people who are no longer there. */}
-            {MARKERS.hubs.map((h, i) => (
-              <circle
-                key={i}
-                className={"hub" + (h.ids.some((id) => visibleIds.has(id)) ? "" : " dimmed")}
-                cx={h.x}
-                cy={h.y}
-                r={HUB_R}
-                fill="#8a2f18"
-              />
-            ))}
-            {MARKERS.spokes.map((s, i) => (
-              <path
-                key={i}
-                className={"spoke" + (visibleIds.has(s.id) ? "" : " dimmed")}
-                d={`M${s.x1},${s.y1} L${s.x2.toFixed(1)},${s.y2.toFixed(1)}`}
-                stroke="#8a6a3a"
-                strokeWidth={SPOKE_WIDTH}
-              />
-            ))}
-
-            {CHARACTERS.map((c) => {
-              const p = MARKERS.positions[c.id];
-              if (!p) return null;
-              const colour = PEOPLES[c.people]?.colour ?? "#c9a227";
-              const dimmed = !visibleIds.has(c.id);
-              return (
-                <g
-                  key={c.id}
-                  data-id={c.id}
-                  className={
-                    "marker" +
-                    (c.id === selectedId ? " selected" : "") +
-                    (dimmed ? " dimmed" : "")
-                  }
-                  transform={`translate(${p.x.toFixed(1)},${p.y.toFixed(1)}) scale(${counterScale.toFixed(3)})`}
-                  onPointerEnter={(ev) => showTooltip(c.id, ev)}
-                  onPointerMove={(ev) => showTooltip(c.id, ev)}
-                  onPointerLeave={() => setTooltip(null)}
-                >
-                  <circle
-                    className="ring"
-                    r={RING_R}
-                    fill="none"
-                    stroke={colour}
-                    strokeWidth={RING_WIDTH}
-                    filter="url(#glow)"
-                  />
-                  {/* Dark contour first, then the people's colour over its
-                      middle: one stroke on top of another, so the rim is cut
-                      out of the paper on both edges for the price of two
-                      circles. */}
-                  <circle
-                    r={RIM_R}
-                    fill="none"
-                    stroke="#231a10"
-                    strokeWidth={CONTOUR_WIDTH}
-                    opacity=".75"
-                  />
-                  <circle r={RIM_R} fill="none" stroke={colour} strokeWidth={RIM_WIDTH} />
-                  <circle r={DISC_R} fill={colour} opacity=".55" />
-                  {/* The picture used to be put through a desaturating filter
-                      so it sat in the paper rather than on it. That made sense
-                      over the app's own pale drawn map; over this one it only
-                      took away the contrast that lets a face be seen at all.
-                      What sits the medallion in the paper now is the rim. */}
-                  <g transform={`translate(${-MARKER_R},${-MARKER_R}) scale(${(MARKER_R * 2) / 100})`}>
-                    <MedallionContent id={c.id} />
-                  </g>
-                </g>
-              );
-            })}
-          </g>
+            <Markers selectedId={selectedId} visibleIds={visibleIds} onHover={hover} />
           )}
         </g>
       </svg>

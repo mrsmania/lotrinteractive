@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 import type { Character, PlaceGroup, SidebarTab } from "../types";
 import { PEOPLES } from "../data/peoples";
 import { PLACE_GROUPS, PLACE_LORE } from "../data/placeLore";
@@ -22,7 +22,7 @@ interface Props {
   onSelectPlace: (id: string) => void;
 }
 
-export function Sidebar({
+export const Sidebar = memo(function Sidebar({
   translator,
   visible,
   activePeoples,
@@ -160,4 +160,4 @@ export function Sidebar({
       )}
     </aside>
   );
-}
+});

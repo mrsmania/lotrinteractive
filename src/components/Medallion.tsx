@@ -2,7 +2,7 @@ import { characterImageUrl } from "../lib/images";
 
 /**
  * The one shared placeholder, drawn when a character has no picture in
- * public/images/characters/.
+ * portrait-source/.
  *
  * Deliberately a single generic figure rather than anything
  * character-specific: a missing picture should look obviously missing, not

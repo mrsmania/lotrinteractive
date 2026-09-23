@@ -18,15 +18,21 @@ npm run tiles    # re-cut the map image, only needed if it changes
 
 ## Character pictures
 
-Drop an image into `public/images/characters/`, named after the character id:
+Drop an image into `portrait-source/`, named after the character id:
 
 ```
-public/images/characters/frodo.jpg
-public/images/characters/gandalf.png
+portrait-source/frodo.jpg
+portrait-source/gandalf.png
 ```
 
-Accepted: `jpg` `jpeg` `png` `webp` `avif` `gif` `svg`. Square images around
-400x400 work best, since they are cropped to a circle and shown small.
+Accepted: `jpg` `jpeg` `png` `webp` `avif` `gif` `svg`, at any size. The page
+never asks for the file itself: `plugins/character-images.ts` cuts a 240-pixel
+square thumbnail from the middle of each (the same crop the medallion makes)
+and serves that from `images/portraits/`, on request under `npm run dev` and
+written into `dist/` by `npm run build`. The whole cast comes to under a
+megabyte that way, where the originals are nearly eight.
+The folder is outside `public/` for that reason: anything in `public/` is copied
+into the build, and the originals would be shipped without ever being asked for.
 
 Anyone without a file gets the shared placeholder. The folder is read at build
 time by `plugins/character-images.ts` and handed to the app as a manifest, so
@@ -39,7 +45,8 @@ Character ids are the `id` field in `src/data/characters.ts`.
 ## Layout
 
 ```
-plugins/character-images.ts   reads public/images/characters/ into a virtual module
+plugins/character-images.ts   reads portrait-source/ into a virtual module
+                              and cuts the thumbnails the page is served
 scripts/make-tiles.mjs        cuts the map image into public/images/map/
 src/data/                     places, peoples, characters, English text, journeys,
                               map metrics, and the relationship graph

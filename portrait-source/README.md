@@ -12,8 +12,9 @@ Any character without a file here shows the shared placeholder instead. The
 folder is read at build time (and watched during `npm run dev`), so there are no
 wasted requests hunting for files that do not exist.
 
-Images are cropped to a circle and displayed small, so square source images
-around 400x400 work best.
+Any size will do: what the page is served is a 240-pixel square thumbnail cut
+from the middle of each, made by plugins/character-images.ts. Keep the face
+near the centre, since that is the part the circle keeps.
 
 ## The 57 ids
 
@@ -52,4 +53,4 @@ A few are worth spelling out, since the id is not the first word of the name:
 
 To regenerate the list from the data:
 
-    sed -n 's/^    id: "\(.*\)",$/\1/p' ../../../src/data/characters.ts | sort
+    sed -n 's/^    id: "\(.*\)",$/\1/p' ../src/data/characters.ts | sort

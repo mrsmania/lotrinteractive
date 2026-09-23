@@ -362,6 +362,11 @@ main{
 .views{display:flex;}
 .views .button:first-child{border-top-right-radius:0;border-bottom-right-radius:0;}
 .views .button:last-child{margin-left:-1px;border-top-left-radius:0;border-bottom-left-radius:0;}
+/* The two share the 1px seam, and the later one paints over it: with Map
+   pressed, Connections' dull edge covered Map's gold one. Whichever is lit
+   comes to the front so its whole border shows. */
+.views .button{position:relative;}
+.views .button[aria-pressed="true"],.views .button:hover,.views .button:focus-visible{z-index:1;}
 
 /* ---------- Connections graph ---------- */
 .graph-field{

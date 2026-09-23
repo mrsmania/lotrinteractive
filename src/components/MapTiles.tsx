@@ -1,9 +1,8 @@
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 import { levelFor, tilesIn, type Rect } from "../lib/tiles";
 
-interface Props {
-  /** The part of the map on screen, in map units. */
-  visible: Rect;
+/** The part of the map on screen, in map units, spread as four numbers. */
+interface Props extends Rect {
   /** Screen pixels per map unit at the current view. */
   density: number;
 }
@@ -18,13 +17,13 @@ interface Props {
  * by then, so the stack costs requests only the first time. It also means
  * there is never a hole to look at while a tile is in flight.
  */
-export function MapTiles({ visible, density }: Props) {
+export const MapTiles = memo(function MapTiles({ x0, y0, x1, y1, density }: Props) {
   const tiles = useMemo(() => {
     const top = levelFor(density);
     const out = [];
-    for (let z = 0; z <= top; z++) out.push(...tilesIn(z, visible));
+    for (let z = 0; z <= top; z++) out.push(...tilesIn(z, { x0, y0, x1, y1 }));
     return out;
-  }, [density, visible.x0, visible.y0, visible.x1, visible.y1]);
+  }, [density, x0, y0, x1, y1]);
 
   return (
     <g id="tiles">
@@ -41,4 +40,4 @@ export function MapTiles({ visible, density }: Props) {
       ))}
     </g>
   );
-}
+});

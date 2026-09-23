@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { CSSProperties } from "react";
 import { JOURNEYS } from "../data/journeys";
 import { PEOPLES } from "../data/peoples";
@@ -18,7 +19,7 @@ interface Props {
  * the button that draws that path across the map, which puts the control on
  * the thing it controls rather than behind a menu somewhere else.
  */
-export function Legend({ translator, activeJourneys, onToggleJourney }: Props) {
+export const Legend = memo(function Legend({ translator, activeJourneys, onToggleJourney }: Props) {
   return (
     <div className="legend">
       <h3>{translator.t("legendJourneys")}</h3>
@@ -48,4 +49,4 @@ export function Legend({ translator, activeJourneys, onToggleJourney }: Props) {
       ))}
     </div>
   );
-}
+});

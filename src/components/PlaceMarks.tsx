@@ -2,6 +2,7 @@ import { memo } from "react";
 import { PLACE_LORE } from "../data/placeLore";
 import { PLACE_MARKS, PLACE_MARK_R } from "../lib/markers";
 import { PlaceIcon } from "./PlaceIcon";
+import { counterPlaced } from "./Markers";
 
 /** The hit area is larger than the ring, so it can be tapped on a phone. */
 const HIT_R = PLACE_MARK_R * 1.25;
@@ -10,8 +11,6 @@ interface Props {
   /** Whether the layer is on. Off, nothing is drawn and nothing is clickable. */
   on: boolean;
   selectedId: string | null;
-  /** Medallions keep a readable size as the map scales, and so do these. */
-  counterScale: number;
   onSelect: (id: string) => void;
 }
 
@@ -37,7 +36,6 @@ interface Props {
 export const PlaceMarks = memo(function PlaceMarks({
   on,
   selectedId,
-  counterScale,
   onSelect,
 }: Props) {
   if (!on) return null;
@@ -53,7 +51,8 @@ export const PlaceMarks = memo(function PlaceMarks({
             key={lore.id}
             className={"place-mark" + (lore.id === selectedId ? " selected" : "")}
             data-place={lore.id}
-            transform={`translate(${at.x.toFixed(1)},${at.y.toFixed(1)}) scale(${counterScale.toFixed(3)})`}
+            // Medallions keep a readable size as the map scales, and so do these.
+            style={counterPlaced(at.x, at.y)}
             onClick={() => onSelect(lore.id)}
           >
             <circle className="place-ring-glow" r={r + 1.9} filter="url(#glow)" />

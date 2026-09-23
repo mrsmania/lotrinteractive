@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { memo, useEffect, useMemo, useRef, useState } from "react";
+import type { CSSProperties } from "react";
 import { CHARACTER_BY_ID } from "../data/characters";
 import { RELATIONS } from "../data/relations";
 import type { RelationEdge, RelationKind } from "../data/relations";
@@ -6,6 +7,7 @@ import { GRAPH_H, GRAPH_W, RELATIONS_LAYOUT, nodeRadius } from "../lib/relations
 import type { Translator } from "../lib/i18n";
 import { useZoomPan } from "../hooks/useZoomPan";
 import { MedallionContent } from "./Medallion";
+import { counterPlaced } from "./Markers";
 
 /**
  * Colour per kind of connection, and the order that decides an edge's colour
@@ -86,7 +88,7 @@ export function RelationsView({
   const [hoverId, setHoverId] = useState<string | null>(null);
 
   const { centreOn, view } = zoomPan;
-  const { nodes, byId } = RELATIONS_LAYOUT;
+  const { byId } = RELATIONS_LAYOUT;
 
   // Only the edges whose kinds are switched on, each with the colour to use.
   const edges = useMemo(() => {
@@ -134,61 +136,19 @@ export function RelationsView({
         preserveAspectRatio="xMidYMid meet"
         {...zoomPan.handlers}
       >
-        <g transform={`translate(${view.tx.toFixed(2)} ${view.ty.toFixed(2)}) scale(${view.k.toFixed(4)})`}>
-          <g className="graph-edges">
-            {edges.map(({ edge, kind, d }) => {
-              const touchesFocus = focusId === edge.a || focusId === edge.b;
-              return (
-                <path
-                  key={`${edge.a}|${edge.b}`}
-                  className={
-                    "graph-edge" +
-                    (focusId ? (touchesFocus ? " lit" : " hushed") : "") +
-                    (visibleIds.has(edge.a) && visibleIds.has(edge.b) ? "" : " dimmed")
-                  }
-                  d={d}
-                  stroke={KIND_COLOUR[kind]}
-                  strokeWidth={edge.weight > 1 ? 1.9 : 1.1}
-                  fill="none"
-                />
-              );
-            })}
-          </g>
-
-          <g className="graph-nodes">
-            {nodes.map((node) => {
-              const character = CHARACTER_BY_ID.get(node.id);
-              if (!character) return null;
-              const r = nodeRadius(node.degree);
-              const hushed = Boolean(related) && !related!.has(node.id);
-              const name = shortLabel(translator.field(character, "name"));
-              return (
-                <g
-                  key={node.id}
-                  data-id={node.id}
-                  className={
-                    "graph-node" +
-                    (node.id === selectedId ? " selected" : "") +
-                    (node.id === focusId ? " focused" : "") +
-                    (hushed ? " hushed" : "") +
-                    (visibleIds.has(node.id) ? "" : " dimmed")
-                  }
-                  transform={`translate(${node.x},${node.y}) scale(${counterScale.toFixed(3)})`}
-                  onPointerEnter={() => setHoverId(node.id)}
-                  onPointerLeave={() => setHoverId(null)}
-                >
-                  <circle className="ring" r={r + 3.5} fill="none" stroke={node.colour} strokeWidth="2.4" filter="url(#glow)" />
-                  <circle r={r + 0.6} fill={node.colour} opacity=".5" />
-                  <g transform={`translate(${-r},${-r}) scale(${(r * 2) / 100})`}>
-                    <MedallionContent id={node.id} />
-                  </g>
-                  <text className="graph-label" y={r + 13} textAnchor="middle">
-                    {name}
-                  </text>
-                </g>
-              );
-            })}
-          </g>
+        <g
+          transform={`translate(${view.tx.toFixed(2)} ${view.ty.toFixed(2)}) scale(${view.k.toFixed(4)})`}
+          style={{ "--counter": counterScale.toFixed(3) } as CSSProperties}
+        >
+          <GraphEdges edges={edges} focusId={focusId} visibleIds={visibleIds} />
+          <GraphNodes
+            translator={translator}
+            selectedId={selectedId}
+            focusId={focusId}
+            related={related}
+            visibleIds={visibleIds}
+            onHover={setHoverId}
+          />
         </g>
       </svg>
 
@@ -224,3 +184,97 @@ export function RelationsView({
     </div>
   );
 }
+
+type Edge = { edge: RelationEdge; kind: RelationKind; d: string };
+
+/**
+ * The two layers of the graph, memoised so that panning and zooming, which
+ * re-render the view on every frame, leave them alone. The nodes keep their
+ * size through the --counter variable set on the group above them, as the
+ * map's medallions do (see counterPlaced).
+ */
+const GraphEdges = memo(function GraphEdges({
+  edges,
+  focusId,
+  visibleIds,
+}: {
+  edges: Edge[];
+  focusId: string | null;
+  visibleIds: ReadonlySet<string>;
+}) {
+  return (
+    <g className="graph-edges">
+      {edges.map(({ edge, kind, d }) => {
+        const touchesFocus = focusId === edge.a || focusId === edge.b;
+        return (
+          <path
+            key={`${edge.a}|${edge.b}`}
+            className={
+              "graph-edge" +
+              (focusId ? (touchesFocus ? " lit" : " hushed") : "") +
+              (visibleIds.has(edge.a) && visibleIds.has(edge.b) ? "" : " dimmed")
+            }
+            d={d}
+            stroke={KIND_COLOUR[kind]}
+            strokeWidth={edge.weight > 1 ? 1.9 : 1.1}
+            fill="none"
+          />
+        );
+      })}
+    </g>
+  );
+});
+
+const GraphNodes = memo(function GraphNodes({
+  translator,
+  selectedId,
+  focusId,
+  related,
+  visibleIds,
+  onHover,
+}: {
+  translator: Translator;
+  selectedId: string | null;
+  focusId: string | null;
+  related: ReadonlySet<string> | null;
+  visibleIds: ReadonlySet<string>;
+  onHover: (id: string | null) => void;
+}) {
+  const { nodes } = RELATIONS_LAYOUT;
+  return (
+    <g className="graph-nodes">
+      {nodes.map((node) => {
+        const character = CHARACTER_BY_ID.get(node.id);
+        if (!character) return null;
+        const r = nodeRadius(node.degree);
+        const hushed = Boolean(related) && !related!.has(node.id);
+        const name = shortLabel(translator.field(character, "name"));
+        return (
+          <g
+            key={node.id}
+            data-id={node.id}
+            className={
+              "graph-node" +
+              (node.id === selectedId ? " selected" : "") +
+              (node.id === focusId ? " focused" : "") +
+              (hushed ? " hushed" : "") +
+              (visibleIds.has(node.id) ? "" : " dimmed")
+            }
+            style={counterPlaced(node.x, node.y)}
+            onPointerEnter={() => onHover(node.id)}
+            onPointerLeave={() => onHover(null)}
+          >
+            <circle className="ring" r={r + 3.5} fill="none" stroke={node.colour} strokeWidth="2.4" filter="url(#glow)" />
+            <circle r={r + 0.6} fill={node.colour} opacity=".5" />
+            <g transform={`translate(${-r},${-r}) scale(${(r * 2) / 100})`}>
+              <MedallionContent id={node.id} />
+            </g>
+            <text className="graph-label" y={r + 13} textAnchor="middle">
+              {name}
+            </text>
+          </g>
+        );
+      })}
+    </g>
+  );
+});

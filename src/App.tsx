@@ -1,20 +1,26 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Suspense, lazy, useCallback, useEffect, useMemo, useState } from "react";
 import type { Character, Language, SidebarTab, ViewName } from "./types";
 import { CHARACTERS, CHARACTER_BY_ID } from "./data/characters";
 import type { RelationKind } from "./data/relations";
 import { JOURNEYS } from "./data/journeys";
 import { PLACES } from "./data/places";
-import { PLACE_LORE_BY_ID } from "./data/placeLore";
+import { PLACE_LORE, PLACE_LORE_BY_ID } from "./data/placeLore";
 import { createTranslator } from "./lib/i18n";
 import type { Translator } from "./lib/i18n";
 import { Header } from "./components/Header";
 import { Sidebar } from "./components/Sidebar";
 import { MapView } from "./components/MapView";
 import type { FocusRequest } from "./components/MapView";
-import { RelationsView } from "./components/RelationsView";
 import { CharacterSheet } from "./components/CharacterSheet";
 import { PlaceSheet } from "./components/PlaceSheet";
 import { SharedDefs } from "./components/SharedDefs";
+
+// The connections view lays its graph out when it is first imported, which is
+// a few hundred passes over every pair of characters. Loaded on demand, that
+// is paid by whoever opens it and not by everybody who only came for the map.
+const RelationsView = lazy(() =>
+  import("./components/RelationsView").then((m) => ({ default: m.RelationsView })),
+);
 
 /** Below this width the sidebar becomes a drawer; matches the CSS breakpoint. */
 const NARROW = 880;
@@ -71,14 +77,20 @@ export default function App() {
     document.title = translator.t("title");
   }, [language, translator]);
 
+  // Built once per language rather than once per character per keystroke.
+  const haystacks = useMemo(
+    () => new Map(CHARACTERS.map((c) => [c.id, haystack(c, translator)])),
+    [translator],
+  );
+
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();
     return CHARACTERS.filter((c) => {
       if (activePeoples.size > 0 && !activePeoples.has(c.people)) return false;
       if (!q) return true;
-      return haystack(c, translator).includes(q);
+      return haystacks.get(c.id)!.includes(q);
     });
-  }, [query, activePeoples, translator]);
+  }, [query, activePeoples, haystacks]);
 
   const visibleIds = useMemo(() => new Set(visible.map((c) => c.id)), [visible]);
 
@@ -135,10 +147,31 @@ export default function App() {
     });
   }, []);
 
+  /**
+   * Somebody, or somewhere, at random: whichever the sidebar is showing. A
+   * character is drawn from those the filters leave, a place from every place
+   * with a sheet. The one already open is left out, so the button always
+   * moves.
+   */
   const random = useCallback(() => {
-    if (visible.length === 0) return;
-    select(visible[Math.floor(Math.random() * visible.length)].id, true);
-  }, [visible, select]);
+    const pick = (ids: string[], current: string | null) => {
+      const pool = ids.length > 1 ? ids.filter((id) => id !== current) : ids;
+      return pool.length ? pool[Math.floor(Math.random() * pool.length)] : null;
+    };
+    if (sidebarTab === "places") {
+      const id = pick(PLACE_LORE.map((p) => p.id), selectedPlaceId);
+      if (id) selectPlace(id, true);
+    } else {
+      const id = pick(visible.map((c) => c.id), selectedId);
+      if (id) select(id, true);
+    }
+  }, [sidebarTab, visible, selectedId, selectedPlaceId, select, selectPlace]);
+
+  // Stable, so the memoised layers below are not re-rendered for nothing.
+  const selectAndMove = useCallback((id: string) => select(id, true), [select]);
+  const selectInPlace = useCallback((id: string) => select(id, false), [select]);
+  const selectPlaceAndMove = useCallback((id: string) => selectPlace(id, true), [selectPlace]);
+  const selectPlaceInPlace = useCallback((id: string) => selectPlace(id, false), [selectPlace]);
 
   // Escape closes the character sheet.
   useEffect(() => {
@@ -181,8 +214,8 @@ export default function App() {
           open={sidebarOpen}
           onTabChange={setSidebarTab}
           onTogglePeople={togglePeople}
-          onSelect={(id) => select(id, true)}
-          onSelectPlace={(id) => selectPlace(id, true)}
+          onSelect={selectAndMove}
+          onSelectPlace={selectPlaceAndMove}
         />
 
         {view === "map" ? (
@@ -195,18 +228,20 @@ export default function App() {
             showPlaces={sidebarTab === "places"}
             selectedPlaceId={sheetOpen ? selectedPlaceId : null}
             onToggleJourney={toggleJourney}
-            onSelect={(id) => select(id, false)}
-            onSelectPlace={(id) => selectPlace(id, false)}
+            onSelect={selectInPlace}
+            onSelectPlace={selectPlaceInPlace}
           />
         ) : (
-          <RelationsView
-            translator={translator}
-            selectedId={sheetOpen ? selectedId : null}
-            visibleIds={visibleIds}
-            activeKinds={activeKinds}
-            focusNonce={focus?.nonce ?? 0}
-            onSelect={(id) => select(id, false)}
-          />
+          <Suspense fallback={<div className="map-field graph-field" />}>
+            <RelationsView
+              translator={translator}
+              selectedId={sheetOpen ? selectedId : null}
+              visibleIds={visibleIds}
+              activeKinds={activeKinds}
+              focusNonce={focus?.nonce ?? 0}
+              onSelect={selectInPlace}
+            />
+          </Suspense>
         )}
 
         {selectedPlaceId ? (

@@ -27,7 +27,7 @@ export interface People {
 /**
  * Portrait parameters for the procedurally drawn faces of the original
  * single-file version. The UI now shows a picture from
- * public/images/characters/ or the shared placeholder instead, so nothing
+ * portrait-source/ or the shared placeholder instead, so nothing
  * reads these. They are kept with the data so drawn portraits could be
  * restored without re-authoring seventy-odd descriptions.
  */
