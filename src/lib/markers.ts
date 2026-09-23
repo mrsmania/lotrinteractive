@@ -1,6 +1,7 @@
 import { CHARACTERS } from "../data/characters";
 import { MARKER_OUTER_R, MARKER_SCALE } from "../data/map";
 import { PLACES } from "../data/places";
+import { PLACE_LORE } from "../data/placeLore";
 
 export interface Point {
   x: number;
@@ -185,3 +186,77 @@ function separate(positions: Record<string, Point>): void {
 }
 
 export const MARKERS = computeMarkers();
+
+/** A ring is drawn a little smaller than a medallion. */
+export const PLACE_MARK_R = MARKER_OUTER_R * 0.86;
+/** A ring may be nudged this far off the spot its place asked for. */
+const MAX_PLACE_DRIFT = MARKER_OUTER_R * 0.9;
+
+/**
+ * Where the ring of a place with a page is drawn.
+ *
+ * Beside the name the map letters for it, as each place says in its own `mark`.
+ * There is no tether: a line from a ring to a spot a few units away explained
+ * nothing and read as clutter. The ring sits next to the words and that is
+ * enough.
+ *
+ * Rings give way to one another where two places are lettered close together,
+ * but not to the medallions, because the two are never on the map at once — the
+ * sidebar shows one pile or the other.
+ */
+export const PLACE_MARKS: Record<string, Point> = computePlaceMarks();
+
+
+function computePlaceMarks(): Record<string, Point> {
+  const marks: Record<string, Point> = {};
+  const ids: string[] = [];
+  for (const lore of PLACE_LORE) {
+    const place = PLACES[lore.id];
+    if (!place) continue;
+    marks[lore.id] = { x: place.x + lore.mark[0], y: place.y + lore.mark[1] };
+    ids.push(lore.id);
+  }
+
+  const ideal = ids.map((id) => ({ ...marks[id] }));
+  const clear = PLACE_MARK_R * 2;
+
+  for (let pass = 0; pass < SEPARATION_PASSES; pass++) {
+    let moved = false;
+
+    for (let i = 0; i < ids.length; i++) {
+      for (let j = i + 1; j < ids.length; j++) {
+        const a = marks[ids[i]];
+        const b = marks[ids[j]];
+        let dx = b.x - a.x;
+        let dy = b.y - a.y;
+        let d = Math.hypot(dx, dy);
+        if (d >= clear) continue;
+        if (d < 1e-6) {
+          dx = 0;
+          dy = -1;
+          d = 1;
+        }
+        const step = (clear - d) / 2;
+        a.x -= (dx / d) * step;
+        a.y -= (dy / d) * step;
+        b.x += (dx / d) * step;
+        b.y += (dy / d) * step;
+        moved = true;
+      }
+    }
+
+    ids.forEach((id, i) => {
+      const m = marks[id];
+      const dx = m.x - ideal[i].x;
+      const dy = m.y - ideal[i].y;
+      const drift = Math.hypot(dx, dy);
+      if (drift <= MAX_PLACE_DRIFT) return;
+      m.x = ideal[i].x + (dx / drift) * MAX_PLACE_DRIFT;
+      m.y = ideal[i].y + (dy / drift) * MAX_PLACE_DRIFT;
+    });
+
+    if (!moved) break;
+  }
+
+  return marks;
+}

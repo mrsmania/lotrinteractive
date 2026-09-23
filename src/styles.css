@@ -133,6 +133,17 @@ main{
 }
 .sidebar-head{padding:12px 14px 8px;border-bottom:1px solid #2e2316;}
 .sidebar-head h2{margin:0 0 9px;font-size:11px;color:#9c8759;font-weight:600;}
+/* The two piles, where the one heading used to be. Same weight and colour as
+   that heading had, so the head of the sidebar did not get louder. */
+.tabs{display:flex;gap:16px;margin:0 0 9px;}
+.tab{
+  padding:0 0 4px;background:none;border:0;border-bottom:1px solid transparent;
+  font-family:"Avenir Next","Trebuchet MS","Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:#6d5c3d;transition:.15s;
+}
+.tab:hover{color:#9c8759;}
+.tab[aria-selected="true"]{color:var(--gold-light);border-bottom-color:var(--gold);}
 .chips{display:flex;flex-wrap:wrap;gap:5px;}
 .chip{
   font-size:9.5px;padding:5px 8px;border-radius:14px;
@@ -150,6 +161,8 @@ main{
 .entry:hover{background:#241a11;border-left-color:var(--gold);}
 .entry.active{background:#2d2011;border-left-color:var(--gold);}
 .entry svg{width:34px;height:34px;flex:none;filter:drop-shadow(0 1px 3px #000);}
+/* A place has no medallion, so the list uses the mark the map layer draws. */
+.entry .place-pip{filter:drop-shadow(0 1px 3px #000);}
 .entry b{display:block;font-weight:600;font-size:14px;color:var(--parchment);}
 .entry small{display:block;font-size:11px;color:#8d7a55;letter-spacing:.02em;}
 .group{
@@ -316,6 +329,23 @@ main{
   transition:stroke-dashoffset var(--draw,1.4s) cubic-bezier(.35,0,.2,1);
 }
 @media (prefers-reduced-motion:reduce){.journey-line.on{transition:none;}}
+
+/* ---------- The place layer ---------- */
+/* Off by default and drawn only when asked for: the map letters its own places
+   and the app adds nothing to them uninvited. What the layer answers is the one
+   thing the map cannot — which of the places drawn here have something to read.
+
+   The ring is the medallion's frame, deliberately: the map has that vocabulary
+   already. What keeps a place from reading as a person is that its rim is one
+   gold rather than a people's colour, and that what sits inside it is a drawn
+   symbol on parchment rather than a face. */
+.place-mark{cursor:pointer;}
+.place-face{fill:#d9c79e;}
+.place-rim{stroke:#c9a227;}
+.place-ring-glow{fill:none;stroke:var(--gold-light);stroke-width:2.4;opacity:0;transition:opacity .18s;}
+.place-mark:hover .place-ring-glow,.place-mark.selected .place-ring-glow{opacity:1;}
+.place-mark:hover .place-face{fill:#e7d9b4;}
+.place-mark.selected .place-rim{stroke:var(--gold-light);}
 
 /* ---------- Markers dimmed by the current filter ---------- */
 /* The dot marking a crowded place and the lines out to its medallions belong

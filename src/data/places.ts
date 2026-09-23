@@ -34,8 +34,14 @@ export const PLACES: Record<string, Place> = {
   eregion: { name: "Eregion", x: 793.8, y: 300.4 },
   lorien: { name: "Lothlórien", x: 872.9, y: 337.5 },
   carrock: { name: "Der Carrock", x: 920.8, y: 205.2 },
+  // Where the Ireborn meets the Anduin. The map letters it; nothing stood
+  // here, which is why it had no entry until it got a page of its own.
+  gladdenfields: { name: "Die Schwertelfelder", shortName: "Schwertelfelder", x: 893, y: 288 },
   rhosgobel: { name: "Rhosgobel", x: 916.7, y: 252.1 },
   woodlandrealm: { name: "Das Waldlandreich", shortName: "Waldlandreich", x: 962.5, y: 187.5 },
+  // The forest itself, which is not the Woodland Realm: the spiders and the
+  // enchanted stream are a long way from the throne room.
+  mirkwood: { name: "Der Düsterwald", shortName: "Düsterwald", x: 955, y: 235 },
   dolguldur: { name: "Dol Guldur", x: 968.8, y: 328.8 },
   erebor: { name: "Erebor, der Einsame Berg", shortName: "Erebor", x: 1069.6, y: 192.7 },
   dale: { name: "Thal", x: 1076, y: 212.5 },

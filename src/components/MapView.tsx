@@ -3,10 +3,12 @@ import { CHARACTERS, CHARACTER_BY_ID } from "../data/characters";
 import { PEOPLES } from "../data/peoples";
 import { CONTOUR_WIDTH, MAP_H, MAP_W, MARKER_SCALE, RIM_R, RIM_WIDTH } from "../data/map";
 import { MARKERS } from "../lib/markers";
+import { PLACES } from "../data/places";
 import type { Translator } from "../lib/i18n";
 import { useZoomPan } from "../hooks/useZoomPan";
 import { MapTiles } from "./MapTiles";
 import { Journeys } from "./Journeys";
+import { PlaceMarks } from "./PlaceMarks";
 import { MedallionContent } from "./Medallion";
 import { Legend } from "./Legend";
 
@@ -24,6 +26,8 @@ const RING_WIDTH = 2.4 * MARKER_SCALE;
 /** A request from elsewhere in the app to bring a character into view. */
 export interface FocusRequest {
   id: string;
+  /** Whether the id names a place rather than a character. */
+  place?: boolean;
   scale: number;
   /** Bumped on every request so repeats of the same character still fire. */
   nonce: number;
@@ -36,9 +40,13 @@ interface Props {
   visibleIds: ReadonlySet<string>;
   /** Ids of the journeys currently drawn across the map. */
   activeJourneys: ReadonlySet<string>;
+/** Whether the map is showing places rather than the cast. */
+  showPlaces: boolean;
+  selectedPlaceId: string | null;
   focus: FocusRequest | null;
   onToggleJourney: (id: string) => void;
   onSelect: (id: string) => void;
+  onSelectPlace: (id: string) => void;
 }
 
 export function MapView({
@@ -46,9 +54,12 @@ export function MapView({
   selectedId,
   visibleIds,
   activeJourneys,
+  showPlaces,
+  selectedPlaceId,
   focus,
   onToggleJourney,
   onSelect,
+  onSelectPlace,
 }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
   const fieldRef = useRef<HTMLDivElement>(null);
@@ -57,7 +68,12 @@ export function MapView({
     height: MAP_H,
     onTap: (target) => {
       const id = target?.closest<SVGGElement>(".marker")?.dataset.id;
-      if (id) onSelect(id);
+      if (id && !showPlaces) {
+        onSelect(id);
+        return;
+      }
+      const placeId = target?.closest<SVGGElement>(".place-mark")?.dataset.place;
+      if (placeId) onSelectPlace(placeId);
     },
   });
   const [tooltip, setTooltip] = useState<{ id: string; x: number; y: number } | null>(null);
@@ -81,7 +97,7 @@ export function MapView({
   // selecting the same character twice still moves the map.
   useEffect(() => {
     if (!focus) return;
-    const p = MARKERS.positions[focus.id];
+    const p = focus.place ? PLACES[focus.id] : MARKERS.positions[focus.id];
     if (p) centreOn(p, focus.scale);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [focus?.nonce]);
@@ -125,6 +141,14 @@ export function MapView({
 
           <Journeys active={activeJourneys} />
 
+          <PlaceMarks
+            on={showPlaces}
+            selectedId={selectedPlaceId}
+            counterScale={counterScale}
+            onSelect={onSelectPlace}
+          />
+
+          {!showPlaces && (
           <g id="markers">
             {/* Crowded places: a dot at the true spot, with a line to each
                 medallion. Both go the same way as the medallion they belong to
@@ -202,6 +226,7 @@ export function MapView({
               );
             })}
           </g>
+          )}
         </g>
       </svg>
 

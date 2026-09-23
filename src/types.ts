@@ -105,6 +105,83 @@ export function isPlaceStep(step: Step): step is string {
   return typeof step === "string";
 }
 
+/**
+ * Text fields of a place that exist both as authored (German) and in EN, the
+ * same arrangement as CharacterText.
+ */
+export interface PlaceText {
+  /** One line of its own: "Der Zwergenbau", "Die Weisse Stadt". */
+  title: string;
+  /** Which book it belongs to, as a character's `source` does. */
+  source: string;
+  /** The region it lies in: Eriador, Rohan, Mordor. */
+  region: string;
+  /** What kind of thing it is: city, pass, forest, ruin, tower, marsh. */
+  kind: string;
+  /** Where it is in relation to what is around it, in one line. */
+  location: string;
+  /**
+   * Sindarin, Quenya, Westron, Rohirric and Dwarvish forms. Places carry far
+   * more names than people do, and which name is used says who is speaking.
+   */
+  otherNames?: string;
+  /**
+   * Who raised it. Half of Middle-earth's strong places were built by one
+   * people and are held by another, and nothing else in the data shows that.
+   */
+  builtBy?: string;
+  /** Who holds it during the War of the Ring. Nobody holds a marsh. */
+  heldBy?: string;
+  /** When it came to be, and when it fell. */
+  age?: string;
+  /** What it is. */
+  bio: string;
+  /** What you would see standing there. */
+  appearance?: string;
+  /**
+   * What it is *like* — and only where that is a moral or unnatural quality:
+   * the malice of Caradhras, the dread on the Barrow-downs, the pull of the
+   * Dead Marshes. Left empty for places that are only places.
+   */
+  nature?: string;
+  /** What becomes of it. */
+  fate: string;
+  /** What happened here, in order. */
+  events?: string[];
+  /**
+   * Where the films depart. On a place sheet this is not an aside: it names
+   * what the film shows, what the book says, and which one is the invention.
+   */
+  bookFilm?: string;
+  /** Asides, shown as loose margin notes. */
+  notes?: string[];
+}
+
+import type { PlaceIconName } from "./components/PlaceIcon";
+
+/** Which part of the story a place belongs to, for grouping the list. */
+export type PlaceGroup = "eriador" | "riddermark" | "mordor" | "wilderland" | "after";
+
+/** A place with a sheet of its own. Not every entry in PLACES has one. */
+export interface PlaceLore extends PlaceText {
+  /** Key of PLACES. */
+  id: string;
+  group: PlaceGroup;
+  /** Which symbol the map draws in its ring. */
+  icon: PlaceIconName;
+  /**
+   * Where the ring sits, in map units from the place itself. Authored by eye
+   * against the map image: the ring goes beside the name the map letters, near
+   * enough to belong to it and clear enough not to cover it. There is no rule
+   * that works for all of them, because the map letters some places above,
+   * some below and some to one side.
+   */
+  mark: Bend;
+}
+
+/** Which pile the sidebar is showing. */
+export type SidebarTab = "peoples" | "places";
+
 export type Language = "en" | "de";
 
 /** Which of the two views of the cast is on screen. */

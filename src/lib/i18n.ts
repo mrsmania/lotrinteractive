@@ -1,7 +1,10 @@
-import type { Character, CharacterText, Language } from "../types";
+import type {
+  Character, CharacterText, Language, PlaceGroup, PlaceLore, PlaceText,
+} from "../types";
 import { PLACES } from "../data/places";
 import { PEOPLES } from "../data/peoples";
 import { EN } from "../data/en";
+import { PLACE_LORE_EN } from "../data/placeLoreEn";
 
 /**
  * Place and region names as they appear on the drawn map. The map is authored
@@ -15,7 +18,7 @@ const MAP_NAMES: Record<string, string> = {
  "Bruchtal":"Rivendell","Carn Dûm in Angmar":"Carn Dûm in Angmar","Carn Dûm":"Carn Dûm",
  "Gundabad":"Mount Gundabad","Der Hohe Pass":"The High Pass","Caradhras":"Caradhras",
  "Moria, Khazad-dûm":"Moria, Khazad-dûm","Moria":"Moria","Eregion":"Eregion","Lothlórien":"Lothlórien",
- "Der Carrock":"The Carrock","Rhosgobel":"Rhosgobel","Das Waldlandreich":"The Woodland Realm",
+ "Der Carrock":"The Carrock","Die Schwertelfelder":"The Gladden Fields","Schwertelfelder":"Gladden Fields","Rhosgobel":"Rhosgobel","Das Waldlandreich":"The Woodland Realm",
  "Waldlandreich":"Woodland Realm","Dol Guldur":"Dol Guldur","Erebor, der Einsame Berg":"Erebor, the Lonely Mountain",
  "Erebor":"Erebor","Thal":"Dale","Esgaroth am See":"Esgaroth upon the Lake","Esgaroth":"Esgaroth",
  "Die Eisenberge":"The Iron Hills","Fangorn":"Fangorn","Isengart und Orthanc":"Isengard and Orthanc",
@@ -36,7 +39,7 @@ const MAP_NAMES: Record<string, string> = {
  "Das Nebelgebirge":"The Misty Mountains","Ered Luin":"Ered Luin","Das Graue Gebirge":"The Grey Mountains",
  "Das Weisse Gebirge":"The White Mountains",
  "Ephel Dúath":"Ephel Dúath","Ered Lithui":"Ered Lithui",
- "Der Düsterwald":"Mirkwood","Ithilien":"Ithilien","Eryn Vorn":"Eryn Vorn",
+ "Der Düsterwald":"Mirkwood","Düsterwald":"Mirkwood","Ithilien":"Ithilien","Eryn Vorn":"Eryn Vorn",
  "Nenuial":"Lake Evendim","Der Lange See":"The Long Lake","Nurnen":"Núrnen",
  "Forodwaith":"Forodwaith","Eisbucht von Forochel":"Ice Bay of Forochel","Angmar":"Angmar",
  "Eriador":"Eriador","Das Auenland":"The Shire","Minhiriath":"Minhiriath","Enedwaith":"Enedwaith",
@@ -71,6 +74,22 @@ const UI = {
     language: "Deutsch",
     languageTitle: "Auf Deutsch umschalten",
     peoples: "Peoples",
+    places: "Places",
+    whereItLies: "Where it lies",
+    builtBy: "Built by",
+    heldBy: "Held by",
+    age: "Age",
+    whatItIs: "What it is",
+    whatYouSee: "What you would see",
+    whatHappened: "What happened here",
+    whatBecomesOfIt: "What becomes of it",
+    whoIsFromHere: "Of this place",
+    journeysThrough: "Journeys through here",
+    groupEriador: "Eriador and the road east",
+    groupRiddermark: "Anduin, Rohan and Gondor",
+    groupMordor: "Mordor",
+    groupWilderland: "Wilderland",
+    groupAfter: "After",
     empty: "Nothing found. Try another spelling or clear the filters.",
     legendJourneys: "Journeys",
     legendMedallions: "Medallions",
@@ -115,6 +134,22 @@ const UI = {
     language: "English",
     languageTitle: "Switch to English",
     peoples: "Völker",
+    places: "Orte",
+    whereItLies: "Wo es liegt",
+    builtBy: "Erbaut von",
+    heldBy: "Gehalten von",
+    age: "Alter",
+    whatItIs: "Was es ist",
+    whatYouSee: "Was man sieht",
+    whatHappened: "Was hier geschah",
+    whatBecomesOfIt: "Was daraus wird",
+    whoIsFromHere: "Von hier",
+    journeysThrough: "Wege hierdurch",
+    groupEriador: "Eriador und die Strasse nach Osten",
+    groupRiddermark: "Anduin, Rohan und Gondor",
+    groupMordor: "Mordor",
+    groupWilderland: "Wilderland",
+    groupAfter: "Danach",
     empty: "Kein Eintrag gefunden. Andere Schreibweise versuchen oder Filter zurücksetzen.",
     legendJourneys: "Reisewege",
     legendMedallions: "Medaillons",
@@ -151,6 +186,15 @@ const UI = {
 
 export type UiKey = keyof typeof UI.en;
 
+/** Which label names each group of places. */
+const GROUP_LABEL = {
+  eriador: "groupEriador",
+  riddermark: "groupRiddermark",
+  mordor: "groupMordor",
+  wilderland: "groupWilderland",
+  after: "groupAfter",
+} as const satisfies Record<PlaceGroup, UiKey>;
+
 /**
  * Everything language-dependent, gathered into one object built per language.
  *
@@ -170,6 +214,10 @@ export interface Translator {
   placeName(id: string, short?: boolean): string;
   /** A field of a character, English where available, authored text otherwise. */
   field<K extends keyof CharacterText>(c: Character, key: K): CharacterText[K];
+  /** A field of a place, the same way. */
+  placeField<K extends keyof PlaceText>(p: PlaceLore, key: K): PlaceText[K];
+  /** The name of one of the groups the places are listed in. */
+  placeGroupName(group: PlaceGroup): string;
 }
 
 export function createTranslator(language: Language): Translator {
@@ -195,6 +243,14 @@ export function createTranslator(language: Language): Translator {
       const english = EN[c.id];
       if (language === "en" && english && english[key] !== undefined) return english[key] as never;
       return c[key];
+    },
+    placeField(p, key) {
+      const english = PLACE_LORE_EN[p.id];
+      if (language === "en" && english && english[key] !== undefined) return english[key] as never;
+      return p[key];
+    },
+    placeGroupName(group) {
+      return UI[language][GROUP_LABEL[group]];
     },
   };
 }

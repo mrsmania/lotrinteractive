@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import type { Character, Language, ViewName } from "./types";
+import type { Character, Language, SidebarTab, ViewName } from "./types";
 import { CHARACTERS, CHARACTER_BY_ID } from "./data/characters";
 import type { RelationKind } from "./data/relations";
 import { JOURNEYS } from "./data/journeys";
 import { PLACES } from "./data/places";
+import { PLACE_LORE_BY_ID } from "./data/placeLore";
 import { createTranslator } from "./lib/i18n";
 import type { Translator } from "./lib/i18n";
 import { Header } from "./components/Header";
@@ -12,6 +13,7 @@ import { MapView } from "./components/MapView";
 import type { FocusRequest } from "./components/MapView";
 import { RelationsView } from "./components/RelationsView";
 import { CharacterSheet } from "./components/CharacterSheet";
+import { PlaceSheet } from "./components/PlaceSheet";
 import { SharedDefs } from "./components/SharedDefs";
 
 /** Below this width the sidebar becomes a drawer; matches the CSS breakpoint. */
@@ -50,6 +52,10 @@ export default function App() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [sheetOpen, setSheetOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarTab, setSidebarTab] = useState<SidebarTab>("peoples");
+  // Which place's sheet is open. A place and a character never show at once:
+  // there is one panel, and the last thing asked for wins.
+  const [selectedPlaceId, setSelectedPlaceId] = useState<string | null>(null);
   // No path is drawn until it is asked for: seven at once is a thicket.
   const [activeJourneys, setActiveJourneys] = useState<ReadonlySet<string>>(() => new Set());
   const [focus, setFocus] = useState<FocusRequest | null>(null);
@@ -79,8 +85,21 @@ export default function App() {
   /** Open a character. `move` also brings the map to them. */
   const select = useCallback((id: string, move: boolean, scale = 2.4) => {
     setSelectedId(id);
+    setSelectedPlaceId(null);
+    setSidebarTab("peoples");
     setSheetOpen(true);
     if (move) setFocus((prev) => ({ id, scale, nonce: (prev?.nonce ?? 0) + 1 }));
+    if (window.innerWidth <= NARROW) setSidebarOpen(false);
+  }, []);
+
+  /** Open a place. `move` also brings the map to it. */
+  const selectPlace = useCallback((id: string, move: boolean, scale = 2.8) => {
+    if (!PLACE_LORE_BY_ID.has(id)) return;
+    setSelectedPlaceId(id);
+    setSelectedId(null);
+    setSidebarTab("places");
+    setSheetOpen(true);
+    if (move) setFocus((prev) => ({ id, place: true, scale, nonce: (prev?.nonce ?? 0) + 1 }));
     if (window.innerWidth <= NARROW) setSidebarOpen(false);
   }, []);
 
@@ -157,9 +176,13 @@ export default function App() {
           visible={visible}
           activePeoples={activePeoples}
           selectedId={selectedId}
+          selectedPlaceId={sheetOpen ? selectedPlaceId : null}
+          tab={sidebarTab}
           open={sidebarOpen}
+          onTabChange={setSidebarTab}
           onTogglePeople={togglePeople}
           onSelect={(id) => select(id, true)}
+          onSelectPlace={(id) => selectPlace(id, true)}
         />
 
         {view === "map" ? (
@@ -169,8 +192,11 @@ export default function App() {
             visibleIds={visibleIds}
             activeJourneys={activeJourneys}
             focus={focus}
+            showPlaces={sidebarTab === "places"}
+            selectedPlaceId={sheetOpen ? selectedPlaceId : null}
             onToggleJourney={toggleJourney}
             onSelect={(id) => select(id, false)}
+            onSelectPlace={(id) => selectPlace(id, false)}
           />
         ) : (
           <RelationsView
@@ -183,14 +209,25 @@ export default function App() {
           />
         )}
 
-        <CharacterSheet
-          translator={translator}
-          character={selected}
-          open={sheetOpen}
-          onClose={() => setSheetOpen(false)}
-          onSelect={(id) => select(id, true)}
-          onShowOnMap={() => selectedId && select(selectedId, true, 3)}
-        />
+        {selectedPlaceId ? (
+          <PlaceSheet
+            translator={translator}
+            place={PLACE_LORE_BY_ID.get(selectedPlaceId) ?? null}
+            open={sheetOpen}
+            onClose={() => setSheetOpen(false)}
+            onSelectCharacter={(id) => select(id, true)}
+            onShowOnMap={() => selectPlace(selectedPlaceId, true, 3.4)}
+          />
+        ) : (
+          <CharacterSheet
+            translator={translator}
+            character={selected}
+            open={sheetOpen}
+            onClose={() => setSheetOpen(false)}
+            onSelect={(id) => select(id, true)}
+            onShowOnMap={() => selectedId && select(selectedId, true, 3)}
+          />
+        )}
       </main>
     </div>
   );
