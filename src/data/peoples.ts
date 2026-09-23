@@ -1,20 +1,20 @@
 import type { People } from "../types";
 
 /**
- * The peoples. Keys are the German names, which the original page used as ids
- * and which the data still refers to; PEOPLES_EN in lib/i18n.ts carries the
- * English wording shown to the reader.
+ * The peoples, keyed by id. The ids are English, like every other id in the
+ * codebase; the German wording the page is authored in is data here, and
+ * PEOPLES_EN in lib/i18n.ts carries the English.
  */
 export const PEOPLES: Record<string, People> = {
-  Hobbit: { colour: "#9cc464", plural: "Hobbits" },
-  Mensch: { colour: "#d0a44f", plural: "Menschen" },
-  Elb: { colour: "#86c9d6", plural: "Elben" },
-  Zwerg: { colour: "#cf7f3a", plural: "Zwerge" },
-  Istar: { colour: "#e6e0d2", plural: "Istari" },
-  Ork: { colour: "#9aa33f", plural: "Orks und Uruks" },
-  "Nazgûl": { colour: "#9a8ec4", plural: "Nazgûl" },
-  Maia: { colour: "#c0392b", plural: "Maiar" },
-  Ent: { colour: "#4e8a6a", plural: "Ents" },
-  Wesen: { colour: "#c98fb0", plural: "Wesen und Tiere" },
-  Drache: { colour: "#e05a2b", plural: "Drachen" }
+  hobbit: { colour: "#9cc464", singular: "Hobbit", plural: "Hobbits" },
+  man: { colour: "#d0a44f", singular: "Mensch", plural: "Menschen" },
+  elf: { colour: "#86c9d6", singular: "Elb", plural: "Elben" },
+  dwarf: { colour: "#cf7f3a", singular: "Zwerg", plural: "Zwerge" },
+  istar: { colour: "#e6e0d2", singular: "Istar", plural: "Istari" },
+  orc: { colour: "#9aa33f", singular: "Ork", plural: "Orks und Uruks" },
+  nazgul: { colour: "#9a8ec4", singular: "Nazgûl", plural: "Nazgûl" },
+  maia: { colour: "#c0392b", singular: "Maia", plural: "Maiar" },
+  ent: { colour: "#4e8a6a", singular: "Ent", plural: "Ents" },
+  creature: { colour: "#c98fb0", singular: "Wesen", plural: "Wesen und Tiere" },
+  dragon: { colour: "#e05a2b", singular: "Drache", plural: "Drachen" }
 };

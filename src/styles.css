@@ -49,7 +49,7 @@ button{font-family:inherit;color:inherit;cursor:pointer;}
 ::-webkit-scrollbar-thumb{background:#4a3a20;border-radius:6px;}
 ::-webkit-scrollbar-thumb:hover{background:var(--gold);}
 
-/* ---------- Rahmen und Kopf ---------- */
+/* ---------- Frame and head ---------- */
 .book{
   height:100%;
   display:grid;
@@ -117,7 +117,7 @@ h1{
 .button[aria-pressed="true"]{background:linear-gradient(180deg,#4a3512,#2a1d0a);border-color:var(--gold);color:var(--gold-light);}
 .narrow-only{display:none;}
 
-/* ---------- Hauptbereich ---------- */
+/* ---------- Main area ---------- */
 main{
   display:grid;
   grid-template-columns:288px 1fr;
@@ -125,7 +125,7 @@ main{
   position:relative;
 }
 
-/* ---------- Seitenleiste ---------- */
+/* ---------- Sidebar ---------- */
 .sidebar{
   border-right:1px solid #3a2c1a;
   background:linear-gradient(180deg,#1b1410,#120d09);
@@ -159,7 +159,7 @@ main{
 }
 .empty{padding:24px 16px;color:#7a6844;font-style:italic;}
 
-/* ---------- Karte ---------- */
+/* ---------- Map ---------- */
 .map-field{position:relative;min-height:0;overflow:hidden;background:#0b0805;}
 #map{width:100%;height:100%;display:block;cursor:grab;touch-action:none;}
 .map-field,#map,#map text,.legend,.entry,header{
@@ -189,7 +189,24 @@ main{
 }
 .legend div{display:flex;align-items:center;gap:7px;margin:3px 0;color:#b6a179;}
 .legend i{width:11px;height:11px;border-radius:50%;display:inline-block;flex:none;}
-.legend .path-key i{height:0;border-radius:0;border-top:2px dashed;width:14px;}
+/* Each journey in the key is the switch that draws it. Off, it is the name
+   with the colour held back to a hint of itself; on, the swatch is the line as
+   it lies on the map. */
+.legend .path-key{
+  display:flex;align-items:center;gap:7px;margin:3px 0;padding:0;
+  width:100%;text-align:left;font:inherit;font-size:11px;letter-spacing:0;
+  background:none;border:0;color:#8d7d5e;line-height:1.55;
+}
+.legend .path-key:hover{color:var(--parchment-dark);}
+.legend .path-key.on{color:var(--gold-light);}
+.legend .path-key i{
+  height:0;border-radius:0;width:14px;
+  border-top:2px solid var(--path-colour);
+  opacity:.34;transition:opacity .18s;
+}
+.legend .path-key:hover i{opacity:.7;}
+.legend .path-key.on i{opacity:1;}
+.legend .path-key:focus-visible{outline:1px solid var(--gold);outline-offset:2px;}
 .tooltip{
   position:absolute;pointer-events:none;z-index:8;
   background:rgba(12,8,5,.95);border:1px solid var(--gold);
@@ -199,7 +216,7 @@ main{
 .tooltip.on{opacity:1;}
 .tooltip small{display:block;color:#9c8759;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;}
 
-/* ---------- Detailblatt ---------- */
+/* ---------- Character sheet ---------- */
 .sheet{
   position:absolute;top:0;right:0;bottom:0;width:352px;max-width:92vw;z-index:20;
   background:linear-gradient(180deg,#241a12,#150f0a 60%);
@@ -242,7 +259,7 @@ main{
 .sheet-foot{padding:10px 18px;border-top:1px solid #3d2f1b;display:flex;gap:8px;}
 .sheet-foot .button{flex:1;text-align:center;}
 
-/* ---------- schmale Schirme ---------- */
+/* ---------- Narrow screens ---------- */
 @media (max-width:880px){
   .narrow-only{display:inline-block;}
   main{grid-template-columns:1fr;}
@@ -253,7 +270,10 @@ main{
   }
   .sidebar.open{transform:none;}
   .sheet{width:100%;max-width:none;}
-  .legend{display:none;}
+  /* The legend used to be dropped here for room. It now holds the only
+     switches for the paths, so it stays and gives up its size instead. */
+  .legend{max-width:164px;max-height:44vh;overflow-y:auto;padding:7px 9px;font-size:10.5px;}
+  .legend .path-key{font-size:10.5px;}
   .search input{width:150px;}
 }
 @media (prefers-reduced-motion:reduce){
@@ -271,21 +291,31 @@ main{
 .marker{cursor:pointer;}
 .marker .ring{opacity:0;transition:opacity .18s;}
 .marker:hover .ring,.marker.selected .ring{opacity:1;}
-/* The marching dashes step rather than flow, and that is deliberate.
-   stroke-dashoffset cannot be animated on the compositor, so a smooth march
-   repaints on every frame; because the journeys cross the whole map, each of
-   those repaints re-rasterises all ~3,400 elements of it. Measured: 32fps and
-   constant GPU work while just sitting there. steps() cuts it to about five
-   repaints a second, which measures at ~100fps, and at this dash size still
-   reads as a slow crawl. */
-.journey-line{animation:wandern 22s steps(110,end) infinite;}
-@keyframes wandern{to{stroke-dashoffset:-420;}}
-@media (prefers-reduced-motion:reduce){.journey-line{animation:none;}}
+/* Each path is one dash as long as the whole route, and switching the path on
+   slides that dash into place from the first place to the last: the line draws
+   itself. Every path declares pathLength="1" (components/Journeys), so the dash
+   is 1 and the offset runs 1 -> 0 whatever the route's real length; --draw,
+   set per path, is how long that takes.
 
-/* ---------- Layer visibility ---------- */
-/* The world is one static markup blob, so the header toggles hide whole
-   groups with CSS rather than rebuilding it. */
-#map.without-journeys #journeys{display:none;}
+   The transition is declared on .on and not on the rule beneath it, so only the
+   drawing is animated. A transition is chosen from the style the element is
+   moving *to*: adding the class moves it to a style that has one, and the line
+   draws; removing the class moves it to a style that has none, and the line is
+   simply gone. Watching a road unwind is no use to anybody who has just asked
+   to be rid of it.
+
+   The dashes used to march for ever, which cost a repaint of the whole map
+   several times a second for as long as the page was open; this costs the same
+   repaints for a few seconds, once, when the reader asks for it. */
+.journey-line{
+  stroke-dasharray:1;
+  stroke-dashoffset:1;
+}
+.journey-line.on{
+  stroke-dashoffset:0;
+  transition:stroke-dashoffset var(--draw,1.4s) cubic-bezier(.35,0,.2,1);
+}
+@media (prefers-reduced-motion:reduce){.journey-line.on{transition:none;}}
 
 /* ---------- Markers dimmed by the current filter ---------- */
 .marker.dimmed{opacity:.12;pointer-events:none;}

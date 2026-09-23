@@ -12,6 +12,8 @@ export interface Place {
 export interface People {
   /** Colour used for this people across map, chips and legend. */
   colour: string;
+  /** Singular, as authored (German). */
+  singular: string;
   /** Plural form, as authored (German). */
   plural: string;
 }
@@ -74,13 +76,27 @@ export interface Character extends CharacterText {
   bonds?: string[];
 }
 
-/** A journey drawn as a dashed line through a sequence of places. */
+/**
+ * A point a route bends through that is not a place: the turn of a river, the
+ * foot of a pass, a ford. In the same map units as Place.
+ */
+export type Bend = readonly [number, number];
+
+/** One step of a route: a place id, or a bend between two places. */
+export type Step = string | Bend;
+
+/** A journey drawn as a line through a sequence of places and bends. */
 export interface Journey {
   id: string;
   name: string;
   colour: string;
-  /** Place ids, in order of travel. */
-  places: string[];
+  /** Places and the bends between them, in order of travel. */
+  route: Step[];
+}
+
+/** Whether a step names a place rather than being a bare bend. */
+export function isPlaceStep(step: Step): step is string {
+  return typeof step === "string";
 }
 
 export type Language = "en" | "de";

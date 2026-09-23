@@ -6,7 +6,8 @@ interface Props {
   translator: Translator;
   view: ViewName;
   query: string;
-  showJourneys: boolean;
+  /** Whether any path is switched on at all; the button is the master switch. */
+  anyJourney: boolean;
   activeKinds: ReadonlySet<RelationKind>;
   onViewChange: (view: ViewName) => void;
   onQueryChange: (q: string) => void;
@@ -28,7 +29,7 @@ export function Header({
   translator,
   view,
   query,
-  showJourneys,
+  anyJourney,
   activeKinds,
   onViewChange,
   onQueryChange,
@@ -83,7 +84,12 @@ export function Header({
 
         {/* Each view has its own layers to switch on and off. */}
         {view === "map" ? (
-          <button className="button" aria-pressed={showJourneys} onClick={onToggleJourneys}>
+          <button
+            className="button"
+            aria-pressed={anyJourney}
+            title={t(anyJourney ? "journeysNone" : "journeysAll")}
+            onClick={onToggleJourneys}
+          >
             {t("journeys")}
           </button>
         ) : (

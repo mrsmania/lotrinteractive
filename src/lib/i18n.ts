@@ -26,6 +26,7 @@ const MAP_NAMES: Record<string, string> = {
  "Emyn Muil":"Emyn Muil","Die Totensümpfe":"The Dead Marshes","Totensümpfe":"Dead Marshes",
  "Das Schwarze Tor":"The Black Gate","Der Schicksalsberg":"Mount Doom","Schicksalsberg":"Mount Doom",
  "Barad-dûr":"Barad-dûr","Minas Morgul":"Minas Morgul","Cirith Ungol":"Cirith Ungol",
+ "Kankras Lauer":"Shelob's Lair",
  "Osgiliath":"Osgiliath","Minas Tirith":"Minas Tirith","Die Pelennor-Felder":"The Pelennor Fields",
  "Henneth Annûn in Ithilien":"Henneth Annûn in Ithilien","Henneth Annûn":"Henneth Annûn",
  "Pelargir":"Pelargir","Dol Amroth":"Dol Amroth","Das Meer von Rhûn":"The Sea of Rhûn","Harad":"Harad",
@@ -43,16 +44,18 @@ const MAP_NAMES: Record<string, string> = {
  "Rhûn":"Rhûn","Rhovanion":"Rhovanion","Das Anduintal":"The Vales of Anduin","Dagorlad":"Dagorlad",
  "Die Braunen Lande":"The Brown Lands","Belegaer":"Belegaer","Bucht von Belfalas":"Bay of Belfalas",
  "Golf von Lhûn":"Gulf of Lune","Dorwinion":"Dorwinion","Khand":"Khand","MEILEN":"MILES",
- "Die Gemeinschaft":"The Fellowship","Frodo und Sam":"Frodo and Sam","Merry und Pippin":"Merry and Pippin",
- "Aragorn, Legolas, Gimli":"Aragorn, Legolas, Gimli"
+ "Bilbo und die Zwerge":"Bilbo and the Dwarves","Frodo und Sam":"Frodo and Sam",
+ "Merry":"Merry","Pippin":"Pippin","Aragorn":"Aragorn","Legolas und Gimli":"Legolas and Gimli",
+ "Gandalf der Graue":"Gandalf the Grey","Gandalf der Weisse":"Gandalf the White",
+ "Sméagol und Gollum":"Sméagol and Gollum"
 };
 
 /** Singular and plural for each people in English. */
 const PEOPLES_EN: Record<string, [string, string]> = {
- "Hobbit":["Hobbit","Hobbits"],"Mensch":["Man","Men"],"Elb":["Elf","Elves"],"Zwerg":["Dwarf","Dwarves"],
- "Istar":["Istar","Istari"],"Ork":["Orc","Orcs and Uruks"],"Nazgûl":["Nazgûl","Nazgûl"],
- "Maia":["Maia","Maiar"],"Ent":["Ent","Ents"],"Wesen":["Creature","Creatures and Beasts"],
- "Drache":["Dragon","Dragons"]
+ hobbit:["Hobbit","Hobbits"],man:["Man","Men"],elf:["Elf","Elves"],dwarf:["Dwarf","Dwarves"],
+ istar:["Istar","Istari"],orc:["Orc","Orcs and Uruks"],nazgul:["Nazgûl","Nazgûl"],
+ maia:["Maia","Maiar"],ent:["Ent","Ents"],creature:["Creature","Creatures and Beasts"],
+ dragon:["Dragon","Dragons"]
 };
 
 const UI = {
@@ -62,6 +65,8 @@ const UI = {
     characters: "Characters",
     search: "Search a character or place",
     journeys: "Journeys",
+    journeysAll: "Draw every path",
+    journeysNone: "Clear every path",
     random: "Random",
     language: "Deutsch",
     languageTitle: "Auf Deutsch umschalten",
@@ -104,6 +109,8 @@ const UI = {
     characters: "Figuren",
     search: "Figur oder Ort suchen",
     journeys: "Reisewege",
+    journeysAll: "Alle Wege zeichnen",
+    journeysNone: "Alle Wege löschen",
     random: "Zufall",
     language: "English",
     languageTitle: "Switch to English",
@@ -176,7 +183,8 @@ export function createTranslator(language: Language): Translator {
     peopleName(people, plural = false) {
       if (language === "en" && PEOPLES_EN[people]) return PEOPLES_EN[people][plural ? 1 : 0];
       const p = PEOPLES[people];
-      return plural && p ? p.plural : people;
+      if (!p) return people;
+      return plural ? p.plural : p.singular;
     },
     placeName(id, short = false) {
       const place = PLACES[id];

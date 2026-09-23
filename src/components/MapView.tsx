@@ -1,12 +1,12 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CHARACTERS, CHARACTER_BY_ID } from "../data/characters";
 import { PEOPLES } from "../data/peoples";
 import { CONTOUR_WIDTH, MAP_H, MAP_W, MARKER_SCALE, RIM_R, RIM_WIDTH } from "../data/map";
-import { buildWorld } from "../lib/buildMap";
 import { MARKERS } from "../lib/markers";
 import type { Translator } from "../lib/i18n";
 import { useZoomPan } from "../hooks/useZoomPan";
 import { MapTiles } from "./MapTiles";
+import { Journeys } from "./Journeys";
 import { MedallionContent } from "./Medallion";
 import { Legend } from "./Legend";
 
@@ -34,8 +34,10 @@ interface Props {
   selectedId: string | null;
   /** Characters passing the current filters; the rest are dimmed out. */
   visibleIds: ReadonlySet<string>;
-  showJourneys: boolean;
+  /** Ids of the journeys currently drawn across the map. */
+  activeJourneys: ReadonlySet<string>;
   focus: FocusRequest | null;
+  onToggleJourney: (id: string) => void;
   onSelect: (id: string) => void;
 }
 
@@ -43,8 +45,9 @@ export function MapView({
   translator,
   selectedId,
   visibleIds,
-  showJourneys,
+  activeJourneys,
   focus,
+  onToggleJourney,
   onSelect,
 }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -71,8 +74,6 @@ export function MapView({
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
-
-  const world = useMemo(buildWorld, []);
 
   const { centreOn, glideTo, view } = zoomPan;
 
@@ -108,8 +109,6 @@ export function MapView({
     setTooltip({ id, x: ev.clientX - field.left, y: ev.clientY - field.top });
   };
 
-  const classes = showJourneys ? "" : "without-journeys";
-
   const tooltipCharacter = tooltip ? CHARACTER_BY_ID.get(tooltip.id) : undefined;
 
   return (
@@ -117,7 +116,6 @@ export function MapView({
       <svg
         id="map"
         ref={svgRef}
-        className={classes}
         viewBox={`0 0 ${MAP_W} ${MAP_H}`}
         preserveAspectRatio="xMidYMid meet"
         {...zoomPan.handlers}
@@ -125,8 +123,7 @@ export function MapView({
         <g transform={`translate(${view.tx.toFixed(2)} ${view.ty.toFixed(2)}) scale(${view.k.toFixed(4)})`}>
           <MapTiles visible={visible} density={density} />
 
-          {/* The journeys, injected as markup: see lib/buildMap.ts. */}
-          <g dangerouslySetInnerHTML={{ __html: world }} />
+          <Journeys active={activeJourneys} />
 
           <g id="markers">
             {/* Crowded places: a dot at the true spot, with a line to each medallion. */}
@@ -210,7 +207,11 @@ export function MapView({
         )}
       </div>
 
-      <Legend translator={translator} />
+      <Legend
+        translator={translator}
+        activeJourneys={activeJourneys}
+        onToggleJourney={onToggleJourney}
+      />
 
       <div className="map-controls">
         <button onClick={() => zoomPan.zoom(1.35)} title={translator.t("closer")}>

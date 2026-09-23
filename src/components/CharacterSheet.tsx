@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import type { Character } from "../types";
 import { CHARACTER_BY_ID } from "../data/characters";
 import { PEOPLES } from "../data/peoples";
-import { JOURNEYS, journeyHas } from "../data/journeys";
+import { JOURNEYS, journeyHas, journeyStations } from "../data/journeys";
 import type { Translator } from "../lib/i18n";
 import { Medallion } from "./Medallion";
 
@@ -50,7 +50,7 @@ export function CharacterSheet({
   const bonds = (c.bonds ?? [])
     .map((id) => CHARACTER_BY_ID.get(id))
     .filter((x): x is Character => Boolean(x));
-  const journeys = JOURNEYS.filter((j) => j.places.length > 0 && journeyHas(j.id, c.id));
+  const journeys = JOURNEYS.filter((j) => j.route.length > 0 && journeyHas(j.id, c.id));
 
   return (
     <section className={"sheet" + (open ? " open" : "")} aria-hidden={!open}>
@@ -173,7 +173,7 @@ export function CharacterSheet({
           <Section title={t("journey")} key={j.id}>
             <p className="prose" style={{ color: j.colour }}>
               {translator.mapName(j.name)}:{" "}
-              {j.places.map((p) => translator.placeName(p, true)).join(" → ")}
+              {journeyStations(j).map((p) => translator.placeName(p, true)).join(" → ")}
             </p>
           </Section>
         ))}

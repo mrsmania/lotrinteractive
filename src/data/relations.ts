@@ -1,6 +1,6 @@
 import { CHARACTERS, CHARACTER_BY_ID } from "./characters";
 import { PLACES } from "./places";
-import { JOURNEYS, JOURNEY_MEMBERS } from "./journeys";
+import { JOURNEY_MEMBERS } from "./journeys";
 
 /**
  * The character relationship graph.
@@ -15,7 +15,8 @@ import { JOURNEYS, JOURNEY_MEMBERS } from "./journeys";
  *            Asymmetric as written (Frodo lists Sam and Sam lists Frodo, but
  *            not every pair agrees), so edges are normalised to unordered
  *            pairs.
- *   journey  the two characters travelled together on one of the JOURNEYS.
+ *   journey  the two characters travelled together in one of the companies
+ *            of JOURNEY_MEMBERS.
  *   place    the two characters share a home.
  *
  * `bond` is the one that carries the story. The other two are cheap to derive
@@ -65,9 +66,11 @@ function buildEdges(): RelationEdge[] {
     for (const other of c.bonds ?? []) connect(c.id, other, "bond");
   }
 
-  // Travelled together
-  for (const journey of JOURNEYS) {
-    const members = JOURNEY_MEMBERS[journey.id] ?? [];
+  // Travelled together. Read from JOURNEY_MEMBERS rather than from JOURNEYS,
+  // because a company can be a tie without being a line on the map: the
+  // Fellowship is no longer drawn, its road having been folded into the
+  // members' own journeys, but the nine of them still travelled together.
+  for (const members of Object.values(JOURNEY_MEMBERS)) {
     for (let i = 0; i < members.length; i++) {
       for (let j = i + 1; j < members.length; j++) {
         connect(members[i], members[j], "journey");

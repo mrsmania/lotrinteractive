@@ -45,8 +45,8 @@ src/data/                     places, peoples, characters, English text, journey
                               map metrics, and the relationship graph
 src/lib/                      journey paths, tile grid, i18n, image lookup,
                               marker placement, graph layout
-src/components/               Header, Sidebar, MapView, MapTiles, RelationsView,
-                              CharacterSheet, Legend
+src/components/               Header, Sidebar, MapView, MapTiles, Journeys,
+                              RelationsView, CharacterSheet, Legend
 src/hooks/useZoomPan.ts       zoom and pan, shared by both views
 docs/relations-map.md         how the connections view works
 ```
@@ -116,33 +116,101 @@ glance, which is what the legend promises. The picture inside it is no longer
 toned down to sit in the paper; the rim does that job now, and the toning only
 took away the contrast that lets a face be seen.
 
-The journeys are built as SVG markup and injected once (`src/lib/buildMap.ts`)
-rather than as JSX. Nothing in them responds to the user and they never change,
-so running React's reconciler over them on every hover would cost something and
-buy nothing. Everything that does respond to the user (markers, sidebar,
-character sheet) is ordinary React.
+## The journeys
 
-## Typography
+Ten routes are drawn over the map: Bilbo and the Dwarves; Frodo and Sam;
+Boromir; Merry; Pippin; Aragorn; Legolas and Gimli; Gandalf the Grey and
+Gandalf the White, who are one person and two journeys; and Sméagol and Gollum.
+Every one of them is off when the page opens, and the legend's key is the
+switch that draws it.
 
-The masthead, the character sheet's name and the two legends are set in
-**Aniron**, the calligraphic face of the films' credits, reconstructed from the
-DVDs by Pete Klassen in 2004. It is a poor face to read and a fine one to name
-things with, so it is used nowhere else; the rest of the page keeps its sans.
-Wherever it is used, the uppercasing and heavy tracking of the `h1..h3` rule
-are undone, because its own letterforms carry the spacing and its lowercase is
-half the point of it.
+There is no line for the Fellowship. It was the road every one of its members
+walked, drawn a second time on top of them, so each of them carries it instead,
+and where they join it differs: Frodo and Sam, Merry and Pippin leave Hobbiton;
+Aragorn's line starts at Bree, where the story finds him; Legolas and Gimli's at
+Rivendell; and Boromir comes up to Rivendell from the other end of the map, a
+hundred and ten days out of Minas Tirith. They part at Amon Hen. The Fellowship
+survives as a company in `JOURNEY_MEMBERS`, along with the pairs and threes that
+no longer have a line of their own, and that table rather than the drawn routes
+is what the connections view reads — so the nine of them are still fellow
+travellers there.
 
-The font is **not** in this repository. It is linked from the CDN that
-publishes it (`index.html`), for licence reasons: Aniron may be passed on only
-free of charge, whole, and unmodified, so serving it from here would mean
-shipping its entire original archive and giving up a woff2 that would be worth
-about seventy kilobytes. Linking it means this project does not pass the font
-on at all, and the CDN's own woff is 56KB against the archive's 117KB .ttf.
+### Following the map
 
-If the CDN ever stops answering, every rule that names Aniron falls through to
-the sans stack behind it and the page looks as it did before. Google's Cinzel
-is the nearest thing licensed for the web outright, if a self-hosted face is
-ever wanted instead.
+A route is places and bends. A bend is a bare point in the same map units as a
+place — the turn of a river, the foot of a pass, a ford — somewhere the road
+goes but nobody stops, and the character sheets leave them out when they say in
+words where a journey went. They are what lets a line follow what the map draws
+rather than cut across it.
+
+Where the Company went by boat the line is *in* the Anduin: every meander the
+map draws between the mouth of the Silverlode and the island above the falls is
+a bend of the route. The Road east crosses the Hoarwell where the Last Bridge
+is, the ride from Isengard to the siege keeps north of the White Mountains, and
+Frodo rounds the northern tip of the Ephel Dúath into Ithilien instead of
+walking over it. Where a company turned back, the line turns back: out of
+Hollin the road climbs towards the Redhorn Gate, gives up, and comes down again
+to the West-gate, which is the shape the attempt on Caradhras actually had.
+
+Every bend was read off the map image itself. `map-source/map-detailed.png` at
+4.8 pixels to the map unit is the authority; the pyramid under
+`public/images/map/` is only what the site serves. The way to check a route is
+to draw it back onto that image and look — three legs that crossed mountain
+ranges they should have skirted were caught that way and no other.
+
+Stretches walked by more than one company — the Road east, the Anduin, the
+Paths of the Dead — are written once at the top of `src/data/journeys.ts` and
+spread into each route. That is not only to save repeating them. Two routes
+passing through the same point between the same neighbours get the same tangent
+there, so sharing the arrays is what makes the lines run exactly parallel for as
+long as the companies were together.
+
+### Drawing and undrawing
+
+Switching a path on draws it from its first place to its last; switching it off
+takes it away at once. Drawing is one CSS transition on `stroke-dashoffset`:
+each path declares `pathLength="1"`, so a single dash of 1 covers the whole
+route whatever its real length and the offset runs between 1 and 0 for all ten
+alike, with nothing to measure in the browser.
+
+The transition is declared on the `.on` class and not on the rule beneath it,
+which is what makes going off instant. A transition is chosen from the style the
+element is moving *to*: adding the class moves it to a style that has one and
+the line draws; removing the class moves it to a style that has none and the
+line is simply gone. Watching a road unwind is no use to anybody who has just
+asked to be rid of it.
+
+How long it takes is worked out per path in `src/lib/buildMap.ts` from the
+length of the route, so the lines all travel at the same speed rather than
+taking the same time: two seconds for Bilbo, six for Gollum, who goes furthest.
+`DRAW_SPEED` there is the one number to change to make them quicker or slower.
+
+The lines used to be dashed and to march for ever. That cost a repaint of the
+whole map several times a second for as long as the page was open;
+`stroke-dashoffset` cannot be animated on the compositor, and each repaint
+re-rasterised the lot. Drawing on demand costs the same repaints while a line is
+being drawn, once, when the reader asks for it.
+
+### Lines that share a road
+
+Five journeys leave the Shire together and six come down the Anduin, so a line
+drawn on top of another would be the only one you could see. Each journey keeps
+one slot in a fan `RIBBON_GAP` wide, and `smoothPath` shifts its points sideways
+by that much before drawing the curve through them. A journey keeps its slot
+whether or not anything else is on, so a road looks the same however the reader
+arrived at it.
+
+Sideways means perpendicular to the way the route is travelling — but measured
+over a window of the route either side of each point, not from its immediate
+neighbours. On a traced river the neighbours are three or four map units apart
+and point every which way; a neighbour-wise normal swings the offset round with
+every meander and ties the line in knots, which is what the outermost journeys
+did on the Anduin. `OFFSET_WINDOW` in `src/lib/draw.ts` is how far along the
+route the direction is taken over: far enough to look past the meanders and see
+the way the river is going, so the whole meandering ribbon shifts across as one
+piece and the lines stay parallel and in order through every bend.
+
+## The connections view
 
 The connections view (`src/components/RelationsView.tsx`) draws the character
 relationship graph derived in `src/data/relations.ts`, positioned by a
@@ -153,9 +221,14 @@ character sheet. See [docs/relations-map.md](docs/relations-map.md).
 Both views share their filter and selection state, which lives in `App`, so the
 sidebar drives either one.
 
-The text is authored in German; English lives in `src/data/en.ts` and is looked
-up per field with a fallback. Switching language is pure state, so neither view
-is disturbed.
+## Names
+
+Every identifier in the codebase is English — place ids, people ids, journey
+ids, everything. The text is another matter: it is authored in German, so
+`Bruchtal` and `Mensch` and `Freie Völker` are values, never keys. English is
+looked up per field with a fallback, in `src/data/en.ts` for the character text
+and the tables in `src/lib/i18n.ts` for everything else. Switching language is
+pure state, so neither view is disturbed.
 
 ## Deploying
 

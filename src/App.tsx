@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Character, Language, ViewName } from "./types";
 import { CHARACTERS, CHARACTER_BY_ID } from "./data/characters";
 import type { RelationKind } from "./data/relations";
+import { JOURNEYS } from "./data/journeys";
 import { PLACES } from "./data/places";
 import { createTranslator } from "./lib/i18n";
 import type { Translator } from "./lib/i18n";
@@ -49,7 +50,8 @@ export default function App() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [sheetOpen, setSheetOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [showJourneys, setShowJourneys] = useState(true);
+  // No path is drawn until it is asked for: seven at once is a thicket.
+  const [activeJourneys, setActiveJourneys] = useState<ReadonlySet<string>>(() => new Set());
   const [focus, setFocus] = useState<FocusRequest | null>(null);
   const [activeKinds, setActiveKinds] = useState<ReadonlySet<RelationKind>>(
     () => new Set(ALL_KINDS),
@@ -80,6 +82,20 @@ export default function App() {
     setSheetOpen(true);
     if (move) setFocus((prev) => ({ id, scale, nonce: (prev?.nonce ?? 0) + 1 }));
     if (window.innerWidth <= NARROW) setSidebarOpen(false);
+  }, []);
+
+  const toggleJourney = useCallback((id: string) => {
+    setActiveJourneys((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }, []);
+
+  /** The header's one button: everything, or nothing. */
+  const toggleAllJourneys = useCallback(() => {
+    setActiveJourneys((prev) => (prev.size > 0 ? new Set() : new Set(JOURNEYS.map((j) => j.id))));
   }, []);
 
   const toggleKind = useCallback((kind: RelationKind) => {
@@ -124,11 +140,11 @@ export default function App() {
         translator={translator}
         view={view}
         query={query}
-        showJourneys={showJourneys}
+        anyJourney={activeJourneys.size > 0}
         activeKinds={activeKinds}
         onViewChange={setView}
         onQueryChange={setQuery}
-        onToggleJourneys={() => setShowJourneys((v) => !v)}
+        onToggleJourneys={toggleAllJourneys}
         onToggleKind={toggleKind}
         onRandom={random}
         onToggleLanguage={() => setLanguage((l) => (l === "en" ? "de" : "en"))}
@@ -151,8 +167,9 @@ export default function App() {
             translator={translator}
             selectedId={sheetOpen ? selectedId : null}
             visibleIds={visibleIds}
-            showJourneys={showJourneys}
+            activeJourneys={activeJourneys}
             focus={focus}
+            onToggleJourney={toggleJourney}
             onSelect={(id) => select(id, false)}
           />
         ) : (
