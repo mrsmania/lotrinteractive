@@ -41,11 +41,19 @@ export const PLACES: Record<string, Place> = {
   dale: { name: "Thal", x: 1076, y: 212.5 },
   esgaroth: { name: "Esgaroth am See", shortName: "Esgaroth", x: 1066.7, y: 239.6 },
   ironhills: { name: "Die Eisenberge", x: 1270.8, y: 166.7 },
-  fangorn: { name: "Fangorn", x: 847.9, y: 395.8 },
-  isengard: { name: "Isengart und Orthanc", shortName: "Isengart", x: 765.8, y: 420.8 },
+  // Under the forest's own lettering rather than over it, so the medallions
+  // fan downwards from here and leave the name to be read.
+  fangorn: { name: "Fangorn", x: 852, y: 414, fan: "down" },
+  // On the tower itself, not the ring of hills west of it.
+  isengard: { name: "Isengart und Orthanc", shortName: "Isengart", x: 780, y: 423 },
   helmsdeep: { name: "Helms Klamm", x: 782.3, y: 471.2 },
   edoras: { name: "Edoras", x: 825.8, y: 487.5 },
-  dunharrow: { name: "Dunharg und die Pfade der Toten", shortName: "Dunharg", x: 835.4, y: 504.2 },
+  // The Paths of the Dead run under the mountains, and their king belongs in
+  // them rather than above the dale, where he read as another man of Edoras.
+  dunharrow: {
+    name: "Dunharg und die Pfade der Toten", shortName: "Dunharg",
+    x: 835.4, y: 504.2, fan: "down",
+  },
   tharbad: { name: "Tharbad", x: 683.3, y: 327.1 },
   dunland: { name: "Dunland", x: 752.1, y: 384.4 },
   argonath: { name: "Argonath", x: 937.5, y: 437.5 },
@@ -60,7 +68,9 @@ export const PLACES: Record<string, Place> = {
   // The map does not name it. It sits in the pass, between the stair out of
   // Minas Morgul and the tower above it.
   torechungol: { name: "Kankras Lauer", x: 1050.5, y: 582 },
-  osgiliath: { name: "Osgiliath", x: 1003.1, y: 556.7 },
+  // Ten map units from Minas Tirith, so its medallion has to go the other
+  // way or it stands in the outermost of the City's five.
+  osgiliath: { name: "Osgiliath", x: 1003.1, y: 556.7, fan: "down" },
   minastirith: { name: "Minas Tirith", x: 981.7, y: 552.5 },
   pelennor: { name: "Die Pelennor-Felder", x: 991.7, y: 555.2 },
   hennethannun: { name: "Henneth Annûn in Ithilien", shortName: "Henneth Annûn", x: 1016.7, y: 593.8 },

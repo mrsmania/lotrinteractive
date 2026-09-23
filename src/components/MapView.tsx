@@ -126,17 +126,27 @@ export function MapView({
           <Journeys active={activeJourneys} />
 
           <g id="markers">
-            {/* Crowded places: a dot at the true spot, with a line to each medallion. */}
+            {/* Crowded places: a dot at the true spot, with a line to each
+                medallion. Both go the same way as the medallion they belong to
+                when the filter dims it, or a place nobody passes would be left
+                trailing lines at people who are no longer there. */}
             {MARKERS.hubs.map((h, i) => (
-              <circle key={i} cx={h.x} cy={h.y} r={HUB_R} fill="#8a2f18" />
+              <circle
+                key={i}
+                className={"hub" + (h.ids.some((id) => visibleIds.has(id)) ? "" : " dimmed")}
+                cx={h.x}
+                cy={h.y}
+                r={HUB_R}
+                fill="#8a2f18"
+              />
             ))}
             {MARKERS.spokes.map((s, i) => (
               <path
                 key={i}
+                className={"spoke" + (visibleIds.has(s.id) ? "" : " dimmed")}
                 d={`M${s.x1},${s.y1} L${s.x2.toFixed(1)},${s.y2.toFixed(1)}`}
                 stroke="#8a6a3a"
                 strokeWidth={SPOKE_WIDTH}
-                opacity=".7"
               />
             ))}
 

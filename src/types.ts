@@ -6,6 +6,12 @@ export interface Place {
   shortName?: string;
   x: number;
   y: number;
+  /**
+   * Which way the medallions standing here are fanned out. Up by default,
+   * which keeps them clear of the caption the map draws under a place. Down
+   * where the map letters the place above it instead, as it does Fangorn.
+   */
+  fan?: "up" | "down";
 }
 
 /** A people: Hobbit, Elf, Dwarf and so on. Keys of PEOPLES are the ids. */

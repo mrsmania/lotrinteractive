@@ -92,6 +92,28 @@ medallion standing on it, and `PLACES` in `src/data/places.ts` is now purely
 where that medallion stands, where a journey turns, and where the map goes when
 you ask to be shown someone.
 
+Medallions fan out above the place they belong to, which keeps them clear of
+the caption the map draws under it. A few places the map letters from above
+instead — Fangorn is named across the middle of its own forest — and those set
+`fan: "down"` so the medallions go the other way and leave the name to be read.
+It settles neighbours too: Osgiliath is ten map units from Minas Tirith, and
+with both fanning the same way its one medallion stood in the outermost of the
+City's five.
+
+Each place fans out only its own, though, and nothing stopped two places from
+doing it into the same piece of paper: Shagrat stood on the Witch-king, two map
+units apart, one of them simply invisible under the other. Neighbouring places
+cannot be solved by hand — moving one lands it on the next — so `separate` in
+`src/lib/markers.ts` relaxes the overlaps away afterwards, pushing any two
+medallions apart until they clear. A medallion may be carried at most its own
+radius off the arc it was given, so it still reads as belonging to its place
+and its spoke still points somewhere sensible. The pass runs over the cast in
+order, so the layout is the same every time.
+
+The dot marking a crowded place and the thin lines out to its medallions belong
+to those medallions, and are dimmed by the people filter along with them. A
+spoke left behind points at somebody who is no longer there.
+
 Places were read off the image itself. It names nearly all of them, so
 Rivendell, Bree, Weathertop, Moria, Erebor, Esgaroth, Isengard, Edoras, Minas
 Tirith, Mount Doom and the rest sit on the very symbol the map draws for them;

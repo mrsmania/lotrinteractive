@@ -318,7 +318,12 @@ main{
 @media (prefers-reduced-motion:reduce){.journey-line.on{transition:none;}}
 
 /* ---------- Markers dimmed by the current filter ---------- */
+/* The dot marking a crowded place and the lines out to its medallions belong
+   to those medallions, and go the same way they do. A spoke left behind points
+   at somebody who is no longer there. */
 .marker.dimmed{opacity:.12;pointer-events:none;}
+.spoke{opacity:.7;}
+.hub.dimmed,.spoke.dimmed{opacity:.08;}
 
 /* Shared defs carrier: present in the document, never seen. */
 .sprites{position:absolute;width:0;height:0;overflow:hidden;}
