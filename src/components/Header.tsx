@@ -43,8 +43,14 @@ export function Header({
 
   return (
     <header>
-      <button className="button narrow-only" onClick={onToggleSidebar}>
-        {t("characters")}
+      {/* On a phone the sidebar is a drawer, and this opens it. */}
+      <button
+        className="button menu narrow-only"
+        onClick={onToggleSidebar}
+        title={t("characters")}
+        aria-label={t("characters")}
+      >
+        <span aria-hidden="true">&#9776;</span>
       </button>
 
       <div className="title">
@@ -70,17 +76,9 @@ export function Header({
           </button>
         </div>
 
-        <div className="search">
-          <span aria-hidden="true">&#9906;</span>
-          <input
-            type="search"
-            value={query}
-            placeholder={t("search")}
-            autoComplete="off"
-            aria-label={t("search")}
-            onChange={(ev) => onQueryChange(ev.target.value)}
-          />
-        </div>
+        {/* On a phone the search moves into the drawer, beside the list it
+            filters; see Sidebar. */}
+        <SearchBox className="wide-only" translator={translator} query={query} onQueryChange={onQueryChange} />
 
         {/* Each view has its own layers to switch on and off. */}
         {view === "map" ? (
@@ -108,10 +106,50 @@ export function Header({
         <button className="button" onClick={onRandom}>
           {t("random")}
         </button>
-        <button className="button" title={t("languageTitle")} onClick={onToggleLanguage}>
-          {t("language")}
+      </div>
+
+      {/* Kept apart from the tools so that on a phone it can stay on the
+          title's line, as two letters, while the tools take a line of their
+          own. */}
+      <div className="head-quick">
+        <button
+          className="button"
+          title={t("languageTitle")}
+          aria-label={t("languageTitle")}
+          onClick={onToggleLanguage}
+        >
+          <span className="wide-only">{t("language")}</span>
+          <span className="narrow-only">{t("languageShort")}</span>
         </button>
       </div>
     </header>
+  );
+}
+
+/** The search field, shared by the header and, on a phone, the drawer. */
+export function SearchBox({
+  translator,
+  query,
+  onQueryChange,
+  className,
+}: {
+  translator: Translator;
+  query: string;
+  onQueryChange: (q: string) => void;
+  className?: string;
+}) {
+  const t = translator.t;
+  return (
+    <div className={"search" + (className ? " " + className : "")}>
+      <span aria-hidden="true">&#9906;</span>
+      <input
+        type="search"
+        value={query}
+        placeholder={t("search")}
+        autoComplete="off"
+        aria-label={t("search")}
+        onChange={(ev) => onQueryChange(ev.target.value)}
+      />
+    </div>
   );
 }

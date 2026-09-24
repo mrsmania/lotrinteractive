@@ -173,10 +173,12 @@ export default function App() {
   const selectPlaceAndMove = useCallback((id: string) => selectPlace(id, true), [selectPlace]);
   const selectPlaceInPlace = useCallback((id: string) => selectPlace(id, false), [selectPlace]);
 
-  // Escape closes the character sheet.
+  // Escape closes the character sheet, and the drawer on a phone.
   useEffect(() => {
     const onKey = (ev: KeyboardEvent) => {
-      if (ev.key === "Escape") setSheetOpen(false);
+      if (ev.key !== "Escape") return;
+      setSheetOpen(false);
+      setSidebarOpen(false);
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
@@ -212,10 +214,19 @@ export default function App() {
           selectedPlaceId={sheetOpen ? selectedPlaceId : null}
           tab={sidebarTab}
           open={sidebarOpen}
+          query={query}
+          onQueryChange={setQuery}
           onTabChange={setSidebarTab}
           onTogglePeople={togglePeople}
           onSelect={selectAndMove}
           onSelectPlace={selectPlaceAndMove}
+        />
+
+        {/* On a phone the open drawer dims the map, and a tap there closes it. */}
+        <div
+          className={"scrim" + (sidebarOpen ? " on" : "")}
+          aria-hidden="true"
+          onClick={() => setSidebarOpen(false)}
         />
 
         {view === "map" ? (

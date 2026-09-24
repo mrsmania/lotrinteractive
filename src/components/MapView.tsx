@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { CHARACTER_BY_ID } from "../data/characters";
-import { MAP_H, MAP_W } from "../data/map";
+import { MAP_H, MAP_W, MARKER_OUTER_R } from "../data/map";
 import { MARKERS } from "../lib/markers";
 import { PLACES } from "../data/places";
 import type { Translator } from "../lib/i18n";
 import { useZoomPan } from "../hooks/useZoomPan";
+import { TOUCH_MIN_PX, coarsePointer, counterScale } from "../lib/counterScale";
 import { MapTiles } from "./MapTiles";
 import { Journeys } from "./Journeys";
 import { PlaceMarks } from "./PlaceMarks";
@@ -38,6 +39,16 @@ interface Props {
   onSelectPlace: (id: string) => void;
 }
 
+/**
+ * The scale at which the map fills a box that is much taller than the map is,
+ * such as a phone held upright; 1 for any box the whole map suits.
+ */
+function coverScale(box: { w: number; h: number }): number {
+  if (!box.w || !box.h) return 1;
+  const cover = Math.max(box.w / MAP_W, box.h / MAP_H) / Math.min(box.w / MAP_W, box.h / MAP_H);
+  return cover < 1.6 ? 1 : Math.min(cover, 3.4);
+}
+
 export function MapView({
   translator,
   selectedId,
@@ -52,9 +63,16 @@ export function MapView({
 }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
   const fieldRef = useRef<HTMLDivElement>(null);
+  // The tile layer has to know how much of the map is on screen and how large
+  // it is being drawn, neither of which the view alone can say.
+  const [box, setBox] = useState({ w: 0, h: 0 });
+  const home = coverScale(box);
   const zoomPan = useZoomPan(svgRef, {
     width: MAP_W,
     height: MAP_H,
+    // As much detail at the deepest zoom as a desktop gets, however small the
+    // map started out.
+    maxScale: Math.min(14, 6 * home),
     onTap: (target) => {
       const id = target?.closest<SVGGElement>(".marker")?.dataset.id;
       if (id && !showPlaces) {
@@ -66,9 +84,6 @@ export function MapView({
     },
   });
   const [tooltip, setTooltip] = useState<{ id: string; x: number; y: number } | null>(null);
-  // The tile layer has to know how much of the map is on screen and how large
-  // it is being drawn, neither of which the view alone can say.
-  const [box, setBox] = useState({ w: 0, h: 0 });
 
   useEffect(() => {
     const el = svgRef.current;
@@ -80,26 +95,49 @@ export function MapView({
     return () => observer.disconnect();
   }, []);
 
-  const { centreOn, glideTo, view } = zoomPan;
+  const { centreOn, glideTo, jumpTo, view } = zoomPan;
+
+  // The map is far wider than it is tall, so in a phone held upright the whole
+  // of it is a strip across the middle of the screen with black above and
+  // below. There it opens filling the height instead, on the middle of the
+  // map, and the reader pans east and west. Done once, on the first measure,
+  // so turning the phone later does not take the map away from the reader.
+  const opened = useRef(false);
+  useEffect(() => {
+    if (opened.current || !box.w || !box.h) return;
+    opened.current = true;
+    if (home === 1) return;
+    jumpTo(MAP_W / 2 - (MAP_W / 2) * home, MAP_H / 2 - (MAP_H / 2) * home, home);
+  }, [box, home, jumpTo]);
 
   // Bring a requested character into view. Depends on the nonce alone so that
   // selecting the same character twice still moves the map.
   useEffect(() => {
     if (!focus) return;
     const p = focus.place ? PLACES[focus.id] : MARKERS.positions[focus.id];
-    if (p) centreOn(p, focus.scale);
+    // Never further out than the phone's opening view, or picking somebody
+    // would shrink the map back to a strip.
+    if (p) centreOn(p, Math.max(focus.scale, home));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [focus?.nonce]);
-
-  // Medallions keep a readable size as the map scales. Handed down as the CSS
-  // variable --counter rather than as a prop; see counterPlaced in Markers.
-  const counterScale = Math.min(1.3, Math.max(0.45, 1 / view.k));
 
   // preserveAspectRatio="xMidYMid meet" fits the viewBox inside the element and
   // centres it, so the element shows the whole viewBox and a margin either side
   // of it in whichever direction it is the roomier.
   const fit = box.w && box.h ? Math.min(box.w / MAP_W, box.h / MAP_H) : 0;
   const density = fit * view.k;
+
+  // Medallions grow with the map, but more slowly than it does, and on a touch
+  // screen never below what a finger can find; see lib/counterScale. Handed
+  // down as the CSS variable --counter rather than as a prop; see
+  // counterPlaced in Markers.
+  const counter = counterScale(
+    view.k,
+    density,
+    MARKER_OUTER_R * 2,
+    coarsePointer() ? TOUCH_MIN_PX : 0,
+    home,
+  );
   const halfW = fit ? box.w / fit / 2 : MAP_W / 2;
   const halfH = fit ? box.h / fit / 2 : MAP_H / 2;
   const visible = {
@@ -112,7 +150,9 @@ export function MapView({
   // Stable, so the memoised marker layer is not re-rendered by its own hover.
   const hover = useCallback((id: string | null, ev?: React.PointerEvent) => {
     const field = fieldRef.current?.getBoundingClientRect();
-    if (!id || !ev || !field) {
+    // A finger has no hover: the tooltip would pop up under it on the tap that
+    // opens the sheet, and stay there after, so it is kept for the mouse.
+    if (!id || !ev || !field || ev.pointerType !== "mouse") {
       setTooltip(null);
       return;
     }
@@ -132,7 +172,7 @@ export function MapView({
       >
         <g
           transform={`translate(${view.tx.toFixed(2)} ${view.ty.toFixed(2)}) scale(${view.k.toFixed(4)})`}
-          style={{ "--counter": counterScale.toFixed(3) } as CSSProperties}
+          style={{ "--counter": counter.toFixed(3) } as CSSProperties}
         >
           <MapTiles {...visible} density={density} />
 

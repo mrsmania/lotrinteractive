@@ -16,6 +16,8 @@ const SPOKE_WIDTH = 0.8 * MARKER_SCALE;
 /** The glow on hover and selection, outside the rim so it reads as a halo. */
 const RING_R = RIM_R + 1.9;
 const RING_WIDTH = 2.4 * MARKER_SCALE;
+/** The unseen area that takes a tap, past the rim. */
+const HIT_R = RIM_R + 3;
 
 /**
  * Where a medallion stands, and the counter-scale that keeps it a readable
@@ -83,6 +85,9 @@ export const Markers = memo(function Markers({ selectedId, visibleIds, onHover }
             onPointerMove={(ev) => onHover(c.id, ev)}
             onPointerLeave={() => onHover(null)}
           >
+            {/* Something a fingertip can land on, a little wider than the
+                medallion; unseen, and first so it is drawn under it. */}
+            <circle r={HIT_R} fill="transparent" />
             <circle
               className="ring"
               r={RING_R}

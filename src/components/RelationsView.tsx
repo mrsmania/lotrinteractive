@@ -6,6 +6,7 @@ import type { RelationEdge, RelationKind } from "../data/relations";
 import { GRAPH_H, GRAPH_W, RELATIONS_LAYOUT, nodeRadius } from "../lib/relationsLayout";
 import type { Translator } from "../lib/i18n";
 import { useZoomPan } from "../hooks/useZoomPan";
+import { TOUCH_MIN_PX, coarsePointer, counterScale } from "../lib/counterScale";
 import { MedallionContent } from "./Medallion";
 import { counterPlaced } from "./Markers";
 
@@ -123,7 +124,24 @@ export function RelationsView({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [focusNonce]);
 
-  const counterScale = Math.min(1.3, Math.max(0.5, 1 / view.k));
+  // As on the map (see lib/counterScale), measured against a typical node.
+  const [box, setBox] = useState({ w: 0, h: 0 });
+  useEffect(() => {
+    const el = svgRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver(([entry]) => {
+      setBox({ w: entry.contentRect.width, h: entry.contentRect.height });
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+  const fit = box.w && box.h ? Math.min(box.w / GRAPH_W, box.h / GRAPH_H) : 0;
+  const counter = counterScale(
+    view.k,
+    fit * view.k,
+    nodeRadius(4) * 2,
+    coarsePointer() ? TOUCH_MIN_PX : 0,
+  );
   const focusCharacter = focusId ? CHARACTER_BY_ID.get(focusId) : undefined;
   const focusDegree = related ? related.size - 1 : 0;
 
@@ -138,7 +156,7 @@ export function RelationsView({
       >
         <g
           transform={`translate(${view.tx.toFixed(2)} ${view.ty.toFixed(2)}) scale(${view.k.toFixed(4)})`}
-          style={{ "--counter": counterScale.toFixed(3) } as CSSProperties}
+          style={{ "--counter": counter.toFixed(3) } as CSSProperties}
         >
           <GraphEdges edges={edges} focusId={focusId} visibleIds={visibleIds} />
           <GraphNodes
@@ -261,7 +279,8 @@ const GraphNodes = memo(function GraphNodes({
               (visibleIds.has(node.id) ? "" : " dimmed")
             }
             style={counterPlaced(node.x, node.y)}
-            onPointerEnter={() => onHover(node.id)}
+            // Hover lights a web for the mouse only; a finger's tap selects.
+            onPointerEnter={(ev) => ev.pointerType === "mouse" && onHover(node.id)}
             onPointerLeave={() => onHover(null)}
           >
             <circle className="ring" r={r + 3.5} fill="none" stroke={node.colour} strokeWidth="2.4" filter="url(#glow)" />

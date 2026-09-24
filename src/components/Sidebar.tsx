@@ -5,6 +5,7 @@ import { PLACE_GROUPS, PLACE_LORE } from "../data/placeLore";
 import type { Translator } from "../lib/i18n";
 import { Medallion } from "./Medallion";
 import { PlaceIcon } from "./PlaceIcon";
+import { SearchBox } from "./Header";
 
 interface Props {
   translator: Translator;
@@ -16,6 +17,8 @@ interface Props {
   selectedPlaceId: string | null;
   tab: SidebarTab;
   open: boolean;
+  query: string;
+  onQueryChange: (q: string) => void;
   onTabChange: (tab: SidebarTab) => void;
   onTogglePeople: (people: string) => void;
   onSelect: (id: string) => void;
@@ -30,6 +33,8 @@ export const Sidebar = memo(function Sidebar({
   selectedPlaceId,
   tab,
   open,
+  query,
+  onQueryChange,
   onTabChange,
   onTogglePeople,
   onSelect,
@@ -64,6 +69,13 @@ export const Sidebar = memo(function Sidebar({
   return (
     <aside className={"sidebar" + (open ? " open" : "")}>
       <div className="sidebar-head">
+        {/* The header's search, where a phone has room for it. */}
+        <SearchBox
+          className="narrow-only"
+          translator={translator}
+          query={query}
+          onQueryChange={onQueryChange}
+        />
         <div className="tabs" role="tablist">
           <button
             className="tab"
