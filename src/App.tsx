@@ -1,4 +1,4 @@
-import { Suspense, lazy, useCallback, useEffect, useMemo, useState } from "react";
+import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Character, Language, SidebarTab, ViewName } from "./types";
 import { CHARACTERS, CHARACTER_BY_ID } from "./data/characters";
 import type { RelationKind } from "./data/relations";
@@ -57,6 +57,14 @@ export default function App() {
   const [activePeoples, setActivePeoples] = useState<ReadonlySet<string>>(new Set());
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [sheetOpen, setSheetOpen] = useState(false);
+  // On a phone the sheet covers everything, so two things stand in for it
+  // there. "Show on the map" closes the sheet but leaves its subject lit on the
+  // map (lingering); and in the connections view a pick opens a small card over
+  // the foot of the graph (peek), with the full sheet a tap further on.
+  const [lingering, setLingering] = useState(false);
+  const [peek, setPeek] = useState(false);
+  const viewRef = useRef(view);
+  viewRef.current = view;
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarTab, setSidebarTab] = useState<SidebarTab>("peoples");
   // Which place's sheet is open. A place and a character never show at once:
@@ -96,10 +104,15 @@ export default function App() {
 
   /** Open a character. `move` also brings the map to them. */
   const select = useCallback((id: string, move: boolean, scale = 2.4) => {
+    const compact = window.innerWidth <= NARROW && viewRef.current === "relations";
     setSelectedId(id);
     setSelectedPlaceId(null);
     setSidebarTab("peoples");
-    setSheetOpen(true);
+    setLingering(false);
+    setPeek(compact);
+    // In the phone's connections view a pick opens the card, not the sheet;
+    // but a sheet already open, followed from one of its own links, stays.
+    setSheetOpen((open) => (compact ? open : true));
     if (move) setFocus((prev) => ({ id, scale, nonce: (prev?.nonce ?? 0) + 1 }));
     if (window.innerWidth <= NARROW) setSidebarOpen(false);
   }, []);
@@ -110,6 +123,8 @@ export default function App() {
     setSelectedPlaceId(id);
     setSelectedId(null);
     setSidebarTab("places");
+    setLingering(false);
+    setPeek(false);
     setSheetOpen(true);
     if (move) setFocus((prev) => ({ id, place: true, scale, nonce: (prev?.nonce ?? 0) + 1 }));
     if (window.innerWidth <= NARROW) setSidebarOpen(false);
@@ -170,6 +185,32 @@ export default function App() {
   // Stable, so the memoised layers below are not re-rendered for nothing.
   const selectAndMove = useCallback((id: string) => select(id, true), [select]);
   const selectInPlace = useCallback((id: string) => select(id, false), [select]);
+
+  /** On a phone, closes the sheet so the map it has just moved can be seen. */
+  const revealMap = useCallback(() => {
+    if (window.innerWidth > NARROW) return;
+    setSheetOpen(false);
+    setLingering(true);
+  }, []);
+
+  const closeSheet = useCallback(() => {
+    setSheetOpen(false);
+    setLingering(false);
+  }, []);
+
+  /** A tap on the open map or graph lets go of whatever was left lit. */
+  const clearHighlight = useCallback(() => {
+    setLingering(false);
+    setPeek(false);
+  }, []);
+
+  const changeView = useCallback((next: ViewName) => {
+    setView(next);
+    setPeek(false);
+  }, []);
+
+  /** Whether the selection is lit on the map or graph. */
+  const shown = sheetOpen || lingering || peek;
   const selectPlaceAndMove = useCallback((id: string) => selectPlace(id, true), [selectPlace]);
   const selectPlaceInPlace = useCallback((id: string) => selectPlace(id, false), [selectPlace]);
 
@@ -196,7 +237,7 @@ export default function App() {
         query={query}
         anyJourney={activeJourneys.size > 0}
         activeKinds={activeKinds}
-        onViewChange={setView}
+        onViewChange={changeView}
         onQueryChange={setQuery}
         onToggleJourneys={toggleAllJourneys}
         onToggleKind={toggleKind}
@@ -232,12 +273,13 @@ export default function App() {
         {view === "map" ? (
           <MapView
             translator={translator}
-            selectedId={sheetOpen ? selectedId : null}
+            selectedId={shown ? selectedId : null}
             visibleIds={visibleIds}
             activeJourneys={activeJourneys}
             focus={focus}
             showPlaces={sidebarTab === "places"}
-            selectedPlaceId={sheetOpen ? selectedPlaceId : null}
+            selectedPlaceId={shown ? selectedPlaceId : null}
+            onBackgroundTap={clearHighlight}
             onToggleJourney={toggleJourney}
             onSelect={selectInPlace}
             onSelectPlace={selectPlaceInPlace}
@@ -246,11 +288,15 @@ export default function App() {
           <Suspense fallback={<div className="map-field graph-field" />}>
             <RelationsView
               translator={translator}
-              selectedId={sheetOpen ? selectedId : null}
+              selectedId={shown ? selectedId : null}
+              peek={peek && !sheetOpen}
+              onExpand={() => setSheetOpen(true)}
+              onClosePeek={clearHighlight}
               visibleIds={visibleIds}
               activeKinds={activeKinds}
               focusNonce={focus?.nonce ?? 0}
               onSelect={selectInPlace}
+              onBackgroundTap={clearHighlight}
             />
           </Suspense>
         )}
@@ -260,18 +306,25 @@ export default function App() {
             translator={translator}
             place={PLACE_LORE_BY_ID.get(selectedPlaceId) ?? null}
             open={sheetOpen}
-            onClose={() => setSheetOpen(false)}
+            onClose={closeSheet}
             onSelectCharacter={(id) => select(id, true)}
-            onShowOnMap={() => selectPlace(selectedPlaceId, true, 3.4)}
+            onShowOnMap={() => {
+              selectPlace(selectedPlaceId, true, 3.4);
+              revealMap();
+            }}
           />
         ) : (
           <CharacterSheet
             translator={translator}
             character={selected}
             open={sheetOpen}
-            onClose={() => setSheetOpen(false)}
+            onClose={closeSheet}
             onSelect={(id) => select(id, true)}
-            onShowOnMap={() => selectedId && select(selectedId, true, 3)}
+            onShowOnMap={() => {
+              if (!selectedId) return;
+              select(selectedId, true, 3);
+              revealMap();
+            }}
           />
         )}
       </main>

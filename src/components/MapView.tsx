@@ -37,6 +37,8 @@ interface Props {
   onToggleJourney: (id: string) => void;
   onSelect: (id: string) => void;
   onSelectPlace: (id: string) => void;
+  /** A tap that landed on the map itself, on nobody and nowhere. */
+  onBackgroundTap?: () => void;
 }
 
 /**
@@ -60,6 +62,7 @@ export function MapView({
   onToggleJourney,
   onSelect,
   onSelectPlace,
+  onBackgroundTap,
 }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
   const fieldRef = useRef<HTMLDivElement>(null);
@@ -81,6 +84,7 @@ export function MapView({
       }
       const placeId = target?.closest<SVGGElement>(".place-mark")?.dataset.place;
       if (placeId) onSelectPlace(placeId);
+      else if (!target?.closest(".marker")) onBackgroundTap?.();
     },
   });
   const [tooltip, setTooltip] = useState<{ id: string; x: number; y: number } | null>(null);
@@ -185,7 +189,7 @@ export function MapView({
           />
 
           {!showPlaces && (
-            <Markers selectedId={selectedId} visibleIds={visibleIds} onHover={hover} />
+            <Markers touch={coarsePointer()} selectedId={selectedId} visibleIds={visibleIds} onHover={hover} />
           )}
         </g>
       </svg>

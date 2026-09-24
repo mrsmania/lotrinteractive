@@ -26,6 +26,11 @@
 }
 *{box-sizing:border-box;}
 html,body,#root{height:100%;}
+/* Nothing on the page scrolls but the lists inside it. The panels waiting off
+   screen — the character sheet to the right, the drawer to the left — are
+   clipped by main below; this is the second lock on the same door, for the
+   phones that pan the whole page whenever anything pokes out of it. */
+html{overflow:hidden;overscroll-behavior:none;}
 /* A phone's toolbars come and go; dvh is the height actually left between them. */
 @supports (height:100dvh){html,body,#root{height:100dvh;}}
 body{
@@ -131,6 +136,11 @@ main{
   grid-template-columns:288px 1fr;
   min-height:0;
   position:relative;
+  /* The closed sheet waits just past the right edge. Unclipped, it made the
+     page twice the width of a phone, which let the page be dragged sideways
+     until the browser snapped it back. */
+  overflow:hidden;
+  overflow:clip;
 }
 
 /* ---------- Sidebar ---------- */
@@ -243,10 +253,14 @@ main{
   background:linear-gradient(180deg,#241a12,#150f0a 60%);
   border-left:1px solid var(--gold);
   box-shadow:-22px 0 50px rgba(0,0,0,.65);
-  transform:translateX(105%);transition:transform .3s cubic-bezier(.3,.8,.3,1);
+  transform:translateX(105%);
+  /* Hidden once it has slid away, so nothing in it can be tabbed to, or
+     scrolled, while it is out of sight. */
+  visibility:hidden;
+  transition:transform .3s cubic-bezier(.3,.8,.3,1), visibility 0s .3s;
   display:flex;flex-direction:column;
 }
-.sheet.open{transform:none;}
+.sheet.open{transform:none;visibility:visible;transition:transform .3s cubic-bezier(.3,.8,.3,1);}
 .sheet-top{padding:16px 18px 12px;border-bottom:1px solid #3d2f1b;position:relative;text-align:center;}
 .sheet-top svg{width:112px;height:112px;filter:drop-shadow(0 4px 14px rgba(0,0,0,.8));}
 .sheet-top h2{
@@ -367,6 +381,56 @@ main{
   .legend i{width:12px;height:12px;}
 
   .map-controls{right:10px;bottom:max(10px, env(safe-area-inset-bottom));}
+
+  /* The connections view's card, over the foot of the graph. The key and the
+     zoom buttons would sit under it, so they step aside while it is up;
+     fingers pinch. */
+  .peeking .legend,.peeking .map-controls{display:none;}
+  .peek{
+    position:absolute;left:8px;right:8px;bottom:max(8px, env(safe-area-inset-bottom));z-index:12;
+    background:linear-gradient(180deg,rgba(36,26,18,.97),rgba(21,15,10,.97));
+    border:1px solid #4a3a20;border-top-color:var(--gold);border-radius:6px;
+    box-shadow:0 -10px 34px rgba(0,0,0,.6);
+    padding:12px 12px 10px;
+    animation:peek-in .26s cubic-bezier(.3,.8,.3,1);
+  }
+  @keyframes peek-in{from{transform:translateY(30px);opacity:0;}}
+  .peek .close{top:2px;right:2px;}
+  .peek-head{
+    display:flex;align-items:center;gap:12px;width:100%;padding:0 40px 0 0;
+    background:none;border:0;text-align:left;
+  }
+  .peek-head svg{width:52px;height:52px;flex:none;filter:drop-shadow(0 2px 6px #000);}
+  .peek-head span{min-width:0;}
+  .peek-head b{
+    display:block;font-family:var(--display);font-weight:400;font-size:17px;letter-spacing:.03em;
+    color:var(--gold-light);line-height:1.2;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .peek-head small{display:block;font-size:12px;color:#a08d63;font-style:italic;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .peek-head em{display:block;font-style:normal;font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:#8d7a55;margin-top:2px;}
+  /* The connections, one row of medallions to thumb through. Each wears the
+     colour of the line that joins it to the one picked. */
+  .peek-links{
+    display:flex;gap:4px;margin:10px -12px 8px;padding:2px 12px 4px;
+    overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;
+    scroll-snap-type:x proximity;
+  }
+  .peek-links::-webkit-scrollbar{display:none;}
+  .peek-links button{
+    flex:none;width:62px;display:flex;flex-direction:column;align-items:center;gap:3px;
+    background:none;border:0;padding:2px 0;scroll-snap-align:start;
+    font-size:11px;color:#d6c49c;
+  }
+  .peek-links svg{
+    width:42px;height:42px;border-radius:50%;
+    box-shadow:0 0 0 2px var(--kind),0 2px 6px #000;
+  }
+  .peek-links span{max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .peek-none{margin:10px 0;font-size:13px;color:#7a6844;font-style:italic;}
+  .peek-more{width:100%;}
   /* Sixteen pixels, or iOS zooms the whole page in when the field is focused. */
   .search input{font-size:16px;}
 }

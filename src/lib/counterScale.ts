@@ -26,7 +26,7 @@ const GROWTH_DAMPING = 0.25;
 const MAX_COUNTER = 2.4;
 
 /** Smallest on-screen diameter, in CSS pixels, with a finger for a pointer. */
-export const TOUCH_MIN_PX = 30;
+export const TOUCH_MIN_PX = 26;
 
 const coarseQuery =
   typeof window !== "undefined" ? window.matchMedia("(pointer:coarse)") : null;

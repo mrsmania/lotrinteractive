@@ -180,11 +180,32 @@ export function useZoomPan(
     [apply],
   );
 
+  /**
+   * Centre a map position, as nearly as the map allows: somebody near its
+   * edge is brought as close to the middle as goes without pulling the edge
+   * itself into view, which on a phone left a band of black across the top.
+   */
   const centreOn = useCallback(
     (p: { x: number; y: number }, scale = 2.4) => {
-      glideTo(width / 2 - p.x * scale, height / 2 - p.y * scale, scale);
+      let tx = width / 2 - p.x * scale;
+      let ty = height / 2 - p.y * scale;
+      const r = svgRef.current?.getBoundingClientRect();
+      if (r && r.width && r.height) {
+        // The part of the viewBox on screen, letterboxing included.
+        const m = Math.max(width / r.width, height / r.height);
+        const shownW = r.width * m;
+        const shownH = r.height * m;
+        const keep = (t: number, size: number, shown: number, whole: number) => {
+          const lo = (whole + shown) / 2 - size;
+          const hi = (whole - shown) / 2;
+          return size >= shown ? Math.min(hi, Math.max(lo, t)) : t;
+        };
+        tx = keep(tx, width * scale, shownW, width);
+        ty = keep(ty, height * scale, shownH, height);
+      }
+      glideTo(tx, ty, scale);
     },
-    [glideTo, width, height],
+    [glideTo, svgRef, width, height],
   );
 
   const reset = useCallback(() => glideTo(0, 0, 1), [glideTo]);

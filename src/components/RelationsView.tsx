@@ -1,4 +1,4 @@
-import { memo, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import type { CSSProperties } from "react";
 import { CHARACTER_BY_ID } from "../data/characters";
 import { RELATIONS } from "../data/relations";
@@ -7,7 +7,7 @@ import { GRAPH_H, GRAPH_W, RELATIONS_LAYOUT, nodeRadius } from "../lib/relations
 import type { Translator } from "../lib/i18n";
 import { useZoomPan } from "../hooks/useZoomPan";
 import { TOUCH_MIN_PX, coarsePointer, counterScale } from "../lib/counterScale";
-import { MedallionContent } from "./Medallion";
+import { Medallion, MedallionContent } from "./Medallion";
 import { counterPlaced } from "./Markers";
 
 /**
@@ -46,8 +46,27 @@ interface Props {
   activeKinds: ReadonlySet<RelationKind>;
   /** Bumped when something elsewhere asks for a character to be brought into view. */
   focusNonce: number;
+  /** Whether the phone's card for the selected character is showing. */
+  peek: boolean;
   onSelect: (id: string) => void;
+  /** Open the full sheet for the character the card is showing. */
+  onExpand: () => void;
+  onClosePeek: () => void;
+  /** A tap on the open graph, on nobody. */
+  onBackgroundTap?: () => void;
 }
+
+/** Below this width the view is a phone's; matches the CSS breakpoint. */
+const NARROW_QUERY = "(max-width:880px)";
+/** Where on screen, as a fraction from the top, the card keeps the picked character. */
+const PEEK_FOCUS_Y = 0.3;
+
+function subscribeNarrow(onChange: () => void) {
+  const q = window.matchMedia(NARROW_QUERY);
+  q.addEventListener("change", onChange);
+  return () => q.removeEventListener("change", onChange);
+}
+const isNarrow = () => window.matchMedia(NARROW_QUERY).matches;
 
 /** The dominant kind of an edge, limited to the kinds currently switched on. */
 function dominantKind(edge: RelationEdge, active: ReadonlySet<RelationKind>): RelationKind | null {
@@ -75,20 +94,26 @@ export function RelationsView({
   visibleIds,
   activeKinds,
   focusNonce,
+  peek,
   onSelect,
+  onExpand,
+  onClosePeek,
+  onBackgroundTap,
 }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
+  const compact = useSyncExternalStore(subscribeNarrow, isNarrow);
   const zoomPan = useZoomPan(svgRef, {
     width: GRAPH_W,
     height: GRAPH_H,
     onTap: (target) => {
       const id = target?.closest<SVGGElement>(".graph-node")?.dataset.id;
-      if (id) onSelect(id);
+      if (id) pick(id);
+      else onBackgroundTap?.();
     },
   });
   const [hoverId, setHoverId] = useState<string | null>(null);
 
-  const { centreOn, view } = zoomPan;
+  const { centreOn, glideTo, jumpTo, view } = zoomPan;
   const { byId } = RELATIONS_LAYOUT;
 
   // Only the edges whose kinds are switched on, each with the colour to use.
@@ -116,14 +141,6 @@ export function RelationsView({
     return set;
   }, [focusId, edges]);
 
-  // Bring a requested character into view, same contract as the map.
-  useEffect(() => {
-    if (!focusNonce || !selectedId) return;
-    const node = byId.get(selectedId);
-    if (node) centreOn(node, 1.8);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [focusNonce]);
-
   // As on the map (see lib/counterScale), measured against a typical node.
   const [box, setBox] = useState({ w: 0, h: 0 });
   useEffect(() => {
@@ -136,6 +153,66 @@ export function RelationsView({
     return () => observer.disconnect();
   }, []);
   const fit = box.w && box.h ? Math.min(box.w / GRAPH_W, box.h / GRAPH_H) : 0;
+
+  // In a phone held upright the whole graph is a band across the middle, its
+  // names too small to read. It opens a little closer, its ring filling the
+  // width. Once, on the first measure, as the map does.
+  const opened = useRef(false);
+  useEffect(() => {
+    if (opened.current || !box.w || !box.h) return;
+    opened.current = true;
+    if (box.w / box.h > (GRAPH_W / GRAPH_H) * 0.8) return;
+    const k = 1.3;
+    jumpTo(GRAPH_W / 2 - (GRAPH_W / 2) * k, GRAPH_H / 2 - (GRAPH_H / 2) * k, k);
+  }, [box, jumpTo]);
+
+  /**
+   * Bring a character into view. On a phone the card covers the foot of the
+   * screen, so the character is kept high, clear of it, rather than centred.
+   */
+  const bringIntoView = (id: string) => {
+    const node = byId.get(id);
+    if (!node) return;
+    if (!compact || !fit) {
+      centreOn(node, 1.8);
+      return;
+    }
+    const k = Math.max(1.8, view.k);
+    // The viewBox is letterboxed into the screen, so a height on screen is
+    // found from the part of the viewBox that is showing.
+    const y = GRAPH_H / 2 + (PEEK_FOCUS_Y - 0.5) * (box.h / fit);
+    glideTo(GRAPH_W / 2 - node.x * k, y - node.y * k, k);
+  };
+
+  /** A character picked on the graph or on the card. */
+  const pick = (id: string) => {
+    onSelect(id);
+    if (compact) bringIntoView(id);
+  };
+
+  // Bring a requested character into view, same contract as the map.
+  useEffect(() => {
+    if (!focusNonce || !selectedId) return;
+    bringIntoView(selectedId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [focusNonce]);
+
+  /** The picked character's connections, for the card: bonds first, strongest first. */
+  const neighbours = useMemo(() => {
+    if (!selectedId) return [];
+    return edges
+      .filter(({ edge }) => edge.a === selectedId || edge.b === selectedId)
+      .map(({ edge, kind }) => ({
+        id: edge.a === selectedId ? edge.b : edge.a,
+        kind,
+        weight: edge.weight,
+      }))
+      .filter((n) => visibleIds.has(n.id))
+      .sort(
+        (a, b) => KIND_ORDER.indexOf(a.kind) - KIND_ORDER.indexOf(b.kind) || b.weight - a.weight,
+      );
+  }, [selectedId, edges, visibleIds]);
+
   const counter = counterScale(
     view.k,
     fit * view.k,
@@ -144,9 +221,10 @@ export function RelationsView({
   );
   const focusCharacter = focusId ? CHARACTER_BY_ID.get(focusId) : undefined;
   const focusDegree = related ? related.size - 1 : 0;
+  const showPeek = peek && compact && Boolean(selectedId && CHARACTER_BY_ID.has(selectedId));
 
   return (
-    <div className="map-field graph-field">
+    <div className={"map-field graph-field" + (showPeek ? " peeking" : "")}>
       <svg
         id="graph"
         ref={svgRef}
@@ -199,7 +277,96 @@ export function RelationsView({
           &#8634;
         </button>
       </div>
+
+      {showPeek && (
+        <PeekCard
+          translator={translator}
+          id={selectedId!}
+          neighbours={neighbours}
+          onPick={pick}
+          onExpand={onExpand}
+          onClose={onClosePeek}
+        />
+      )}
     </div>
+  );
+}
+
+/**
+ * The phone's stand-in for the character sheet in the connections view.
+ *
+ * The sheet fills a phone, and the point of opening somebody here is to see
+ * their web, which the sheet then hides. So a pick opens this instead: a card
+ * over the foot of the screen, with the web lit above it and the character
+ * kept clear of it. It says who they are and holds their connections as a row
+ * of medallions, each a tap from becoming the next pick, so the web can be
+ * walked from one person to the next with a thumb. The full sheet is one more
+ * tap away.
+ */
+function PeekCard({
+  translator,
+  id,
+  neighbours,
+  onPick,
+  onExpand,
+  onClose,
+}: {
+  translator: Translator;
+  id: string;
+  neighbours: { id: string; kind: RelationKind }[];
+  onPick: (id: string) => void;
+  onExpand: () => void;
+  onClose: () => void;
+}) {
+  const t = translator.t;
+  const character = CHARACTER_BY_ID.get(id)!;
+  const links = useRef<HTMLDivElement>(null);
+  // Each new person's row starts at its beginning.
+  useEffect(() => {
+    links.current?.scrollTo({ left: 0 });
+  }, [id]);
+
+  return (
+    <section className="peek" aria-label={translator.field(character, "name")}>
+      <button className="close" onClick={onClose} title={t("close")} aria-label={t("close")}>
+        &times;
+      </button>
+      <button className="peek-head" onClick={onExpand}>
+        <Medallion id={id} />
+        <span>
+          <b>{translator.field(character, "name")}</b>
+          <small>{translator.field(character, "title")}</small>
+          <em>
+            {neighbours.length} {t("connectionCount")}
+          </em>
+        </span>
+      </button>
+
+      {neighbours.length > 0 ? (
+        <div className="peek-links" ref={links}>
+          {neighbours.map((n) => {
+            const c = CHARACTER_BY_ID.get(n.id);
+            if (!c) return null;
+            return (
+              <button
+                key={n.id}
+                style={{ "--kind": KIND_COLOUR[n.kind] } as CSSProperties}
+                onClick={() => onPick(n.id)}
+              >
+                <Medallion id={n.id} />
+                <span>{shortLabel(translator.field(c, "name"))}</span>
+              </button>
+            );
+          })}
+        </div>
+      ) : (
+        <p className="peek-none">{t("peekNone")}</p>
+      )}
+
+      <button className="button peek-more" onClick={onExpand}>
+        {t("peekMore")}
+      </button>
+    </section>
   );
 }
 
